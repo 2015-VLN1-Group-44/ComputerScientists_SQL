@@ -8,7 +8,6 @@ Scientist::Scientist()
 }
 
 // Constructor með argumentum
-
 Scientist::Scientist(string fn, string ln, bool g, int *db, int *dd){
     first_name = fn;
     last_name = ln;
@@ -20,6 +19,7 @@ Scientist::Scientist(string fn, string ln, bool g, int *db, int *dd){
     }
 }
 
+// Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)
 {
     out << sc.first_name << " " << sc.last_name << endl;
