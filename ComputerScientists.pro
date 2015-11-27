@@ -15,3 +15,6 @@ HEADERS += \
     scientist.h \
     database.h
 
+DISTFILES += \
+    listofCS.txt
+
