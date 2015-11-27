@@ -10,8 +10,10 @@ class Scientist
 {
 public:
     Scientist();
-    Scientist(string fn, string ln, bool g, int *db, int *dd);
+    Scientist(string fn, string ln, bool g, int db[date_format], int dd[date_format]);
+    Scientist(const Scientist& scientist_object); // Copy constructor
     friend ostream& operator << (ostream& out, Scientist sc);
+    friend class Database;
 private:
     string first_name;
     string last_name;

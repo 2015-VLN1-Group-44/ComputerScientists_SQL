@@ -8,8 +8,10 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    scientist.cpp
+    scientist.cpp \
+    database.cpp
 
 HEADERS += \
-    scientist.h
+    scientist.h \
+    database.h
 
