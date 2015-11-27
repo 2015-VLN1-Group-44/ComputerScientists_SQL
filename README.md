@@ -1,5 +1,3 @@
-# README 
-
 ## Computer Scientists
 
 #### Source code
@@ -12,8 +10,7 @@
 
 #### VLN1 Group 44
 
-	Hallgrimur Jo:wq
-	Jonas Jensson
+	Hallgrimur Jonas Jensson
 	Ingvi Thor Markusson
 	Magnea Hilmarsdottir
 	Oli Olafsson
