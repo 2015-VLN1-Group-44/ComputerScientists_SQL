@@ -1,5 +1,6 @@
 #include <iostream>
 #include "scientist.h"
+#include <string>
 
 using namespace std;
 
@@ -45,12 +46,16 @@ ostream& operator << (ostream& out, Scientist sc)
     out << "Date of death: ";
     for (int i = 0; i < date_format; i++)
     {
-        out << sc.date_death[i] << "/";
+        out << sc.date_death[i];
+        if (i < date_format -1)
+            out << "/";
     }
     out << endl << "Date of birth: ";
     for (int i = 0; i < date_format; i++)
     {
-        out << sc.date_birth[i] << "/";
+        out << sc.date_birth[i];
+        if (i < date_format -1)
+            out << "/";
     }
     out << endl;
     return out;
