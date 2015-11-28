@@ -28,6 +28,6 @@
 *.app
 
 # Extra
-*.user
+*.user*
 test*
 *DS_Store
