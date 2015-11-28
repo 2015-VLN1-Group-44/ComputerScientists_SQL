@@ -1,5 +1,6 @@
 #include <iostream>
 #include "scientist.h"
+#include <string>
 
 using namespace std;
 
@@ -28,6 +29,7 @@ ostream& operator << (ostream& out, Scientist sc)
     }
     else
         out << "Female" << endl;
+
     out << "Date of Birth: " << endl;
     out << sc.birth.day() << "/" << sc.birth.month() << "/";
     out << sc.birth.year() << endl;
