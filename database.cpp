@@ -6,7 +6,6 @@ using namespace std;
 
 Database::Database()
 {
-
 }
 
 Database::Database(vector<Scientist>& d)
