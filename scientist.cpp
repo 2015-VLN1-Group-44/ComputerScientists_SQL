@@ -55,6 +55,17 @@ int Scientist::get_death_year()
     return death.year();
 }
 
+QDate Scientist::get_birth()
+{
+    return birth;
+}
+
+QDate Scientist::get_death()
+{
+    return death;
+}
+
+
 Scientist& Scientist::operator = (Scientist other)
 {
     first_name = other.first_name;
@@ -87,17 +98,5 @@ ostream& operator << (ostream& out, Scientist sc)
     return out;
 }
 
-
-
-// Skilar true ef 2 Scientist
-bool death_order(Scientist n1, Scientist n2)
-{
-    bool d = false;
-    if (n1.death < n2.death)
-    {
-        d = true;
-    }
-    return d;
-}
 
 

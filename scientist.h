@@ -21,9 +21,11 @@ public:
     int get_death_day();
     int get_death_month();
     int get_death_year();
+    QDate get_birth();
+    QDate get_death();
     Scientist& operator = (Scientist other);
 
-    friend bool death_order(Scientist n1, Scientist n2);
+
 
     friend ostream& operator << (ostream& out, Scientist sc);
 

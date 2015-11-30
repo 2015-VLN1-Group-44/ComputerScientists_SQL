@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include "database.h"
 
 using namespace std;
@@ -31,11 +30,44 @@ bool name_order(Scientist n1, Scientist n2)
     return order;
 }
 
+bool birth_order(Scientist n1, Scientist n2)
+{
+    bool b = false;
+    if (n1.get_birth() < n2.get_birth())
+    {
+        b = true;
+    }
+    return b;
+}
+
+// Skilar true ef 2 Scientist
+bool death_order(Scientist n1, Scientist n2)
+{
+    bool d = false;
+    if (n1.get_death() < n2.get_death())
+    {
+        d = true;
+    }
+    return d;
+}
+
+
 
 void Database::sort_name()
 {
     sort(data.begin(), data.end(), name_order);
 }
+
+void Database::sort_birth()
+{
+    sort(data.begin(), data.end(), birth_order);
+}
+
+void Database::sort_death()
+{
+    sort(data.begin(), data.end(), death_order);
+}
+
 
 unsigned int Database::size()
 {

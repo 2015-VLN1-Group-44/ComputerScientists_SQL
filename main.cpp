@@ -37,7 +37,7 @@ int main()
     cout << data1;
 
     cout << endl << "Test sort" << endl;
-    data1.sort_name();
+    data1.sort_death();
     cout << data1;
 
 
