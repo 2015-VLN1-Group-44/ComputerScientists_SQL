@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <QDate>
+#include <fstream>
+
 using namespace std;
 
 const int date_format = 3;

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "database.h"
+#include <fstream> 
 
 using namespace std;
 

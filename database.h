@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "scientist.h"
+#include <fstream>
 
 using namespace std;
 
