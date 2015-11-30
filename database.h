@@ -26,7 +26,7 @@ public:
     friend bool name_order(Scientist n1, Scientist n2);
     friend bool death_order(Scientist n1, Scientist n2);
     friend bool gender_order(Scientist n1, Scientist n2);
-
+    friend class Interface;
     friend ostream& operator << (ostream& out, Database d);
 
 private:

@@ -9,11 +9,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     scientist.cpp \
-    database.cpp
+    database.cpp \
+    interface.cpp
 
 HEADERS += \
     scientist.h \
-    database.h
+    database.h \
+    interface.h
 
 DISTFILES += \
     listofCS.txt

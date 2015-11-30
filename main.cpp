@@ -3,6 +3,7 @@
 #include <string>
 #include "database.h"
 #include <fstream> 
+#include "interface.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ int main()
 {
     QDate birth(1815, 12, 10);
     QDate death(1852, 11, 27); // Fæðingar- og dánardagur fyrir Ödu
-
+    Interface implement_test;
     // Búa til instance af Scientist til að prófa klasann
     Scientist first("Ada", "Lovelace", 0, birth, death);
     cout << "Test prent á Scientist: " << endl;
@@ -34,25 +35,25 @@ int main()
     first_test.push_back(first);
 
     // Búa til instance af database úr vectornum
-    Database data1(first_test);
-    cout << "Test prent á Database: " << endl;
-    cout << data1;
+    bool menu_input = implement_test.start_menu();
+    bool test2 = false;
+    if (menu_input == false)
+    {
+        test2 = implement_test.start_menu();
+    }
+    cout << endl << test2;
+    // cout << "Test prent á Database: " << endl;
+    // cout << data1;
 
-    cout << endl << "Test sort" << endl;
-    data1.sort_death();
-    cout << data1;
-
-    // data1.read_input();
 
 
 
-    cout << data1;
 
-    data1.sort_gender();
+    // data1.sort_gender();
 
-    cout << data1;
+    // cout << data1;
 
-    data1.print_to_file();
+    // data1.print_to_file();
 
     // menu();
 

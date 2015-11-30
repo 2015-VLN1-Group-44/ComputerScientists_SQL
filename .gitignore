@@ -28,7 +28,8 @@
 *.app
 
 # Extra
-*.user*
 test*
 *DS_Store
 *.user.*
+*.pro.user
+*.pro.user.*
