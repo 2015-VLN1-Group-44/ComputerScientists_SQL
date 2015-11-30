@@ -33,7 +33,7 @@ bool Interface::start_menu()
             }while (!legal);
             valid = false;
             break;
-        case 3:
+        case 0:
             cout << "Quit";
             valid = true;
             //exit(1);
@@ -78,11 +78,13 @@ bool Interface::list_menu()
 {
     bool valid = false;
     int select;
+    string f; // strengur til að lesa inn filename
     cout << "1. Display list" << endl;
     cout << "2. Sort list by name" << endl;
     cout << "3. Sort list by date of birth" << endl;
     cout << "4. Sort list by date of death" << endl;
     cout << "5. Sort list by gender" << endl;
+    cout << "6. Save list" << endl;
     cout << "0. Main menu" << endl;
     cout << "Enter selection: ";
     cin >> select;
@@ -106,6 +108,12 @@ bool Interface::list_menu()
         case 5:
             our_scientists.sort_gender();
             cout << "List sorted by gender." << endl;
+        break;
+        case 6:
+            cout << "Input filename: ";
+            cin >> f;
+            f += ".txt";
+            our_scientists.print_to_file(f);
         break;
         case 0:
             valid = true;

@@ -20,7 +20,7 @@ public:
     void sort_death();
     void sort_gender();
     void read_input();
-    void print_to_file();
+    void print_to_file(string filename);
 
 
     friend bool name_order(Scientist n1, Scientist n2);

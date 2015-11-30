@@ -120,10 +120,10 @@ void Database::read_input()
     data.push_back(temp);
 }
 
-void Database::print_to_file()
+void Database::print_to_file(string filename)
 {
     ofstream out_file;
-    out_file.open("listofCS.txt");
+    out_file.open(filename.c_str());
     for (unsigned int i = 0; i < size(); i++)
     {
         out_file << data[i].get_first()<< " " << data[i].get_last() << " ";

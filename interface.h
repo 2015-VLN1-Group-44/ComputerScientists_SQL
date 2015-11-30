@@ -14,10 +14,7 @@ public:
     bool start_menu();
     bool add_menu();
     bool list_menu();
-
-
 private:
-    string filename;
     Database our_scientists;
 };
 
