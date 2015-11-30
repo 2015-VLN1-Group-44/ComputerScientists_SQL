@@ -13,7 +13,7 @@ bool Interface::start_menu()
     cout << endl;
     cout << "1. Add Scientists to list" << endl;
     cout << "2. Display List of Scientists" << endl;
-    cout << "3. quit" << endl;
+    cout << "0. quit" << endl;
     cout << "Enter selection: ";
     cin >> selection;
     switch (selection)
