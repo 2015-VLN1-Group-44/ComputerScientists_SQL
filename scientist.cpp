@@ -97,6 +97,3 @@ ostream& operator << (ostream& out, Scientist sc)
     out << sc.death.year() << endl;
     return out;
 }
-
-
-

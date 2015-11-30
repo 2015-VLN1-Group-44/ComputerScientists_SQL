@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <string>
 #include "database.h"
 
 using namespace std;
@@ -40,7 +41,9 @@ int main()
     data1.sort_death();
     cout << data1;
 
+    data1.read_input();
 
+    cout << data1;
 
 
 

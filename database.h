@@ -17,6 +17,7 @@ public:
     void sort_name();
     void sort_birth();
     void sort_death();
+    void read_input();
 
     friend bool name_order(Scientist n1, Scientist n2);
     friend bool death_order(Scientist n1, Scientist n2);

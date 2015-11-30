@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <stdio.h>
 #include "database.h"
 
 using namespace std;
@@ -68,6 +70,41 @@ void Database::sort_death()
     sort(data.begin(), data.end(), death_order);
 }
 
+
+// Les upplýsingar frá notanda
+void Database::read_input()
+{
+    Scientist temp;
+    char cgender;
+    int day, month, year;
+    char stop;
+    cout << "Input first name(s): ";
+    cin >> temp.first_name;
+    cout << "Input last name: ";
+    cin >> temp.last_name;
+    cout << "Input gender (M/F): ";
+    cin >> cgender;
+    switch(tolower(cgender))
+    {
+        case 'm':
+            temp.gender = true;
+            break;
+        case 'f':
+            temp.gender = false;
+            break;
+        default:
+            break;
+    }
+    cout << "Input date of birth (dd/mm/yyyy): ";
+    cin >> day >> stop >> month >> stop >> year;
+    QDate birthd(year, month, day);
+    temp.birth = birthd;
+    cout << "Input date of death (dd/mm/yyyy): ";
+    cin >> day >> stop >> month >> stop >> year;
+    QDate deathd(year, month, day);
+    temp.death = deathd;
+    data.push_back(temp);
+}
 
 unsigned int Database::size()
 {
