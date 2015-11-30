@@ -1,4 +1,6 @@
 #include <iostream>
+#include <algorithm>
+#include <string>
 #include "database.h"
 #include <fstream> 
 
@@ -22,19 +24,29 @@ int main()
     Scientist second("Alan", "Turing", 1, b, d);
 
 
+
     // búa til vector til að lesa inn í Database object
     vector<Scientist> first_test;
-    first_test.push_back(first);
+
+
+
     first_test.push_back(second);
+    first_test.push_back(first);
 
     // Búa til instance af database úr vectornum
     Database data1(first_test);
     cout << "Test prent á Database: " << endl;
     cout << data1;
 
-    bool order = data1.name_ordered(first.get_first(), first.get_last(), second.get_first(), second.get_last());
+    cout << endl << "Test sort" << endl;
+    data1.sort_death();
+    cout << data1;
 
-    cout << endl << order << endl;
+    data1.read_input();
+
+    cout << data1;
+
+
 
     menu();
 

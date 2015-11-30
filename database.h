@@ -3,18 +3,26 @@
 
 #include <iostream>
 #include <vector>
-#include "scientist.h"
 #include <fstream>
+#include <algorithm>
+#include <scientist.h>
 
 using namespace std;
 
-class Database
+class Database : public Scientist
 {
 public:
     Database();
     Database(vector<Scientist> &d);
     unsigned int size();
-    bool name_ordered(string f1, string l1, string f2, string l2);
+    void sort_name();
+    void sort_birth();
+    void sort_death();
+    void read_input();
+
+    friend bool name_order(Scientist n1, Scientist n2);
+    friend bool death_order(Scientist n1, Scientist n2);
+
     friend ostream& operator << (ostream& out, Database d);
 
 private:

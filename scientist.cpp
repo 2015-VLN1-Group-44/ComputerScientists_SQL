@@ -56,6 +56,28 @@ int Scientist::get_death_year()
     return death.year();
 }
 
+QDate Scientist::get_birth()
+{
+    return birth;
+}
+
+QDate Scientist::get_death()
+{
+    return death;
+}
+
+
+Scientist& Scientist::operator = (Scientist other)
+{
+    first_name = other.first_name;
+    last_name = other.last_name;
+    gender = other.gender;
+    birth = other.birth;
+    death = other.death;
+    return *this;
+}
+
+
 // Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)
 {
@@ -76,4 +98,3 @@ ostream& operator << (ostream& out, Scientist sc)
     out << sc.death.year() << endl;
     return out;
 }
-
