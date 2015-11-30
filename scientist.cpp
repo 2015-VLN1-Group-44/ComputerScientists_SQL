@@ -17,6 +17,38 @@ Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d){
     death = d;
 }
 
+string Scientist::get_first()
+{
+    return first_name;
+}
+string Scientist::get_last()
+{
+    return last_name;
+}
+int Scientist::get_birth_day()
+{
+    return birth.day();
+}
+int Scientist::get_birth_month()
+{
+    return birth.month();
+}
+int Scientist::get_birth_year()
+{
+    return birth.year();
+}
+int Scientist::get_death_day()
+{
+    return death.day();
+}
+int Scientist::get_death_month()
+{
+    return death.month();
+}
+int Scientist::get_death_year()
+{
+    return death.year();
+}
 
 // Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)

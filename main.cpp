@@ -31,7 +31,9 @@ int main()
     cout << "Test prent á Database: " << endl;
     cout << data1;
 
+
     menu();
+
 
     return 0;
 

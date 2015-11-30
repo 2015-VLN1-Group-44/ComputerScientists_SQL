@@ -12,6 +12,15 @@ class Scientist
 public:
     Scientist();
     Scientist(string fn, string ln, bool g, QDate b, QDate d);
+    string get_first();
+    string get_last();
+    bool get_gender();
+    int get_birth_day();
+    int get_birth_month();
+    int get_birth_year();
+    int get_death_day();
+    int get_death_month();
+    int get_death_year();
     friend ostream& operator << (ostream& out, Scientist sc);
     friend class Database;
 private:
