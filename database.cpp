@@ -120,6 +120,25 @@ void Database::read_input()
     data.push_back(temp);
 }
 
+void Database::print_to_file()
+{
+    ofstream out_file;
+    out_file.open("listofCS.txt");
+    for (unsigned int i = 0; i < size(); i++)
+    {
+        out_file << data[i].get_first()<< " " << data[i].get_last() << " ";
+        out_file << data[i].get_birth_day() << "." << data[i].get_birth_month();
+        out_file << "." << data[i].get_birth_year() << " ";
+        out_file << data[i].get_death_day() << "." << data[i].get_death_month() << ".";
+        out_file << data[i].get_death_year() << " ";
+        if(data[i].get_gender())
+            out_file << "M" << endl;
+        else
+            out_file << "F" << endl;
+    }
+    out_file.close();
+}
+
 unsigned int Database::size()
 {
     return data.size();

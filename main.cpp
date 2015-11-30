@@ -42,7 +42,9 @@ int main()
     data1.sort_death();
     cout << data1;
 
-    data1.read_input();
+    // data1.read_input();
+
+
 
     cout << data1;
 
@@ -50,7 +52,9 @@ int main()
 
     cout << data1;
 
-    menu();
+    data1.print_to_file();
+
+    // menu();
 
 
     return 0;
