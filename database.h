@@ -13,7 +13,9 @@ public:
     Database();
     Database(vector<Scientist> &d);
     unsigned int size();
-    bool name_ordered(string f1, string l1, string f2, string l2);
+
+    bool name_order(Scientist n1, Scientist n2);
+
     friend ostream& operator << (ostream& out, Database d);
 
 private:

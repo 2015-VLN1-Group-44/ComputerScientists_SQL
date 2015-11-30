@@ -31,7 +31,7 @@ int main()
     cout << "Test prent á Database: " << endl;
     cout << data1;
 
-    bool order = data1.name_ordered(first.get_first(), first.get_last(), second.get_first(), second.get_last());
+    bool order = data1.name_order(first, second);
 
     cout << endl << order << endl;
 

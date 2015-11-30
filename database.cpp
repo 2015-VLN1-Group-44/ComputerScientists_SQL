@@ -30,16 +30,16 @@ ostream& operator << (ostream& out, Database d)
     return out;
 }
 
-bool Database::name_ordered(string f1, string l1, string f2, string l2)
+bool Database::name_order(Scientist n1, Scientist n2)
 {
-    bool ordered = false;
-    if(l1 < l2)
+    bool order = false;
+    if (n1.get_last() < n2.get_last())
     {
-        ordered = true;
+        order = true;
     }
-    else if(l1 == l2 && f1 < f2)
+    else if(n1.get_last() == n2.get_last() && n1.get_first() < n2.get_first())
     {
-        ordered = true;
+        order = true;
     }
-    return ordered;
+    return order;
 }
