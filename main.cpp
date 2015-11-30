@@ -35,28 +35,11 @@ int main()
     first_test.push_back(first);
 
     // Búa til instance af database úr vectornum
-    bool menu_input = implement_test.start_menu();
-    bool test2 = false;
-    if (menu_input == false)
+    bool menu_input;
+    do
     {
-        test2 = implement_test.start_menu();
-    }
-    cout << endl << test2;
-    // cout << "Test prent á Database: " << endl;
-    // cout << data1;
-
-
-
-
-
-    // data1.sort_gender();
-
-    // cout << data1;
-
-    // data1.print_to_file();
-
-    // menu();
-
+        menu_input = implement_test.start_menu();
+    }while (!menu_input);
 
     return 0;
 

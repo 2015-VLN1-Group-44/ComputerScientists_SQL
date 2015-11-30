@@ -13,6 +13,7 @@ public:
     Interface();
     bool start_menu();
     bool add_menu();
+    bool list_menu();
 
 
 private:
