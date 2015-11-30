@@ -42,7 +42,6 @@ bool birth_order(Scientist n1, Scientist n2)
     return b;
 }
 
-// Skilar true ef 2 Scientist
 bool death_order(Scientist n1, Scientist n2)
 {
     bool d = false;
@@ -53,6 +52,15 @@ bool death_order(Scientist n1, Scientist n2)
     return d;
 }
 
+bool gender_order(Scientist n1, Scientist n2)
+{
+    bool g = false;
+    if (n1.get_gender() > n2.get_gender())
+    {
+        g = true;
+    }
+    return g;
+}
 
 
 void Database::sort_name()
@@ -68,6 +76,11 @@ void Database::sort_birth()
 void Database::sort_death()
 {
     sort(data.begin(), data.end(), death_order);
+}
+
+void Database::sort_gender()
+{
+    sort(data.begin(), data.end(), gender_order);
 }
 
 

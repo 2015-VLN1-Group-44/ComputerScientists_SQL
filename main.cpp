@@ -45,7 +45,9 @@ int main()
 
     cout << data1;
 
+    data1.sort_gender();
 
+    cout << data1;
 
     menu();
 
