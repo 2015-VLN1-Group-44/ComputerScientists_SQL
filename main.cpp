@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "database.h"
 
 using namespace std;
@@ -21,19 +22,27 @@ int main()
     Scientist second("Alan", "Turing", 1, b, d);
 
 
+
     // búa til vector til að lesa inn í Database object
     vector<Scientist> first_test;
-    first_test.push_back(first);
+
+
+
     first_test.push_back(second);
+    first_test.push_back(first);
 
     // Búa til instance af database úr vectornum
     Database data1(first_test);
     cout << "Test prent á Database: " << endl;
     cout << data1;
 
-    bool order = data1.name_order(first, second);
+    cout << endl << "Test sort" << endl;
+    data1.sort_name();
+    cout << data1;
 
-    cout << endl << order << endl;
+
+
+
 
     menu();
 

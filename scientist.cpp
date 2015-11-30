@@ -55,6 +55,17 @@ int Scientist::get_death_year()
     return death.year();
 }
 
+Scientist& Scientist::operator = (Scientist other)
+{
+    first_name = other.first_name;
+    last_name = other.last_name;
+    gender = other.gender;
+    birth = other.birth;
+    death = other.death;
+    return *this;
+}
+
+
 // Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)
 {
@@ -75,4 +86,18 @@ ostream& operator << (ostream& out, Scientist sc)
     out << sc.death.year() << endl;
     return out;
 }
+
+
+
+// Skilar true ef 2 Scientist
+bool death_order(Scientist n1, Scientist n2)
+{
+    bool d = false;
+    if (n1.death < n2.death)
+    {
+        d = true;
+    }
+    return d;
+}
+
 

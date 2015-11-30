@@ -13,8 +13,12 @@ public:
     Database();
     Database(vector<Scientist> &d);
     unsigned int size();
+    void sort_name();
+    void sort_birth();
+    friend bool birth_order(Scientist n1, Scientist n2);
+    friend bool name_order(Scientist n1, Scientist n2);
 
-    bool name_order(Scientist n1, Scientist n2);
+
 
     friend ostream& operator << (ostream& out, Database d);
 
