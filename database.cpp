@@ -29,3 +29,17 @@ ostream& operator << (ostream& out, Database d)
     }
     return out;
 }
+
+bool Database::name_ordered(string f1, string l1, string f2, string l2)
+{
+    bool ordered = false;
+    if(l1 < l2)
+    {
+        ordered = true;
+    }
+    else if(l1 == l2 && f1 < f2)
+    {
+        ordered = true;
+    }
+    return ordered;
+}

@@ -25,6 +25,11 @@ string Scientist::get_last()
 {
     return last_name;
 }
+bool Scientist::get_gender()
+{
+    return gender;
+}
+
 int Scientist::get_birth_day()
 {
     return birth.day();
