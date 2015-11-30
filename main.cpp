@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <string>
 #include "database.h"
+#include <fstream> 
 
 using namespace std;
 

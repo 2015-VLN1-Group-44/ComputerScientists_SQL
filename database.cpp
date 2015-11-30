@@ -3,6 +3,7 @@
 #include <string>
 #include <stdio.h>
 #include "database.h"
+#include <fstream> 
 
 using namespace std;
 
