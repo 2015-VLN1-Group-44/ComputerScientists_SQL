@@ -351,7 +351,8 @@ void Interface::edit_menu(unsigned int i)
     char g;
     QString date, format;
     format = "d/M/yyyy";
-    QDate d;
+    QDate d, current;
+    current = QDate::currentDate(); // Sækir daginn í dag úr klukkunni
     bool exit = false;
     cout << string(20, '-') << endl;
     cout << "1. Edit first name" << endl;
@@ -397,14 +398,22 @@ void Interface::edit_menu(unsigned int i)
             getline(cin, line);
             date = QString::fromStdString(line);
             d = QDate::fromString(date, format);
-            if (d.isValid())
+            if (!d.isValid())
             {
-                list_scientists.data[i].set_birth(d);
-                cout << list_scientists.data[i];
+                cout << "Not a valid date." << endl;
+            }
+            else if (list_scientists.data[i].get_death() < d)
+            {
+                cout << "Date of birth after date of death. Please correct." << endl;
+            }
+            else if (current < d)
+            {
+                cout << "Date of birth after current date. Please correct." << endl;
             }
             else
             {
-                cout << "Not a valid date." << endl;
+                list_scientists.data[i].set_birth(d);
+                cout << list_scientists.data[i];
             }
             break;
         case 5:
@@ -413,16 +422,20 @@ void Interface::edit_menu(unsigned int i)
             getline(cin, line);
             date = QString::fromStdString(line);
             d = QDate::fromString(date, format);
-            if (d.isValid() && !(d < list_scientists.data[i].get_birth()))
+            if (!d.isValid())
+            {
+                cout << "Not a valid date." << endl;
+            }
+            else if (d < list_scientists.data[i].get_birth())
+                cout << "Date of death before date of birth. Please correct." << endl;
+            else if (current < d)
+            {
+                cout << "Date of death after current date. Please correct." << endl;
+            }
+            else
             {
                 list_scientists.data[i].set_death(d);
                 cout << list_scientists.data[i];
-            }
-            else if(d.isValid() && (d < list_scientists.data[i].get_birth()))
-                cout << "Date of death before date of birth. Please correct." << endl;
-            else
-            {
-                cout << "Not a valid date." << endl;
             }
             break;
         case 0:
