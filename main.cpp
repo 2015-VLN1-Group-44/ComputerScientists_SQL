@@ -12,12 +12,13 @@ int main()
     QDate birth(1815, 12, 10);
     QDate death(1852, 11, 27); // Fæðingar- og dánardagur fyrir Ödu
     // Búa til instance af Scientist til að prófa klasann
-    Scientist first("Ada", "Lovelace", 0, birth, death);
+    Scientist first("Ada", "Lovelace", 0, birth, death, 0);
 
 
     QDate b(1912, 6, 23);
-    QDate d(1954, 6, 7);
-    Scientist second("Alan", "Turing", 1, b, d);
+    // QDate d(1954, 6, 7);
+    QDate d;
+    Scientist second("Alan", "Turing", 1, b, d, 1);
 
     // búa til vector til að lesa inn í Database object
     vector<Scientist> first_test;
