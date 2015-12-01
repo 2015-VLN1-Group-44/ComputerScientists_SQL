@@ -217,6 +217,26 @@ bool Interface::search_menu()
     {
         cout << "No entries found." << endl;
         exit = false;
+        char adding;
+        bool legal_choice;
+        cout << "Do you wish to add this person to the list of computer scientists? " << endl;
+        cin >> adding;
+        do
+        {
+        if(adding == 'y' || adding == 'Y')
+        {
+            list_scientists.read_input();
+            exit = true;
+            legal_choice = true;
+        }
+        else if(adding == 'n' || adding == 'N')
+        {
+            exit = true;
+            legal_choice = true;
+        }
+        else
+            legal_choice = false;
+        }while(!legal_choice);
     }
     return exit;
 }
