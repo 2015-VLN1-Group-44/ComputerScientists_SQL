@@ -15,8 +15,7 @@ Interface::Interface(vector<Scientist> v)
 bool Interface::start_menu()
 {
     int selection = 0;
-    bool valid, legal;
-    //system("CLS");
+    bool quit, legal;
     cout << endl;
     cout << "1. Add Scientists to list" << endl;
     cout << "2. Display List of Scientists" << endl;
@@ -32,33 +31,33 @@ bool Interface::start_menu()
             {
                 legal = add_menu();
             }while (!legal);
-            valid = false;
+            quit = false;
             break;
         case 2:
             do
             {
                 legal = list_menu();
             }while (!legal);
-            valid = false;
+            quit = false;
             break;
         case 3:
             do
             {
                 legal = search_menu();
-            }while (!legal);
+            }while (legal);
+            quit = false;
         case 0:
             cout << "Quit";
-            valid = true;
+            quit = true;
             //exit(1);
             break;
 
         default:
-            system("CLS");
             cout << endl;
             cout << selection << " is not a valid menu item.\n";
-            valid = false;
+            quit = false;
     }
-    return valid;
+    return quit;
 }
 
 bool Interface::add_menu()
@@ -144,7 +143,8 @@ bool Interface::search_menu()
     unsigned int found_index;
     string name;
     char stop;
-    bool found;
+    bool found, valid_date;
+    QDate sdate;
     cout << "1. Search by first name" << endl;
     cout << "2. Search by last name" << endl;
     cout << "3. Search by date of birth" << endl;
@@ -162,16 +162,29 @@ bool Interface::search_menu()
         case 2:
             cout << "Enter name: ";
             cin >> name;
+            found = search_last(found_index, name);
         break;
         case 3:
             cout << "Enter date of birth (dd/mm/yyyy): ";
             cin >> day >> stop >> month >> stop >> year;
-            // QDate btemp(year, month, day);
+            valid_date = sdate.setDate(year, month, day);
+            if (valid_date)
+            {
+                found = search_birth(found_index, sdate);
+            }
+            else
+                found = valid_date;
         break;
         case 4:
             cout << "Enter date of death (dd/mm/yyyy): ";
             cin >> day >> stop >> month >> stop >> year;
-            // QDate dtemp(year, month, day);
+            valid_date = sdate.setDate(year, month, day);
+            if (valid_date)
+            {
+                found = search_death(found_index, sdate);
+            }
+            else
+                found = valid_date;
         break;
     }
     if(found)
@@ -187,17 +200,57 @@ bool Interface::search_first(unsigned int& found_i, string n)
     for(unsigned int i = 0; i < list_scientists.size(); i++)
     {
         if(n == list_scientists.data[i].get_first())
+        {
             found = true;
             found_i = i;
+        }
     }
     return found;
 }
 
-/*
-bool search_last();
-bool search_birth();
-bool search_death();
-*/
+bool Interface::search_last(unsigned int& found_i, string n)
+{
+    bool found = false;
+    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    {
+        if(n == list_scientists.data[i].get_last())
+        {
+            found = true;
+            found_i = i;
+        }
+    }
+    return found;
+}
+
+bool Interface::search_birth(unsigned int& found_i, QDate b)
+{
+    bool found = false;
+    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    {
+        if(b == list_scientists.data[i].get_birth())
+        {
+            found = true;
+            found_i = i;
+        }
+    }
+    return found;
+}
+
+
+bool Interface::search_death(unsigned int& found_i, QDate d)
+{
+    bool found = false;
+    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    {
+        if(d == list_scientists.data[i].get_death())
+        {
+            found = true;
+            found_i = i;
+        }
+    }
+    return found;
+}
+
 
 void Interface::edit_found(unsigned int i)
 {
