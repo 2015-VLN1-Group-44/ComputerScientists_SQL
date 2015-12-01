@@ -158,6 +158,11 @@ void Database::read_input()
             {
                 cout << "Date is not valid." << endl;
             }
+            else if (in_date < temp.birth)
+            {
+                cout << "Date of death before date of birth. Please correct." << endl;
+                valid_date = false;
+            }
         } while (!valid_date);
     }
     if (!deceased)
