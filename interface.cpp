@@ -16,7 +16,7 @@ bool Interface::start_menu()
 {
     int selection = 0;
     bool quit, legal;
-    cout << endl;
+    cout << string(20, '-') << endl;
     cout << "1. Add Scientists to list" << endl;
     cout << "2. Display List of Scientists" << endl;
     cout << "3. Search list" << endl;
@@ -65,6 +65,7 @@ bool Interface::add_menu()
 {
     int select;
     bool valid = false;
+    cout << string(20, '-') << endl;
     cout << "1. Read from file" << endl;
     cout << "2. Add Scientist manually" << endl;
     cout << "0. Main menu" << endl << "Selection: ";
@@ -92,6 +93,7 @@ bool Interface::list_menu()
     bool valid = false;
     int select;
     string f; // strengur til að lesa inn filename
+    cout << string(20, '-') << endl;
     cout << "1. Display list" << endl;
     cout << "2. Sort list by name" << endl;
     cout << "3. Sort list by date of birth" << endl;
@@ -146,6 +148,7 @@ bool Interface::search_menu()
     char stop;
     bool found, valid_date;
     QDate sdate;
+    cout << string(20, '-') << endl;
     cout << "1. Search by first name" << endl;
     cout << "2. Search by last name" << endl;
     cout << "3. Search by date of birth" << endl;
@@ -258,8 +261,8 @@ void Interface::found_menu(unsigned int i)
     int select;
     bool valid;
     cout << "Found entry: " << endl;
-    cout << list_scientists.data[i];
     cout << string(20, '-') << endl;
+    cout << list_scientists.data[i];
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
     cout << "0. Main menu" << endl;

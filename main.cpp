@@ -13,9 +13,7 @@ int main()
     QDate death(1852, 11, 27); // Fæðingar- og dánardagur fyrir Ödu
     // Búa til instance af Scientist til að prófa klasann
     Scientist first("Ada", "Lovelace", 0, birth, death);
-    cout << "Test prent á Scientist: " << endl;
-    // Prenta Scientist klasann
-    cout << first << endl;
+
 
     QDate b(1912, 6, 23);
     QDate d(1954, 6, 7);

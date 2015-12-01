@@ -96,5 +96,6 @@ ostream& operator << (ostream& out, Scientist sc)
     out << "Date of Death: " << endl;
     out << sc.death.day() << "/" << sc.death.month() << "/";
     out << sc.death.year() << endl;
+    cout << string(20, '-') << endl;
     return out;
 }
