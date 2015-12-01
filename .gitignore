@@ -30,6 +30,5 @@
 # Extra
 test*
 *DS_Store
-*.user.*
 *.pro.user
 *.pro.user.*

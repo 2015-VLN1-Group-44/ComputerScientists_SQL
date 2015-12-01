@@ -11,7 +11,6 @@ int main()
 {
     QDate birth(1815, 12, 10);
     QDate death(1852, 11, 27); // Fæðingar- og dánardagur fyrir Ödu
-    Interface implement_test;
     // Búa til instance af Scientist til að prófa klasann
     Scientist first("Ada", "Lovelace", 0, birth, death);
     cout << "Test prent á Scientist: " << endl;
@@ -27,6 +26,8 @@ int main()
 
     first_test.push_back(second);
     first_test.push_back(first);
+
+    Interface implement_test(first_test);
 
     bool quit;
     // Keyrir start menu - start_menu skilar false áður en búið er að gera quit

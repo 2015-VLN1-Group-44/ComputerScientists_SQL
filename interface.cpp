@@ -2,7 +2,14 @@
 
 Interface::Interface()
 {
+}
 
+Interface::Interface(vector<Scientist> v)
+{
+    for (unsigned int i = 0; i < v.size(); i++)
+    {
+        list_scientists.data.push_back(v[i]);
+    }
 }
 
 bool Interface::start_menu()
@@ -13,7 +20,7 @@ bool Interface::start_menu()
     cout << endl;
     cout << "1. Add Scientists to list" << endl;
     cout << "2. Display List of Scientists" << endl;
-    cout << "0. quit" << endl;
+    cout << "0. Quit" << endl;
     cout << "Enter selection: ";
     cin >> selection;
     switch (selection)
@@ -62,7 +69,7 @@ bool Interface::add_menu()
             cout << "TBA";
             break;
         case 2:
-            our_scientists.read_input();
+            list_scientists.read_input();
             break;
         case 0:
             valid = true;
@@ -91,29 +98,29 @@ bool Interface::list_menu()
     switch(select)
     {
         case 1:
-            cout << our_scientists;
+            cout << list_scientists;
         break;
         case 2:
-            our_scientists.sort_name();
+            list_scientists.sort_name();
             cout << "List sorted by name." << endl;
         break;
         case 3:
-            our_scientists.sort_birth();
+            list_scientists.sort_birth();
             cout << "List sorted by date of birth." << endl;
         break;
         case 4:
-            our_scientists.sort_death();
+            list_scientists.sort_death();
             cout << "List sorted by date of death." << endl;
         break;
         case 5:
-            our_scientists.sort_gender();
+            list_scientists.sort_gender();
             cout << "List sorted by gender." << endl;
         break;
         case 6:
             cout << "Input filename: ";
             cin >> f;
             f += ".txt";
-            our_scientists.print_to_file(f);
+            list_scientists.print_to_file(f);
         break;
         case 0:
             valid = true;

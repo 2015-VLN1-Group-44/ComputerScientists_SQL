@@ -11,11 +11,12 @@ class Interface
 {
 public:
     Interface();
+    Interface(vector<Scientist> v);
     bool start_menu();
     bool add_menu();
     bool list_menu();
 private:
-    Database our_scientists;
+    Database list_scientists;
 };
 
 
