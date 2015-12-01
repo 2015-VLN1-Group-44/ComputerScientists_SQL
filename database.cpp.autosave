@@ -96,10 +96,9 @@ void Database::read_input()
     QDate in_date;
     bool valid_date;
     cout << "Input first name(s): ";
-    cin.ignore();
+    cin.ignore();                       //varð að setja þetta inn til að lesa 
     std::getline(cin, temp.first_name);
     //cin >> temp.first_name;
-
     cout << "Input last name: ";
     std::getline(cin, temp.last_name);
     //cin >> temp.last_name;
