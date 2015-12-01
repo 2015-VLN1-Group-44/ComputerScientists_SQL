@@ -10,12 +10,13 @@ Scientist::Scientist()
 }
 
 // Constructor með argumentum
-Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d){
+Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l){
     first_name = fn;
     last_name = ln;
     gender = g;
     birth = b;
     death = d;
+    living = l;
 }
 
 void Scientist::set_first(string n)
@@ -74,6 +75,7 @@ Scientist& Scientist::operator = (Scientist other)
     gender = other.gender;
     birth = other.birth;
     death = other.death;
+    living = other.living;
     return *this;
 }
 
@@ -94,8 +96,13 @@ ostream& operator << (ostream& out, Scientist sc)
     out << "Date of Birth: " << endl;
     out << sc.birth.day() << "/" << sc.birth.month() << "/";
     out << sc.birth.year() << endl;
-    out << "Date of Death: " << endl;
-    out << sc.death.day() << "/" << sc.death.month() << "/";
-    out << sc.death.year() << endl;
+    if(!sc.living)
+    {
+        out << "Date of Death: " << endl;
+        out << sc.death.day() << "/" << sc.death.month() << "/";
+        out << sc.death.year() << endl;
+    }
+    else
+        out << sc.first_name << " is alive and well." << endl;
     return out;
 }

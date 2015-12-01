@@ -13,7 +13,7 @@ class Scientist
 {
 public:
     Scientist();
-    Scientist(string fn, string ln, bool g, QDate b, QDate d);
+    Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l);
 
     void set_first(string n);
     void set_last(string n);
@@ -36,6 +36,7 @@ private:
     bool gender;
     QDate birth;
     QDate death;
+    bool living;
 };
 
 #endif // SCIENTIST_H
