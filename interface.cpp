@@ -287,8 +287,11 @@ void Interface::found_menu(unsigned int i)
 
 void Interface::edit_menu(unsigned int i)
 {
-    int select;
-    bool valid;
+    int select, day, month, year;
+    string n;
+    char g, stop;
+    QDate d;
+    bool exit = false;
     cout << string(20, '-') << endl;
     cout << "1. Edit first name" << endl;
     cout << "2. Edit last name" << endl;
@@ -296,4 +299,57 @@ void Interface::edit_menu(unsigned int i)
     cout << "4. Edit date of birth" << endl;
     cout << "5. Edit date of death" << endl;
     cout << "0. Main menu" << endl;
+    cout << "Enter selection: ";
+    cin >> select;
+    switch (select)
+    {
+        case 1:
+            cout << "Enter new first name: ";
+            cin >> n;
+            list_scientists.data[i].set_first(n);
+        break;
+        case 2:
+            cout << "Enter new last name: ";
+            cin >> n;
+            list_scientists.data[i].set_last(n);
+        break;
+        case 3:
+            cout << "Enter gender: ";
+            cin >> g;
+            if (g == 'm' || g == 'M')
+                list_scientists.data[i].set_gender(1);
+            else
+                list_scientists.data[i].set_gender(0);
+        break;
+        case 4:
+            cout << "Enter date of birth (dd/mm/yyyy): ";
+            cin >> day >> stop >> month >> stop >> year;
+            exit = d.setDate(year, month, day);
+            if (exit)
+            {
+                list_scientists.data[i].set_birth(d);
+                exit = false;
+            }
+        break;
+        case 5:
+            cout << "Enter date of death (dd/mm/yyyy): ";
+            cin >> day >> stop >> month >> stop >> year;
+            exit = d.setDate(year, month, day);
+            if (exit)
+            {
+                list_scientists.data[i].set_death(d);
+                exit = false;
+            }
+        break;
+        case 0:
+            exit = true;
+        break;
+        default:
+            cout << "Invalid menu item." << endl;
+        break;
+    }
+    if(!exit)
+    {
+        edit_menu(i);
+    }
 }
