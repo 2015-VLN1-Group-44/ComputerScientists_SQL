@@ -64,15 +64,19 @@ bool Interface::add_menu()
 {
     int select;
     bool exit = false;
+    string n;
     cout << string(20, '-') << endl;
-    cout << "1. Read from file" << endl;
+    cout << "1. Read from .txt file" << endl;
     cout << "2. Add Scientist manually" << endl;
     cout << "0. Main menu" << endl << "Selection: ";
     cin >> select;
     switch(select)
     {
         case 1:
-            cout << "TBA";
+            cout << "Input filename: ";
+            cin >> n;
+            n += ".txt";
+            list_scientists.read_file(n);
             break;
         case 2:
             list_scientists.read_input();

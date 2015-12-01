@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <stdio.h>
+#include <QString>
+#include <QDate>
 #include "database.h"
 #include <fstream> 
 
@@ -138,17 +140,64 @@ void Database::read_input()
     data.push_back(temp);
 }
 
+void Database::read_file(string filename)
+{
+    Scientist temp;
+    ifstream in_file;
+    string line;
+    char g;
+    QDate birth, death;
+    QString date, format;
+    format = "d.M.yyyy";
+    in_file.open(filename.c_str());
+    if (in_file.fail())
+    {
+        cout << "Unable to open file" << endl;
+    }
+    while (getline(in_file, line))
+    {
+        temp.first_name = line;
+        getline(in_file, line);
+        temp.last_name = line;
+        getline(in_file, line);
+        date = QString::fromStdString(line);
+        temp.birth = QDate::fromString(date, format);
+        getline(in_file, line);
+        date = QString::fromStdString(line);
+        temp.death = QDate::fromString(date, format);
+        if(temp.death.isValid() == false)
+        {
+            temp.living = true;
+        }
+        else
+        {
+            temp.living = false;
+        }
+        getline(in_file, line);
+        g = line[0];
+        if(g == 'M' || g == 'm')
+        {
+            temp.gender = 1;
+        }
+        else
+            temp.gender = 0;
+        data.push_back(temp);
+    }
+    in_file.close();
+}
+
 void Database::print_to_file(string filename)
 {
     ofstream out_file;
     out_file.open(filename.c_str());
     for (unsigned int i = 0; i < size(); i++)
     {
-        out_file << data[i].get_first()<< " " << data[i].get_last() << " ";
+        out_file << data[i].get_first()<< endl;
+        out_file << data[i].get_last() << endl;
         out_file << data[i].get_birth().day() << "." << data[i].get_birth().month();
-        out_file << "." << data[i].get_birth().year() << " ";
+        out_file << "." << data[i].get_birth().year() << endl;
         out_file << data[i].get_death().day() << "." << data[i].get_death().month() << ".";
-        out_file << data[i].get_death().year() << " ";
+        out_file << data[i].get_death().year() << endl;
         if(data[i].get_gender())
             out_file << "M" << endl;
         else

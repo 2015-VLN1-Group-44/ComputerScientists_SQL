@@ -10,7 +10,8 @@ Scientist::Scientist()
 }
 
 // Constructor með argumentum
-Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l){
+Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l)
+{
     first_name = fn;
     last_name = ln;
     gender = g;
@@ -37,6 +38,10 @@ void Scientist::set_birth(QDate b)
 void Scientist::set_death(QDate d)
 {
     death = d;
+    if(death.isValid())
+    {
+        living = false;
+    }
 }
 
 void Scientist::set_gender(bool g)
