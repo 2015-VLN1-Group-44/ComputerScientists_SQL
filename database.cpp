@@ -138,7 +138,6 @@ void Database::read_input()
             case 'y':
                 deceased = false;
                 temp.living = true;
-                temp.death.setDate(0, 0, 0);
             break;
             case 'n':
                 deceased = true;
@@ -160,6 +159,10 @@ void Database::read_input()
                 cout << "Date is not valid." << endl;
             }
         }while(!valid_date);
+    }
+    if (!deceased)
+    {
+        in_date.setDate(0, 0, 0);
     }
     temp.death = in_date;
     data.push_back(temp);
@@ -221,8 +224,15 @@ void Database::print_to_file(string filename)
         out_file << data[i].get_last() << endl;
         out_file << data[i].get_birth().day() << "." << data[i].get_birth().month();
         out_file << "." << data[i].get_birth().year() << endl;
-        out_file << data[i].get_death().day() << "." << data[i].get_death().month() << ".";
-        out_file << data[i].get_death().year() << endl;
+        if(!living)
+        {
+            out_file << data[i].get_death().day() << "." << data[i].get_death().month() << ".";
+            out_file << data[i].get_death().year() << endl;
+        }
+        else
+        {
+            out_file << "0.0.0" << endl;
+        }
         if(data[i].get_gender())
             out_file << "M" << endl;
         else

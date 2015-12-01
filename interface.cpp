@@ -16,10 +16,12 @@ bool Interface::start_menu()
 {
     int selection = 0;
     bool quit, exit;
+    string f; // strengur til að lesa inn filename
     cout << string(20, '-') << endl;
     cout << "1. Add Scientists to list" << endl;
     cout << "2. Display List of Scientists" << endl;
     cout << "3. Search list" << endl;
+    cout << "4. Save list to .txt file"  << endl;
     cout << "0. Quit" << endl;
     cout << "Enter selection: ";
     cin >> selection;
@@ -47,6 +49,13 @@ bool Interface::start_menu()
             }while (!exit);
             quit = false;
             break;
+        case 4:
+            cout << "Input filename: ";
+            cin >> f;
+            f += ".txt";
+            list_scientists.print_to_file(f);
+            quit = false;
+        break;
         case 0:
             cout << "Quit";
             quit = true;
@@ -95,14 +104,12 @@ bool Interface::list_menu()
 {
     bool exit = false;
     int select;
-    string f; // strengur til að lesa inn filename
     cout << string(20, '-') << endl;
     cout << "1. Display list" << endl;
     cout << "2. Sort list by name" << endl;
     cout << "3. Sort list by date of birth" << endl;
     cout << "4. Sort list by date of death" << endl;
     cout << "5. Sort list by gender" << endl;
-    cout << "6. Save list to .txt file" << endl;
     cout << "0. Main menu" << endl;
     cout << "Enter selection: ";
     cin >> select;
@@ -126,12 +133,6 @@ bool Interface::list_menu()
         case 5:
             list_scientists.sort_gender();
             cout << "List sorted by gender." << endl;
-        break;
-        case 6:
-            cout << "Input filename: ";
-            cin >> f;
-            f += ".txt";
-            list_scientists.print_to_file(f);
         break;
         case 0:
             exit = true;
