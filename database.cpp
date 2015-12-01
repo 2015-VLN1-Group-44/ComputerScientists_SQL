@@ -145,12 +145,13 @@ void Database::read_input()
         }
     } while (!valid_date);
     temp.birth = in_date;
+    // bool valid_choice;
     do
     {
         cout << "Is this person living (y/n)?" << endl;
-        cin >> answer;
-        tolower(answer);
-        switch (answer)
+        getline(cin, line);
+        answer = line[0];
+        switch (tolower(answer))
         {
             case 'y':
                 deceased = false;
@@ -162,7 +163,7 @@ void Database::read_input()
             default:
             break;
         }
-    } while ( !(answer == 'y' || answer == 'n'));
+    } while ( !(tolower(answer) == 'y' || tolower(answer) == 'n'));
     if (deceased)
     {
         cin.ignore();  // grípur newline á undan
