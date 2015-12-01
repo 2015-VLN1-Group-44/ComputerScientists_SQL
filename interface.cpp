@@ -44,8 +44,9 @@ bool Interface::start_menu()
             do
             {
                 legal = search_menu();
-            }while (legal);
+            }while (!legal);
             quit = false;
+            break;
         case 0:
             cout << "Quit";
             quit = true;
@@ -189,7 +190,7 @@ bool Interface::search_menu()
     }
     if(found)
     {
-        edit_found(found_index);
+        found_menu(found_index);
     }
     return found;
 }
@@ -252,8 +253,47 @@ bool Interface::search_death(unsigned int& found_i, QDate d)
 }
 
 
-void Interface::edit_found(unsigned int i)
+void Interface::found_menu(unsigned int i)
 {
+    int select;
+    bool valid;
     cout << "Found entry: " << endl;
     cout << list_scientists.data[i];
+    cout << string(20, '-') << endl;
+    cout << "1. Edit entry" << endl;
+    cout << "2. Remove entry" << endl;
+    cout << "0. Main menu" << endl;
+    cout << "Enter selection: ";
+    cin >> select;
+    switch(select)
+    {
+        case 1:
+            edit_menu(i);
+            valid = true;
+        break;
+        case 2:
+            list_scientists.data.erase(list_scientists.data.begin() + (i));
+            valid = true;
+        break;
+        default:
+            valid = false;
+    }
+    if (!valid)
+    {
+        cout << "Invalid menu item." << endl;
+        found_menu(i);
+    }
+}
+
+void Interface::edit_menu(unsigned int i)
+{
+    int select;
+    bool valid;
+    cout << string(20, '-') << endl;
+    cout << "1. Edit first name" << endl;
+    cout << "2. Edit last name" << endl;
+    cout << "3. Edit gender" << endl;
+    cout << "4. Edit date of birth" << endl;
+    cout << "5. Edit date of death" << endl;
+    cout << "0. Main menu" << endl;
 }

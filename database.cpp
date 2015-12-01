@@ -127,10 +127,10 @@ void Database::print_to_file(string filename)
     for (unsigned int i = 0; i < size(); i++)
     {
         out_file << data[i].get_first()<< " " << data[i].get_last() << " ";
-        out_file << data[i].get_birth_day() << "." << data[i].get_birth_month();
-        out_file << "." << data[i].get_birth_year() << " ";
-        out_file << data[i].get_death_day() << "." << data[i].get_death_month() << ".";
-        out_file << data[i].get_death_year() << " ";
+        out_file << data[i].get_birth().day() << "." << data[i].get_birth().month();
+        out_file << "." << data[i].get_birth().year() << " ";
+        out_file << data[i].get_death().day() << "." << data[i].get_death().month() << ".";
+        out_file << data[i].get_death().year() << " ";
         if(data[i].get_gender())
             out_file << "M" << endl;
         else

@@ -18,6 +18,31 @@ Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d){
     death = d;
 }
 
+void Scientist::set_first(string n)
+{
+    first_name = n;
+}
+
+void Scientist::set_last(string n)
+{
+    last_name = n;
+}
+
+void Scientist::set_birth(QDate b)
+{
+    birth = b;
+}
+
+void Scientist::set_death(QDate d)
+{
+    death = d;
+}
+
+void Scientist::set_gender(bool g)
+{
+    gender = g;
+}
+
 string Scientist::get_first()
 {
     return first_name;
@@ -29,31 +54,6 @@ string Scientist::get_last()
 bool Scientist::get_gender()
 {
     return gender;
-}
-
-int Scientist::get_birth_day()
-{
-    return birth.day();
-}
-int Scientist::get_birth_month()
-{
-    return birth.month();
-}
-int Scientist::get_birth_year()
-{
-    return birth.year();
-}
-int Scientist::get_death_day()
-{
-    return death.day();
-}
-int Scientist::get_death_month()
-{
-    return death.month();
-}
-int Scientist::get_death_year()
-{
-    return death.year();
 }
 
 QDate Scientist::get_birth()

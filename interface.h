@@ -20,7 +20,8 @@ public:
     bool search_last(unsigned int& found_i, string n);
     bool search_birth(unsigned int& found_i, QDate b);
     bool search_death(unsigned int& found_i, QDate d);
-    void edit_found(unsigned int i);
+    void found_menu(unsigned int i);
+    void edit_menu(unsigned int i);
 private:
     Database list_scientists;
 };
