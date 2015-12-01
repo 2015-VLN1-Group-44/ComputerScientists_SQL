@@ -15,7 +15,7 @@ int main()
     do
     {
         quit = implement_test.start_menu();
-    }while (!quit);
+    } while (!quit);
 
     return 0;
 }

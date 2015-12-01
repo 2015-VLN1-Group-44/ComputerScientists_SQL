@@ -38,7 +38,7 @@ void Scientist::set_birth(QDate b)
 void Scientist::set_death(QDate d)
 {
     death = d;
-    if(death.isValid())
+    if (death.isValid())
     {
         living = false;
     }
@@ -101,7 +101,7 @@ ostream& operator << (ostream& out, Scientist sc)
     out << "Date of Birth: " << endl;
     out << sc.birth.day() << "/" << sc.birth.month() << "/";
     out << sc.birth.year() << endl;
-    if(!sc.living)
+    if (!sc.living)
     {
         out << "Date of Death: " << endl;
         out << sc.death.day() << "/" << sc.death.month() << "/";

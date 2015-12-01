@@ -29,7 +29,7 @@ bool name_order(Scientist n1, Scientist n2)
     {
         order = true;
     }
-    else if(n1.get_last() == n2.get_last() && n1.get_first() <= n2.get_first())
+    else if (n1.get_last() == n2.get_last() && n1.get_first() <= n2.get_first())
     {
         order = true;
     }
@@ -127,7 +127,7 @@ void Database::read_input()
         {
             cout << "Date is not valid." << endl;
         }
-    }while(!valid_date);
+    } while (!valid_date);
     temp.birth = in_date;
     do
     {
@@ -145,7 +145,7 @@ void Database::read_input()
             default:
             break;
         }
-    }while( !(answer == 'y' || answer == 'n'));
+    } while ( !(answer == 'y' || answer == 'n'));
     if (deceased)
     {
         do
@@ -158,7 +158,7 @@ void Database::read_input()
             {
                 cout << "Date is not valid." << endl;
             }
-        }while(!valid_date);
+        } while (!valid_date);
     }
     if (!deceased)
     {
@@ -193,7 +193,7 @@ void Database::read_file(string filename)
         getline(in_file, line);
         date = QString::fromStdString(line);
         temp.death = QDate::fromString(date, format);
-        if(temp.death.isValid() == false)
+        if (temp.death.isValid() == false)
         {
             temp.living = true;
         }
@@ -203,7 +203,7 @@ void Database::read_file(string filename)
         }
         getline(in_file, line);
         g = line[0];
-        if(g == 'M' || g == 'm')
+        if (g == 'M' || g == 'm')
         {
             temp.gender = 1;
         }
@@ -218,13 +218,14 @@ void Database::print_to_file(string filename)
 {
     ofstream out_file;
     out_file.open(filename.c_str());
+
     for (unsigned int i = 0; i < size(); i++)
     {
         out_file << data[i].get_first()<< endl;
         out_file << data[i].get_last() << endl;
         out_file << data[i].get_birth().day() << "." << data[i].get_birth().month();
         out_file << "." << data[i].get_birth().year() << endl;
-        if(!living)
+        if (!living)
         {
             out_file << data[i].get_death().day() << "." << data[i].get_death().month() << ".";
             out_file << data[i].get_death().year() << endl;
@@ -233,7 +234,7 @@ void Database::print_to_file(string filename)
         {
             out_file << "0.0.0" << endl;
         }
-        if(data[i].get_gender())
+        if (data[i].get_gender())
             out_file << "M" << endl;
         else
             out_file << "F" << endl;
@@ -250,7 +251,7 @@ ostream& operator << (ostream& out, Database d)
 {
     for (unsigned int i = 0; i < d.size(); i++)
     {
-        out << d.data[i];
+        out << d.data[i]; // notar overload << virkjann í Scientist
     }
     return out;
 }

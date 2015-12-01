@@ -32,21 +32,21 @@ bool Interface::start_menu()
             do
             {
                 exit = add_menu();
-            }while (!exit);
+            } while (!exit);
             quit = false;
             break;
         case 2:
             do
             {
                 exit = list_menu();
-            }while (!exit);
+            } while (!exit);
             quit = false;
             break;
         case 3:
             do
             {
                 exit = search_menu();
-            }while (!exit);
+            } while (!exit);
             quit = false;
             break;
         case 4:
@@ -55,16 +55,16 @@ bool Interface::start_menu()
             f += ".txt";
             list_scientists.print_to_file(f);
             quit = false;
-        break;
+            break;
         case 0:
             cout << "Quit";
             quit = true;
             break;
-
         default:
             cout << endl;
             cout << selection << " is not a valid menu item.\n";
             quit = false;
+            break;
     }
     return quit;
 }
@@ -89,7 +89,7 @@ bool Interface::add_menu()
             break;
         case 2:
             list_scientists.read_input();
-        break;
+            break;
         case 0:
             exit = true;
             break;
@@ -117,29 +117,29 @@ bool Interface::list_menu()
     {
         case 1:
             cout << list_scientists;
-        break;
+            break;
         case 2:
             list_scientists.sort_name();
             cout << "List sorted by name." << endl;
-        break;
+            break;
         case 3:
             list_scientists.sort_birth();
             cout << "List sorted by date of birth." << endl;
-        break;
+            break;
         case 4:
             list_scientists.sort_death();
             cout << "List sorted by date of death." << endl;
-        break;
+            break;
         case 5:
             list_scientists.sort_gender();
             cout << "List sorted by gender." << endl;
-        break;
+            break;
         case 0:
             exit = true;
-        break;
+            break;
         default:
             cout << select << " is not a valid menu item." << endl;
-        break;
+            break;
     }
     return exit;
 }
@@ -168,13 +168,13 @@ bool Interface::search_menu()
             cin >> name;
             found = search_first(found_index, name);
             exit = true;
-        break;
+            break;
         case 2:
             cout << "Enter name: ";
             cin >> name;
             found = search_last(found_index, name);
             exit = true;
-        break;
+            break;
         case 3:
             cout << "Enter date of birth (dd/mm/yyyy): ";
             cin >> day >> stop >> month >> stop >> year;
@@ -184,9 +184,11 @@ bool Interface::search_menu()
                 found = search_birth(found_index, sdate);
             }
             else
+            {
                 found = valid_date;
+            }
             exit = true;
-        break;
+            break;
         case 4:
             cout << "Enter date of death (dd/mm/yyyy): ";
             cin >> day >> stop >> month >> stop >> year;
@@ -196,7 +198,9 @@ bool Interface::search_menu()
                 found = search_death(found_index, sdate);
             }
             else
+            {
                 found = valid_date;
+            }
             exit = true;
         break;
         case 0:
@@ -206,10 +210,9 @@ bool Interface::search_menu()
         default:
             cout << "Invalid selection." << endl;
             found = false;
-        break;
-
+            break;
     }
-    if(found)
+    if (found)
     {
         found_menu(found_index);
         exit = false;
@@ -224,20 +227,20 @@ bool Interface::search_menu()
         cin >> adding;
         do
         {
-        if(adding == 'y' || adding == 'Y')
+        if (adding == 'y' || adding == 'Y')
         {
             list_scientists.read_input();
             exit = true;
             legal_choice = true;
         }
-        else if(adding == 'n' || adding == 'N')
+        else if (adding == 'n' || adding == 'N')
         {
             exit = true;
             legal_choice = true;
         }
         else
             legal_choice = false;
-        }while(!legal_choice);
+        } while (!legal_choice);
     }
     return exit;
 }
@@ -245,9 +248,9 @@ bool Interface::search_menu()
 bool Interface::search_first(unsigned int& found_i, string n)
 {
     bool found = false;
-    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < list_scientists.size(); i++)
     {
-        if(n == list_scientists.data[i].get_first())
+        if (n == list_scientists.data[i].get_first())
         {
             found = true;
             found_i = i;
@@ -259,9 +262,9 @@ bool Interface::search_first(unsigned int& found_i, string n)
 bool Interface::search_last(unsigned int& found_i, string n)
 {
     bool found = false;
-    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < list_scientists.size(); i++)
     {
-        if(n == list_scientists.data[i].get_last())
+        if (n == list_scientists.data[i].get_last())
         {
             found = true;
             found_i = i;
@@ -273,9 +276,9 @@ bool Interface::search_last(unsigned int& found_i, string n)
 bool Interface::search_birth(unsigned int& found_i, QDate b)
 {
     bool found = false;
-    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < list_scientists.size(); i++)
     {
-        if(b == list_scientists.data[i].get_birth())
+        if (b == list_scientists.data[i].get_birth())
         {
             found = true;
             found_i = i;
@@ -288,9 +291,9 @@ bool Interface::search_birth(unsigned int& found_i, QDate b)
 bool Interface::search_death(unsigned int& found_i, QDate d)
 {
     bool found = false;
-    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < list_scientists.size(); i++)
     {
-        if(d == list_scientists.data[i].get_death())
+        if (d == list_scientists.data[i].get_death())
         {
             found = true;
             found_i = i;
@@ -312,22 +315,22 @@ void Interface::found_menu(unsigned int i)
     cout << "0. Search menu" << endl;
     cout << "Enter selection: ";
     cin >> select;
-    switch(select)
+    switch (select)
     {
         case 1:
             edit_menu(i);
             valid = true;
-        break;
+            break;
         case 2:
             list_scientists.data.erase(list_scientists.data.begin() + (i));
             valid = true;
-        break;
+            break;
         case 0:
             valid = true;
-        break;
+            break;
         default:
             valid = false;
-        break;
+            break;
     }
     if (!valid)
     {
@@ -358,12 +361,12 @@ void Interface::edit_menu(unsigned int i)
             cout << "Enter new first name: ";
             cin >> n;
             list_scientists.data[i].set_first(n);
-        break;
+            break;
         case 2:
             cout << "Enter new last name: ";
             cin >> n;
             list_scientists.data[i].set_last(n);
-        break;
+            break;
         case 3:
             cout << "Enter gender: ";
             cin >> g;
@@ -371,7 +374,7 @@ void Interface::edit_menu(unsigned int i)
                 list_scientists.data[i].set_gender(1);
             else
                 list_scientists.data[i].set_gender(0);
-        break;
+            break;
         case 4:
             cout << "Enter date of birth (dd/mm/yyyy): ";
             cin >> day >> stop >> month >> stop >> year;
@@ -381,7 +384,7 @@ void Interface::edit_menu(unsigned int i)
                 list_scientists.data[i].set_birth(d);
                 exit = false;
             }
-        break;
+            break;
         case 5:
             cout << "Enter date of death (dd/mm/yyyy): ";
             cin >> day >> stop >> month >> stop >> year;
@@ -391,15 +394,15 @@ void Interface::edit_menu(unsigned int i)
                 list_scientists.data[i].set_death(d);
                 exit = false;
             }
-        break;
+            break;
         case 0:
             exit = true;
-        break;
+            break;
         default:
             cout << "Invalid menu item." << endl;
-        break;
+            break;
     }
-    if(!exit)
+    if (!exit)
     {
         edit_menu(i);
     }
