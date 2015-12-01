@@ -96,13 +96,12 @@ void Database::read_input()
     QDate in_date;
     bool valid_date;
     cout << "Input first name(s): ";
-    cin.ignore();
+    cin.ignore();                       //varð að setja git.ignore til að miðjunafnið fari með. Ingvi
     std::getline(cin, temp.first_name);
-    //cin >> temp.first_name;
-
+    //cin >> temp.first_name;           //má eyða ef allt keyrir rétt. Ingvi
     cout << "Input last name: ";
     std::getline(cin, temp.last_name);
-    //cin >> temp.last_name;
+    //cin >> temp.last_name;            //má eyða ef allt keyrir rétt. Ingvi
     cout << "Input gender (M/F): ";
     cin >> cgender;
     switch(tolower(cgender))
