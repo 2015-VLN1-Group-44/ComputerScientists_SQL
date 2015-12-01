@@ -20,6 +20,7 @@ bool Interface::start_menu()
     cout << endl;
     cout << "1. Add Scientists to list" << endl;
     cout << "2. Display List of Scientists" << endl;
+    cout << "3. Search list" << endl;
     cout << "0. Quit" << endl;
     cout << "Enter selection: ";
     cin >> selection;
@@ -40,6 +41,11 @@ bool Interface::start_menu()
             }while (!legal);
             valid = false;
             break;
+        case 3:
+            do
+            {
+                legal = search_menu();
+            }while (!legal);
         case 0:
             cout << "Quit";
             valid = true;
@@ -70,7 +76,7 @@ bool Interface::add_menu()
             break;
         case 2:
             list_scientists.read_input();
-            break;
+        break;
         case 0:
             valid = true;
             break;
@@ -91,7 +97,7 @@ bool Interface::list_menu()
     cout << "3. Sort list by date of birth" << endl;
     cout << "4. Sort list by date of death" << endl;
     cout << "5. Sort list by gender" << endl;
-    cout << "6. Save list" << endl;
+    cout << "6. Save list to .txt file" << endl;
     cout << "0. Main menu" << endl;
     cout << "Enter selection: ";
     cin >> select;
@@ -130,4 +136,71 @@ bool Interface::list_menu()
         break;
     }
     return valid;
+}
+
+bool Interface::search_menu()
+{
+    int select, day, month, year;
+    unsigned int found_index;
+    string name;
+    char stop;
+    bool found;
+    cout << "1. Search by first name" << endl;
+    cout << "2. Search by last name" << endl;
+    cout << "3. Search by date of birth" << endl;
+    cout << "4. Search by date of death" << endl;
+    cout << "0. Main menu" << endl;
+    cout << "Enter selection: ";
+    cin >> select;
+    switch (select)
+    {
+        case 1:
+            cout << "Enter name: ";
+            cin >> name;
+            found = search_first(found_index, name);
+        break;
+        case 2:
+            cout << "Enter name: ";
+            cin >> name;
+        break;
+        case 3:
+            cout << "Enter date of birth (dd/mm/yyyy): ";
+            cin >> day >> stop >> month >> stop >> year;
+            // QDate btemp(year, month, day);
+        break;
+        case 4:
+            cout << "Enter date of death (dd/mm/yyyy): ";
+            cin >> day >> stop >> month >> stop >> year;
+            // QDate dtemp(year, month, day);
+        break;
+    }
+    if(found)
+    {
+        edit_found(found_index);
+    }
+    return found;
+}
+
+bool Interface::search_first(unsigned int& found_i, string n)
+{
+    bool found = false;
+    for(unsigned int i = 0; i < list_scientists.size(); i++)
+    {
+        if(n == list_scientists.data[i].get_first())
+            found = true;
+            found_i = i;
+    }
+    return found;
+}
+
+/*
+bool search_last();
+bool search_birth();
+bool search_death();
+*/
+
+void Interface::edit_found(unsigned int i)
+{
+    cout << "Found entry: " << endl;
+    cout << list_scientists.data[i];
 }
