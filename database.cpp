@@ -92,11 +92,11 @@ void Database::sort_gender()
 void Database::read_input()
 {
     Scientist temp;
-    char cgender;
+    char cgender, answer;
     int day, month, year;
     char stop;
     QDate in_date;
-    bool valid_date;
+    bool valid_date, deceased;
     cout << "Input first name(s): ";
     cin.ignore();                       //varð að setja git.ignore til að miðjunafnið fari með. Ingvi
     std::getline(cin, temp.first_name);
@@ -131,15 +131,36 @@ void Database::read_input()
     temp.birth = in_date;
     do
     {
-        cout << "Input date of death (dd/mm/yyyy): ";
-        cin >> day >> stop >> month >> stop >> year;
-        in_date.setDate(year, month, day);
-        valid_date = in_date.isValid();
-        if(!valid_date)
+        cout << "Is this person living (y/n)?" << endl;
+        cin >> answer;
+        switch (tolower(answer))
         {
-            cout << "Date is not valid." << endl;
+            case 'y':
+                deceased = false;
+                temp.living = true;
+                temp.death.setDate(0, 0, 0);
+            break;
+            case 'n':
+                deceased = true;
+            break;
+            default:
+            break;
         }
-    }while(!valid_date);
+    }while( !(answer == 'y' || answer == 'n'));
+    if (deceased)
+    {
+        do
+        {
+            cout << "Input date of death (dd/mm/yyyy): ";
+            cin >> day >> stop >> month >> stop >> year;
+            in_date.setDate(year, month, day);
+            valid_date = in_date.isValid();
+            if(!valid_date)
+            {
+                cout << "Date is not valid." << endl;
+            }
+        }while(!valid_date);
+    }
     temp.death = in_date;
     data.push_back(temp);
 }

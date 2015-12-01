@@ -328,7 +328,7 @@ void Interface::edit_menu(unsigned int i)
     cout << "3. Edit gender" << endl;
     cout << "4. Edit date of birth" << endl;
     cout << "5. Edit date of death" << endl;
-    cout << "0. Main menu" << endl;
+    cout << "0. Search menu" << endl;
     cout << "Enter selection: ";
     cin >> select;
     switch (select)
