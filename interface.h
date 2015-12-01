@@ -22,6 +22,7 @@ public:
     bool search_death(unsigned int& found_i, QDate d);
     void found_menu(unsigned int i);
     void edit_menu(unsigned int i);
+    void print_header();
 private:
     Database list_scientists;
 };

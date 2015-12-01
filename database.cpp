@@ -149,7 +149,8 @@ void Database::read_input()
     {
         cout << "Is this person living (y/n)?" << endl;
         cin >> answer;
-        switch (tolower(answer))
+        tolower(answer);
+        switch (answer)
         {
             case 'y':
                 deceased = false;

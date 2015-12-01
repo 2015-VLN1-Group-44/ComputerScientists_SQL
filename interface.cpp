@@ -121,6 +121,7 @@ bool Interface::list_menu()
     switch(select)
     {
         case 1:
+            print_header();
             cout << list_scientists;
             break;
         case 2:
@@ -314,6 +315,7 @@ void Interface::found_menu(unsigned int i)
     bool valid;
     cout << "Found entry: " << endl;
     cout << string(20, '-') << endl;
+    print_header();
     cout << list_scientists.data[i];
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
@@ -370,6 +372,7 @@ void Interface::edit_menu(unsigned int i)
             cin.ignore();
             getline(cin, n);
             list_scientists.data[i].set_first(n);
+            print_header();
             cout << list_scientists.data[i];
             break;
         case 2:
@@ -377,6 +380,7 @@ void Interface::edit_menu(unsigned int i)
             cin.ignore();
             getline(cin, n);
             list_scientists.data[i].set_last(n);
+            print_header();
             cout << list_scientists.data[i];
             break;
         case 3:
@@ -390,6 +394,7 @@ void Interface::edit_menu(unsigned int i)
                 list_scientists.data[i].set_gender(0);
             else
                 cout << "Not a valid gender." << endl;
+            print_header();
             cout << list_scientists.data[i];
             break;
         case 4:
@@ -413,6 +418,7 @@ void Interface::edit_menu(unsigned int i)
             else
             {
                 list_scientists.data[i].set_birth(d);
+                print_header();
                 cout << list_scientists.data[i];
             }
             break;
@@ -420,8 +426,8 @@ void Interface::edit_menu(unsigned int i)
             cout << "Enter date of death (dd/mm/yyyy): ";
             cin.ignore();
             getline(cin, line);
-            date = QString::fromStdString(line);
-            d = QDate::fromString(date, format);
+            date = QString::fromStdString(line); // breytir inputinu í QString
+            d = QDate::fromString(date, format); // breytir inputi í QDate
             if (!d.isValid())
             {
                 cout << "Not a valid date." << endl;
@@ -435,6 +441,7 @@ void Interface::edit_menu(unsigned int i)
             else
             {
                 list_scientists.data[i].set_death(d);
+                print_header();
                 cout << list_scientists.data[i];
             }
             break;
@@ -449,4 +456,11 @@ void Interface::edit_menu(unsigned int i)
     {
         edit_menu(i);
     }
+}
+
+void Interface::print_header()
+{
+    const int MAX_NAME = 36;
+    cout << "Name" << string(MAX_NAME, ' ') << "Gender\tDoB\t\tDoD\n";
+    cout << string(101, '-') << endl;
 }

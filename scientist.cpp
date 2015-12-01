@@ -83,54 +83,39 @@ Scientist& Scientist::operator = (Scientist other)
     living = other.living;
     return *this;
 }
-
-bool header;                                                   //segir til hvort búið sé að skrifa header á skja *** Þarf að færa
 // Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)
 {
-    const int MAX_NAME_LENGTH = 36;                             //Constant sem *********þarf að færa
-
+    const int MAX_NAME_LENGTH = 36;                             //Constant sem þarf að færa
     int name_length = sc.first_name.size() + sc.last_name.size() +1;    //búa til pláss fyrir nafn
 
-    if (header == 0) //Prentar header
-        {
-            out << "Name" << string(MAX_NAME_LENGTH, ' ') << "Gender\tDoB\t\tDoD\n";
-            out << string(101, '-') << endl;
-            header = 1;
-        }
-
-    //out << string(20, '-') << endl;                                   //má eyða ef allt keyrir rétt. Ingvi
-    //out << "Name: " << sc.first_name << " " << sc.last_name << endl;  //má eyða ef allt keyrir rétt. Ingvi
     out << sc.first_name << " " << sc.last_name;
     if (name_length < MAX_NAME_LENGTH)  //Fyllir línuna ef nafnið er undir max_name_length
         {
             name_length = MAX_NAME_LENGTH - name_length;
             out << string(name_length , ' ');
         }
-    //out << "Gender: ";                                                //má eyða ef allt keyrir rétt. Ingvi
+
     if (sc.gender)
     {
-        //out << "Male" << endl;                                        //má eyða ef allt keyrir rétt. Ingvi
+
         out << "\tMale\t";
     }
     else
-        //out << "Female" << endl;                                      //má eyða ef allt keyrir rétt. Ingvi
+    {
         out << "\tFemale\t";
-
-    //out << "Date of Birth: " << endl;                                 //má eyða ef allt keyrir rétt. Ingvi
+    }
     out << sc.birth.day() << "/" << sc.birth.month() << "/";
-    //out << sc.birth.year() << endl;                                   //má eyða ef allt keyrir rétt. Ingvi
     out << sc.birth.year() << "\t";
     if (!sc.living)
     {
-        //out << "Date of Death: " << endl;                             //má eyða ef allt keyrir rétt. Ingvi
         out << "Date of Death: ";
         out << sc.death.day() << "/" << sc.death.month() << "/";
-        //out << sc.death.year() << endl;                               //má eyða ef allt keyrir rétt. Ingvi
         out << sc.death.year() << "\n";
     }
     else
-        //out << sc.first_name << " is alive and well." << endl;        //má eyða ef allt keyrir rétt. Ingvi
+    {
         out << sc.first_name << " is alive and well.\n";
+    }
     return out;
 }
