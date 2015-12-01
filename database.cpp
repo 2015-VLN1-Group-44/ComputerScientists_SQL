@@ -60,7 +60,7 @@ bool death_order(Scientist n1, Scientist n2)
 bool gender_order(Scientist n1, Scientist n2)
 {
     bool g = false;
-    if (n1.get_gender() > n2.get_gender())
+    if (n1.get_gender() < n2.get_gender())
     {
         g = true;
     }
@@ -88,6 +88,10 @@ void Database::sort_gender()
     sort(data.begin(), data.end(), gender_order);
 }
 
+void Database::reverse_order()
+{
+    reverse(data.begin(), data.end());
+}
 
 // Les upplýsingar frá notanda
 void Database::read_input()

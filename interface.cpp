@@ -115,6 +115,7 @@ bool Interface::list_menu()
     cout << "3. Sort list by date of birth" << endl;
     cout << "4. Sort list by date of death" << endl;
     cout << "5. Sort list by gender" << endl;
+    cout << "6. Reverse order" << endl;
     cout << "0. Main menu" << endl;
     cout << "Enter selection: ";
     cin >> select;
@@ -139,6 +140,10 @@ bool Interface::list_menu()
         case 5:
             list_scientists.sort_gender();
             cout << "List sorted by gender." << endl;
+            break;
+        case 6:
+            list_scientists.reverse_order();
+            cout << "List reversed." << endl;
             break;
         case 0:
             exit = true;

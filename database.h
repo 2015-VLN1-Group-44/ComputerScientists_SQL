@@ -19,6 +19,8 @@ public:
     void sort_birth();
     void sort_death();
     void sort_gender();
+    void reverse_order();
+
     void read_input();
     void print_to_file(string filename);
     void read_file(string filename);
