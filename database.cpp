@@ -92,6 +92,8 @@ void Database::read_input()
     char cgender;
     int day, month, year;
     char stop;
+    QDate in_date;
+    bool valid_date;
     cout << "Input first name(s): ";
     cin >> temp.first_name;
     cout << "Input last name: ";
@@ -109,14 +111,30 @@ void Database::read_input()
         default:
             break;
     }
-    cout << "Input date of birth (dd/mm/yyyy): ";
-    cin >> day >> stop >> month >> stop >> year;
-    QDate birthd(year, month, day);
-    temp.birth = birthd;
-    cout << "Input date of death (dd/mm/yyyy): ";
-    cin >> day >> stop >> month >> stop >> year;
-    QDate deathd(year, month, day);
-    temp.death = deathd;
+    do
+    {
+        cout << "Input date of birth (dd/mm/yyyy): ";
+        cin >> day >> stop >> month >> stop >> year;
+        in_date.setDate(year, month, day);
+        valid_date = in_date.isValid();
+        if(!valid_date)
+        {
+            cout << "Date is not valid." << endl;
+        }
+    }while(!valid_date);
+    temp.birth = in_date;
+    do
+    {
+        cout << "Input date of death (dd/mm/yyyy): ";
+        cin >> day >> stop >> month >> stop >> year;
+        in_date.setDate(year, month, day);
+        valid_date = in_date.isValid();
+        if(!valid_date)
+        {
+            cout << "Date is not valid." << endl;
+        }
+    }while(!valid_date);
+    temp.death = in_date;
     data.push_back(temp);
 }
 
