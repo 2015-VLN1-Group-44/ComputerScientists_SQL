@@ -95,7 +95,8 @@ void Database::read_input()
     Scientist temp;
     char cgender, answer;
     string line;
-    QDate in_date;
+    QDate in_date, current;
+    current = QDate::currentDate(); // sækir daginn í dag í system-klukkuna
     QString date, format;
     format = "d/M/yyyy";
     bool valid_date, deceased, valid;
@@ -137,6 +138,11 @@ void Database::read_input()
         {
             cout << "Date is not valid." << endl;
         }
+        else if (current < in_date)
+        {
+            cout << "Date of birth after current date. Please correct" << endl;
+            valid_date = false;
+        }
     } while (!valid_date);
     temp.birth = in_date;
     do
@@ -173,6 +179,11 @@ void Database::read_input()
             else if (in_date < temp.birth) // fæðing ekki eftir dauða
             {
                 cout << "Date of death before date of birth. Please correct." << endl;
+                valid_date = false;
+            }
+            else if (current < in_date)
+            {
+                cout << "Date of death after today's date. Please correct." << endl;
                 valid_date = false;
             }
         } while (!valid_date);
