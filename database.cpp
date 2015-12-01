@@ -94,35 +94,44 @@ void Database::read_input()
 {
     Scientist temp;
     char cgender, answer;
-    int day, month, year;
-    char stop;
+    string line;
     QDate in_date;
-    bool valid_date, deceased;
+    QString date, format;
+    format = "d/M/yyyy";
+    bool valid_date, deceased, valid;
     cout << "Input first name(s): ";
     cin.ignore();                       //varð að setja git.ignore til að miðjunafnið fari með. Ingvi
-    std::getline(cin, temp.first_name);
+    getline(cin, temp.first_name);
     //cin >> temp.first_name;           //má eyða ef allt keyrir rétt. Ingvi
     cout << "Input last name: ";
-    std::getline(cin, temp.last_name);
+    getline(cin, temp.last_name);
     //cin >> temp.last_name;            //má eyða ef allt keyrir rétt. Ingvi
-    cout << "Input gender (M/F): ";
-    cin >> cgender;
-    switch(tolower(cgender))
+    do
     {
-        case 'm':
-            temp.gender = true;
-            break;
-        case 'f':
-            temp.gender = false;
-            break;
-        default:
-            break;
-    }
+        cout << "Input gender (M/F): ";
+        getline(cin, line);
+        cgender = line[0];
+        switch(tolower(cgender))
+        {
+            case 'm':
+                temp.gender = true;
+                valid = true;
+                break;
+            case 'f':
+                temp.gender = false;
+                valid = true;
+                break;
+            default:
+                cout << "Invalid gender. Please correct." << endl;
+                break;
+        }
+    } while (!valid);
     do
     {
         cout << "Input date of birth (dd/mm/yyyy): ";
-        cin >> day >> stop >> month >> stop >> year;
-        in_date.setDate(year, month, day);
+        getline(cin, line);
+        date = QString::fromStdString(line);    // breytir innlestri í QString
+        in_date = QDate::fromString(date, format);  // innlestur => dags.
         valid_date = in_date.isValid();
         if(!valid_date)
         {
@@ -149,11 +158,13 @@ void Database::read_input()
     } while ( !(answer == 'y' || answer == 'n'));
     if (deceased)
     {
+        cin.ignore();  // grípur newline á undan
         do
         {
             cout << "Input date of death (dd/mm/yyyy): ";
-            cin >> day >> stop >> month >> stop >> year;
-            in_date.setDate(year, month, day);
+            getline(cin, line);
+            date = QString::fromStdString(line); // breytir innlestri í QString
+            in_date = QDate::fromString(date, format); // breytir innlestri í dags.
             valid_date = in_date.isValid();  // testar hvort dagsetning sé gild
             if(!valid_date)
             {

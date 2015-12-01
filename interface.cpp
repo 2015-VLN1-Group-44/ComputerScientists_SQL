@@ -346,9 +346,11 @@ void Interface::found_menu(unsigned int i)
 
 void Interface::edit_menu(unsigned int i)
 {
-    int select, day, month, year;
-    string n;
-    char g, stop;
+    int select;
+    string n, line;
+    char g;
+    QString date, format;
+    format = "d/M/yyyy";
     QDate d;
     bool exit = false;
     cout << string(20, '-') << endl;
@@ -364,46 +366,64 @@ void Interface::edit_menu(unsigned int i)
     {
         case 1:
             cout << "Enter new first name: ";
-            cin >> n;
+            cin.ignore();
+            getline(cin, n);
             list_scientists.data[i].set_first(n);
             cout << list_scientists.data[i];
             break;
         case 2:
             cout << "Enter new last name: ";
-            cin >> n;
+            cin.ignore();
+            getline(cin, n);
             list_scientists.data[i].set_last(n);
             cout << list_scientists.data[i];
             break;
         case 3:
             cout << "Enter gender: ";
-            cin >> g;
+            cin.ignore();
+            getline(cin, line);
+            g = line[0];
             if (g == 'm' || g == 'M')
                 list_scientists.data[i].set_gender(1);
-            else
+            else if (g == 'f' || g == 'F')
                 list_scientists.data[i].set_gender(0);
+            else
+                cout << "Not a valid gender." << endl;
             cout << list_scientists.data[i];
             break;
         case 4:
             cout << "Enter date of birth (dd/mm/yyyy): ";
-            cin >> day >> stop >> month >> stop >> year;
-            exit = d.setDate(year, month, day);
-            if (exit)
+            cin.ignore();
+            getline(cin, line);
+            date = QString::fromStdString(line);
+            d = QDate::fromString(date, format);
+            if (d.isValid())
             {
                 list_scientists.data[i].set_birth(d);
-                exit = false;
+                cout << list_scientists.data[i];
             }
-            cout << list_scientists.data[i];
+            else
+            {
+                cout << "Not a valid date." << endl;
+            }
             break;
         case 5:
             cout << "Enter date of death (dd/mm/yyyy): ";
-            cin >> day >> stop >> month >> stop >> year;
-            exit = d.setDate(year, month, day);
-            if (exit)
+            cin.ignore();
+            getline(cin, line);
+            date = QString::fromStdString(line);
+            d = QDate::fromString(date, format);
+            if (d.isValid() && !(d < list_scientists.data[i].get_birth()))
             {
                 list_scientists.data[i].set_death(d);
-                exit = false;
+                cout << list_scientists.data[i];
             }
-            cout << list_scientists.data[i];
+            else if(d.isValid() && (d < list_scientists.data[i].get_birth()))
+                cout << "Date of death before date of birth. Please correct." << endl;
+            else
+            {
+                cout << "Not a valid date." << endl;
+            }
             break;
         case 0:
             exit = true;
