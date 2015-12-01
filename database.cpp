@@ -22,6 +22,7 @@ Database::Database(vector<Scientist>& d)
     }
 }
 
+// Nokkur föll sem gera samanburð á tveimur elementum, skila true ef í réttri röð
 bool name_order(Scientist n1, Scientist n2)
 {
     bool order = false;
@@ -66,7 +67,7 @@ bool gender_order(Scientist n1, Scientist n2)
     return g;
 }
 
-
+// Sort föll úr C++ library
 void Database::sort_name()
 {
     sort(data.begin(), data.end(), name_order);
@@ -153,12 +154,12 @@ void Database::read_input()
             cout << "Input date of death (dd/mm/yyyy): ";
             cin >> day >> stop >> month >> stop >> year;
             in_date.setDate(year, month, day);
-            valid_date = in_date.isValid();
+            valid_date = in_date.isValid();  // testar hvort dagsetning sé gild
             if(!valid_date)
             {
                 cout << "Date is not valid." << endl;
             }
-            else if (in_date < temp.birth)
+            else if (in_date < temp.birth) // fæðing ekki eftir dauða
             {
                 cout << "Date of death before date of birth. Please correct." << endl;
                 valid_date = false;

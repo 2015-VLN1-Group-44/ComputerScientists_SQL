@@ -12,6 +12,11 @@ Interface::Interface(vector<Scientist> v)
     }
 }
 
+/* Bool breytan quit er false á meðan ekki er búið að velja quit möguleikann
+ * Exit bool breytan tekur gildi úr föllunum fyrir undirvalmyndir, þau skila
+ * false ef ekki er búið að velja exit inni í þeim, og þær undirvalmyndir keyra
+ * þá aftur.
+ */
 bool Interface::start_menu()
 {
     int selection = 0;
@@ -19,7 +24,7 @@ bool Interface::start_menu()
     string f; // strengur til að lesa inn filename
     cout << string(20, '-') << endl;
     cout << "1. Add Scientists to list" << endl;
-    cout << "2. Display List of Scientists" << endl;
+    cout << "2. Display list of Scientists" << endl;
     cout << "3. Search list" << endl;
     cout << "4. Save list to .txt file"  << endl;
     cout << "0. Quit" << endl;
@@ -361,11 +366,13 @@ void Interface::edit_menu(unsigned int i)
             cout << "Enter new first name: ";
             cin >> n;
             list_scientists.data[i].set_first(n);
+            cout << list_scientists.data[i];
             break;
         case 2:
             cout << "Enter new last name: ";
             cin >> n;
             list_scientists.data[i].set_last(n);
+            cout << list_scientists.data[i];
             break;
         case 3:
             cout << "Enter gender: ";
@@ -374,6 +381,7 @@ void Interface::edit_menu(unsigned int i)
                 list_scientists.data[i].set_gender(1);
             else
                 list_scientists.data[i].set_gender(0);
+            cout << list_scientists.data[i];
             break;
         case 4:
             cout << "Enter date of birth (dd/mm/yyyy): ";
@@ -384,6 +392,7 @@ void Interface::edit_menu(unsigned int i)
                 list_scientists.data[i].set_birth(d);
                 exit = false;
             }
+            cout << list_scientists.data[i];
             break;
         case 5:
             cout << "Enter date of death (dd/mm/yyyy): ";
@@ -394,6 +403,7 @@ void Interface::edit_menu(unsigned int i)
                 list_scientists.data[i].set_death(d);
                 exit = false;
             }
+            cout << list_scientists.data[i];
             break;
         case 0:
             exit = true;
