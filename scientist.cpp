@@ -81,6 +81,7 @@ Scientist& Scientist::operator = (Scientist other)
 // Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)
 {
+    out << string(20, '-') << endl;
     out << "Name: " << sc.first_name << " " << sc.last_name << endl;
     out << "Gender: ";
     if (sc.gender)
@@ -96,6 +97,5 @@ ostream& operator << (ostream& out, Scientist sc)
     out << "Date of Death: " << endl;
     out << sc.death.day() << "/" << sc.death.month() << "/";
     out << sc.death.year() << endl;
-    cout << string(20, '-') << endl;
     return out;
 }

@@ -15,7 +15,7 @@ Interface::Interface(vector<Scientist> v)
 bool Interface::start_menu()
 {
     int selection = 0;
-    bool quit, legal;
+    bool quit, exit;
     cout << string(20, '-') << endl;
     cout << "1. Add Scientists to list" << endl;
     cout << "2. Display List of Scientists" << endl;
@@ -29,28 +29,27 @@ bool Interface::start_menu()
 
             do
             {
-                legal = add_menu();
-            }while (!legal);
+                exit = add_menu();
+            }while (!exit);
             quit = false;
             break;
         case 2:
             do
             {
-                legal = list_menu();
-            }while (!legal);
+                exit = list_menu();
+            }while (!exit);
             quit = false;
             break;
         case 3:
             do
             {
-                legal = search_menu();
-            }while (!legal);
+                exit = search_menu();
+            }while (!exit);
             quit = false;
             break;
         case 0:
             cout << "Quit";
             quit = true;
-            //exit(1);
             break;
 
         default:
@@ -64,7 +63,7 @@ bool Interface::start_menu()
 bool Interface::add_menu()
 {
     int select;
-    bool valid = false;
+    bool exit = false;
     cout << string(20, '-') << endl;
     cout << "1. Read from file" << endl;
     cout << "2. Add Scientist manually" << endl;
@@ -79,18 +78,18 @@ bool Interface::add_menu()
             list_scientists.read_input();
         break;
         case 0:
-            valid = true;
+            exit = true;
             break;
         default:
             cout << select << " is not a valid menu item." << endl;
             break;
     }
-    return valid;
+    return exit;
 }
 
 bool Interface::list_menu()
 {
-    bool valid = false;
+    bool exit = false;
     int select;
     string f; // strengur til að lesa inn filename
     cout << string(20, '-') << endl;
@@ -131,13 +130,13 @@ bool Interface::list_menu()
             list_scientists.print_to_file(f);
         break;
         case 0:
-            valid = true;
+            exit = true;
         break;
         default:
             cout << select << " is not a valid menu item." << endl;
         break;
     }
-    return valid;
+    return exit;
 }
 
 bool Interface::search_menu()
@@ -147,6 +146,7 @@ bool Interface::search_menu()
     string name;
     char stop;
     bool found, valid_date;
+    bool exit = false;
     QDate sdate;
     cout << string(20, '-') << endl;
     cout << "1. Search by first name" << endl;
@@ -162,11 +162,13 @@ bool Interface::search_menu()
             cout << "Enter name: ";
             cin >> name;
             found = search_first(found_index, name);
+            exit = true;
         break;
         case 2:
             cout << "Enter name: ";
             cin >> name;
             found = search_last(found_index, name);
+            exit = true;
         break;
         case 3:
             cout << "Enter date of birth (dd/mm/yyyy): ";
@@ -178,6 +180,7 @@ bool Interface::search_menu()
             }
             else
                 found = valid_date;
+            exit = true;
         break;
         case 4:
             cout << "Enter date of death (dd/mm/yyyy): ";
@@ -189,13 +192,29 @@ bool Interface::search_menu()
             }
             else
                 found = valid_date;
+            exit = true;
         break;
+        case 0:
+            exit = true;
+            found = true;
+            return exit;
+        default:
+            cout << "Invalid selection." << endl;
+            found = false;
+        break;
+
     }
     if(found)
     {
         found_menu(found_index);
+        exit = false;
     }
-    return found;
+    if (!found && exit) // Val löglegt en ekkert fundið
+    {
+        cout << "No entries found." << endl;
+        exit = false;
+    }
+    return exit;
 }
 
 bool Interface::search_first(unsigned int& found_i, string n)
@@ -265,7 +284,7 @@ void Interface::found_menu(unsigned int i)
     cout << list_scientists.data[i];
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
-    cout << "0. Main menu" << endl;
+    cout << "0. Search menu" << endl;
     cout << "Enter selection: ";
     cin >> select;
     switch(select)
@@ -278,8 +297,12 @@ void Interface::found_menu(unsigned int i)
             list_scientists.data.erase(list_scientists.data.begin() + (i));
             valid = true;
         break;
+        case 0:
+            valid = true;
+        break;
         default:
             valid = false;
+        break;
     }
     if (!valid)
     {
