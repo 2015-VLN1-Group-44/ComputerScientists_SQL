@@ -18,6 +18,5 @@ HEADERS += \
     interface.h
 
 DISTFILES += \
-    listofCS.txt \
-    database1.txt
+    data.txt
 
