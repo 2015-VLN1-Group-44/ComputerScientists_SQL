@@ -216,6 +216,10 @@ void Database::read_file(string filename)
     {
         cout << "Unable to open file" << endl;
     }
+    else
+    {
+        cout << "File read." << endl;
+    }
     while (getline(in_file, line))
     {
         temp.first_name = line;
@@ -227,7 +231,8 @@ void Database::read_file(string filename)
         getline(in_file, line);
         date = QString::fromStdString(line);
         temp.death = QDate::fromString(date, format);
-        if (temp.death.isValid() == false)
+        // sé einstaklingur lifandi er dagsetning á forminu 0.0.0
+        if (!temp.death.isValid())
         {
             temp.living = true;
         }
