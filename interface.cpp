@@ -21,21 +21,11 @@ bool Interface::start_menu()
 {
     int selection = 0;
     bool quit, exit;
-    /*string f; // strengur til að lesa inn filename
-    cout << string(20, '-') << endl;
-    cout << "1. Add Scientists to list" << endl;
-    cout << "2. Display list of Scientists" << endl;            //taka út ef allir eru sáttir
-    cout << "3. Search list" << endl;
-    cout << "4. Save list to .txt file"  << endl;
-    cout << "0. Quit" << endl;
-*/
-
     string f; // strengur til að lesa inn filename
     cout << string(101, '-') << endl;
     cout << "1. Add Scientists to list\t";
     cout << "3. Search list\t\t\t";
     cout << "0. Quit" << endl;
-
     cout << "2. Display list of Scientists\t";
     cout << "4. Save list to .txt file"  << endl;
     cout << "Enter selection: ";
@@ -89,11 +79,6 @@ bool Interface::add_menu()
     int select;
     bool exit = false;
     string n;
-    /*cout << string(20, '-') << endl;
-    cout << "1. Read from .txt file" << endl;
-    cout << "2. Add Scientist manually" << endl;            //taka út ef allir eru sáttir
-    cout << "0. Main menu" << endl << "Selection: ";*/
-
     cout << string(101, '-') << endl;
     cout << "1. Read from .txt file\t\t";
     cout << "2. Add Scientist manually\t";
@@ -124,29 +109,15 @@ bool Interface::list_menu()
 {
     bool exit = false;
     int select;
-   /* cout << string(20, '-') << endl;
-    cout << "1. Display list" << endl;
-    cout << "2. Sort list by name" << endl;
-    cout << "3. Sort list by date of birth" << endl;                //taka út ef allir eru sáttir
-    cout << "4. Sort list by date of death" << endl;
-    cout << "5. Sort list by gender" << endl;
-    cout << "6. Reverse order" << endl;
-    cout << "0. Main menu" << endl;*/
 
     cout << string(101, '-') << endl;
     cout << "1. Display list\t\t\t";
     cout << "4. Sort list by date of death\t";
     cout << "0. Main menu" << endl;
-
     cout << "2. Sort list by name\t\t";
     cout << "5. Sort list by gender" << endl;
-
     cout << "3. Sort list by date of birth\t";
     cout << "6. Reverse order" << endl;
-
-
-
-
     cout << "Enter selection: ";
     cin >> select;
     switch(select)
@@ -187,51 +158,46 @@ bool Interface::list_menu()
 
 bool Interface::search_menu()
 {
-    int select, day, month, year;
+    int select;
     unsigned int found_index;
-    string name;
-    char stop;
+    string name, line;
     bool found, valid_date;
     bool exit = false;
     QDate sdate;
-                                                                                //taka út ef allir eru sáttir
- /* cout << string(20, '-') << endl;
-    cout << "1. Search by first name" << endl;
-    cout << "2. Search by last name" << endl;
-    cout << "3. Search by date of birth" << endl;
-    cout << "4. Search by date of death" << endl;
-    cout << "0. Main menu" << endl;
-*/
+    QString date, format;
+    format = "d/M/yyyy";
 
-    cout << string(20, '-') << endl;
+    cout << string(101, '-') << endl;
     cout << "1. Search by first name\t\t";
     cout << "3. Search by date of birth\t";
     cout << "0. Main menu" << endl;
-
     cout << "2. Search by last name\t\t";
     cout << "4. Search by date of death" << endl;
-
-
     cout << "Enter selection: ";
     cin >> select;
     switch (select)
     {
         case 1:
             cout << "Enter name: ";
-            cin >> name;
+            cin.ignore();
+            getline(cin, name);
             found = search_first(found_index, name);
             exit = true;
             break;
         case 2:
             cout << "Enter name: ";
-            cin >> name;
+            cin.ignore();
+            getline(cin, name);
             found = search_last(found_index, name);
             exit = true;
             break;
         case 3:
             cout << "Enter date of birth (dd/mm/yyyy): ";
-            cin >> day >> stop >> month >> stop >> year;
-            valid_date = sdate.setDate(year, month, day);
+            cin.ignore();
+            getline(cin, line);
+            date = QString::fromStdString(line);
+            sdate = QDate::fromString(date, format);
+            valid_date = sdate.isValid();
             if (valid_date)
             {
                 found = search_birth(found_index, sdate);
@@ -244,8 +210,11 @@ bool Interface::search_menu()
             break;
         case 4:
             cout << "Enter date of death (dd/mm/yyyy): ";
-            cin >> day >> stop >> month >> stop >> year;
-            valid_date = sdate.setDate(year, month, day);
+            cin.ignore();
+            getline(cin, line);
+            date = QString::fromStdString(line);
+            sdate = QDate::fromString(date, format);
+            valid_date = sdate.isValid();
             if (valid_date)
             {
                 found = search_death(found_index, sdate);
@@ -276,24 +245,26 @@ bool Interface::search_menu()
         exit = false;
         char adding;
         bool legal_choice;
-        cout << "Do you wish to add this person to the list of computer scientists(y/n)? " << endl;
-        cin >> adding;
         do
         {
-        if (adding == 'y' || adding == 'Y')
-        {
-            list_scientists.read_input();
-            exit = true;
-            legal_choice = true;
-        }
-        else if (adding == 'n' || adding == 'N')
-        {
-            exit = true;
-            legal_choice = true;
-        }
-        else
-            legal_choice = false;
-        } while (!legal_choice);
+            cout << "Do you wish to add this person to the list of computer scientists(y/n)? " << endl;
+            getline(cin, line);
+            adding = line[0];
+            if (tolower(adding) == 'y')
+            {
+                list_scientists.read_input();
+                exit = true;
+                legal_choice = true;
+            }
+            else if (tolower(adding) == 'n')
+            {
+                exit = true;
+                legal_choice = true;
+            }
+            else
+                cout << "Selection is not valid. Please try again." << endl;
+                legal_choice = false;
+            } while (!legal_choice);
     }
     return exit;
 }
@@ -361,7 +332,7 @@ void Interface::found_menu(unsigned int i)
     int select;
     bool valid;
     cout << "Found entry: " << endl;
-    cout << string(20, '-') << endl;
+    cout << string(101, '-') << endl;
     print_header();
     cout << list_scientists.data[i];
     cout << "1. Edit entry" << endl;
@@ -403,7 +374,7 @@ void Interface::edit_menu(unsigned int i)
     QDate d, current;
     current = QDate::currentDate(); // Sækir daginn í dag úr klukkunni
     bool exit = false;
-    cout << string(20, '-') << endl;
+    cout << string(101, '-') << endl;
     cout << "1. Edit first name" << endl;
     cout << "2. Edit last name" << endl;
     cout << "3. Edit gender" << endl;
