@@ -109,7 +109,6 @@ ostream& operator << (ostream& out, Scientist sc)
     out << sc.birth.year() << "\t";
     if (!sc.living)
     {
-        out << "Date of Death: ";
         out << sc.death.day() << "/" << sc.death.month() << "/";
         out << sc.death.year() << "\n";
     }
