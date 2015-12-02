@@ -75,7 +75,7 @@ Aho
 M
 Frances
 Allen
-04.08.1932
+4.8.1932
 0.0.0
 F
 Gene
@@ -118,7 +118,7 @@ Bartik
 27.12.1924
 23.3.2011
 F
-Sir Timothy John 
+Sir Timothy John
 Berners-Lee
 8.6.1955
 0.0.0

@@ -62,7 +62,6 @@ bool Interface::start_menu()
             quit = false;
             break;
         case 0:
-            cout << "Quit";
             quit = true;
             break;
         default:
