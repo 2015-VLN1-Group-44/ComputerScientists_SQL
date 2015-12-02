@@ -21,13 +21,23 @@ bool Interface::start_menu()
 {
     int selection = 0;
     bool quit, exit;
-    string f; // strengur til að lesa inn filename
+    /*string f; // strengur til að lesa inn filename
     cout << string(20, '-') << endl;
     cout << "1. Add Scientists to list" << endl;
-    cout << "2. Display list of Scientists" << endl;
+    cout << "2. Display list of Scientists" << endl;            //taka út ef allir eru sáttir
     cout << "3. Search list" << endl;
     cout << "4. Save list to .txt file"  << endl;
     cout << "0. Quit" << endl;
+*/
+
+    string f; // strengur til að lesa inn filename
+    cout << string(101, '-') << endl;
+    cout << "1. Add Scientists to list\t";
+    cout << "3. Search list\t\t\t";
+    cout << "0. Quit" << endl;
+
+    cout << "2. Display list of Scientists\t";
+    cout << "4. Save list to .txt file"  << endl;
     cout << "Enter selection: ";
     cin >> selection;
     switch (selection)
@@ -79,9 +89,14 @@ bool Interface::add_menu()
     int select;
     bool exit = false;
     string n;
-    cout << string(20, '-') << endl;
+    /*cout << string(20, '-') << endl;
     cout << "1. Read from .txt file" << endl;
-    cout << "2. Add Scientist manually" << endl;
+    cout << "2. Add Scientist manually" << endl;            //taka út ef allir eru sáttir
+    cout << "0. Main menu" << endl << "Selection: ";*/
+
+    cout << string(101, '-') << endl;
+    cout << "1. Read from .txt file\t\t";
+    cout << "2. Add Scientist manually\t";
     cout << "0. Main menu" << endl << "Selection: ";
     cin >> select;
     switch(select)
@@ -109,14 +124,29 @@ bool Interface::list_menu()
 {
     bool exit = false;
     int select;
-    cout << string(20, '-') << endl;
+   /* cout << string(20, '-') << endl;
     cout << "1. Display list" << endl;
     cout << "2. Sort list by name" << endl;
-    cout << "3. Sort list by date of birth" << endl;
+    cout << "3. Sort list by date of birth" << endl;                //taka út ef allir eru sáttir
     cout << "4. Sort list by date of death" << endl;
     cout << "5. Sort list by gender" << endl;
     cout << "6. Reverse order" << endl;
+    cout << "0. Main menu" << endl;*/
+
+    cout << string(101, '-') << endl;
+    cout << "1. Display list\t\t\t";
+    cout << "4. Sort list by date of death\t";
     cout << "0. Main menu" << endl;
+
+    cout << "2. Sort list by name\t\t";
+    cout << "5. Sort list by gender" << endl;
+
+    cout << "3. Sort list by date of birth\t";
+    cout << "6. Reverse order" << endl;
+
+
+
+
     cout << "Enter selection: ";
     cin >> select;
     switch(select)
@@ -164,12 +194,24 @@ bool Interface::search_menu()
     bool found, valid_date;
     bool exit = false;
     QDate sdate;
-    cout << string(20, '-') << endl;
+                                                                                //taka út ef allir eru sáttir
+ /* cout << string(20, '-') << endl;
     cout << "1. Search by first name" << endl;
     cout << "2. Search by last name" << endl;
     cout << "3. Search by date of birth" << endl;
     cout << "4. Search by date of death" << endl;
     cout << "0. Main menu" << endl;
+*/
+
+    cout << string(20, '-') << endl;
+    cout << "1. Search by first name\t\t";
+    cout << "3. Search by date of birth\t";
+    cout << "0. Main menu" << endl;
+
+    cout << "2. Search by last name\t\t";
+    cout << "4. Search by date of death" << endl;
+
+
     cout << "Enter selection: ";
     cin >> select;
     switch (select)
@@ -234,7 +276,7 @@ bool Interface::search_menu()
         exit = false;
         char adding;
         bool legal_choice;
-        cout << "Do you wish to add this person to the list of computer scientists? " << endl;
+        cout << "Do you wish to add this person to the list of computer scientists(y/n)? " << endl;
         cin >> adding;
         do
         {
