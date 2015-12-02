@@ -255,14 +255,16 @@ bool Interface::search_menu()
                 exit = true;
                 legal_choice = true;
             }
-            else if (tolower(adding) == 'n')
+            else if (adding == 'n' || adding == 'N')
             {
                 exit = true;
                 legal_choice = true;
             }
             else
+            {
                 cout << "Selection is not valid. Please try again." << endl;
                 legal_choice = false;
+            }
             } while (!legal_choice);
     }
     return exit;
