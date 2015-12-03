@@ -7,6 +7,7 @@
 #include "database.h"
 #include <fstream> 
 #include <sstream>
+#include "constants.h"
 
 using namespace std;
 
@@ -101,8 +102,7 @@ void Database::read_input()
     string line;
     QDate in_date, current;
     current = QDate::currentDate(); // sækir daginn í dag í system-klukkuna
-    QString date, format;
-    format = "d/M/yyyy";
+    QString date;
     bool valid_date, deceased, valid;
     cout << "Input first name(s): ";
     cin.ignore();                //varð að setja ignore til að miðjunafnið fari með. Ingvi
@@ -135,7 +135,7 @@ void Database::read_input()
         cout << "Input date of birth (dd/mm/yyyy): ";
         getline(cin, line);
         date = QString::fromStdString(line);    // breytir innlestri í QString
-        in_date = QDate::fromString(date, format);  // innlestur => dags.
+        in_date = QDate::fromString(date, constants::DATE_FORMAT);  // innlestur => dags.
         valid_date = in_date.isValid();
         if(!valid_date)
         {
@@ -175,7 +175,7 @@ void Database::read_input()
             cout << "Input date of death (dd/mm/yyyy): ";
             getline(cin, line);
             date = QString::fromStdString(line); // breytir innlestri í QString
-            in_date = QDate::fromString(date, format); // breytir innlestri í dags.
+            in_date = QDate::fromString(date, constants::DATE_FORMAT); // breytir innlestri í dags.
             valid_date = in_date.isValid();  // testar hvort dagsetning sé gild
             if(!valid_date)
             {

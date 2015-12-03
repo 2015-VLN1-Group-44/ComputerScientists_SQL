@@ -1,4 +1,6 @@
 #include "interface.h"
+#include "constants.h"
+#include "constants.h"
 
 Interface::Interface()
 {
@@ -22,7 +24,7 @@ bool Interface::start_menu()
     int selection = 0;
     bool quit, exit;
     string f; // strengur til að lesa inn filename
-    cout << string(101, '-') << endl;
+    cout << constants::MENU_DELIMITER << endl;
     cout << "1. Add Scientists to list\t";
     cout << "3. Search list\t\t\t";
     cout << "0. Quit" << endl;
@@ -78,10 +80,10 @@ bool Interface::add_menu()
     int select;
     bool exit = false;
     string n;
-    cout << string(101, '-') << endl;
+    cout << constants::MENU_DELIMITER << endl;
     cout << "1. Read from .txt file\t\t";
     cout << "2. Add Scientist manually\t";
-    cout << "0. Main menu" << endl << "Selection: ";
+    cout << "0. Main menu" << endl << constants::SELECTION_PROMPT;
     cin >> select;
     switch(select)
     {
@@ -98,7 +100,7 @@ bool Interface::add_menu()
             exit = true;
             break;
         default:
-            cout << select << " is not a valid menu item." << endl;
+            cout << constants::SELECTION_NOT_VALID << endl;
             break;
     }
     return exit;
@@ -109,7 +111,7 @@ bool Interface::list_menu()
     bool exit = false;
     int select;
 
-    cout << string(101, '-') << endl;
+    cout << constants::MENU_DELIMITER << endl;
     cout << "1. Display list\t\t\t";
     cout << "4. Sort list by date of death\t";
     cout << "0. Main menu" << endl;
@@ -117,7 +119,7 @@ bool Interface::list_menu()
     cout << "5. Sort list by gender" << endl;
     cout << "3. Sort list by date of birth\t";
     cout << "6. Reverse order" << endl;
-    cout << "Enter selection: ";
+    cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch(select)
     {
@@ -163,10 +165,9 @@ bool Interface::search_menu()
     bool found, valid_date;
     bool exit = false;
     QDate sdate;
-    QString date, format;
-    format = "d/M/yyyy";
+    QString date;
 
-    cout << string(101, '-') << endl;
+    cout << constants::MENU_DELIMITER << endl;
     cout << "1. Search by first name\t\t";
     cout << "3. Search by date of birth\t";
     cout << "0. Main menu" << endl;
@@ -195,7 +196,7 @@ bool Interface::search_menu()
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line);
-            sdate = QDate::fromString(date, format);
+            sdate = QDate::fromString(date, constants::DATE_FORMAT);
             valid_date = sdate.isValid();
             if (valid_date)
             {
@@ -212,7 +213,7 @@ bool Interface::search_menu()
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line);
-            sdate = QDate::fromString(date, format);
+            sdate = QDate::fromString(date, constants::DATE_FORMAT);
             valid_date = sdate.isValid();
             if (valid_date)
             {
@@ -229,7 +230,7 @@ bool Interface::search_menu()
             found = true;
             return exit;
         default:
-            cout << "Invalid selection." << endl;
+            cout << constants::SELECTION_NOT_VALID << endl;
             found = false;
             break;
     }
@@ -262,7 +263,7 @@ bool Interface::search_menu()
             }
             else
             {
-                cout << "Selection is not valid. Please try again." << endl;
+                cout << constants::SELECTION_NOT_VALID << endl;
                 legal_choice = false;
             }
             } while (!legal_choice);
@@ -333,13 +334,13 @@ void Interface::found_menu(unsigned int i)
     int select;
     bool valid;
     cout << "Found entry: " << endl;
-    cout << string(101, '-') << endl;
+    cout << constants::MENU_DELIMITER << endl;
     print_header();
     cout << list_scientists.data[i];
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
     cout << "0. Search menu" << endl;
-    cout << "Enter selection: ";
+    cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
     {
@@ -360,7 +361,7 @@ void Interface::found_menu(unsigned int i)
     }
     if (!valid)
     {
-        cout << "Invalid menu item." << endl;
+        cout << constants::SELECTION_NOT_VALID << endl;
         found_menu(i);
     }
 }
@@ -370,19 +371,18 @@ void Interface::edit_menu(unsigned int i)
     int select;
     string n, line;
     char g;
-    QString date, format;
-    format = "d/M/yyyy";
+    QString date;
     QDate d, current;
     current = QDate::currentDate(); // Sækir daginn í dag úr klukkunni
     bool exit = false;
-    cout << string(101, '-') << endl;
+    cout << constants::MENU_DELIMITER << endl;
     cout << "1. Edit first name" << endl;
     cout << "2. Edit last name" << endl;
     cout << "3. Edit gender" << endl;
     cout << "4. Edit date of birth" << endl;
     cout << "5. Edit date of death" << endl;
     cout << "0. Search menu" << endl;
-    cout << "Enter selection: ";
+    cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
     {
@@ -421,7 +421,7 @@ void Interface::edit_menu(unsigned int i)
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line);
-            d = QDate::fromString(date, format);
+            d = QDate::fromString(date, constants::DATE_FORMAT);
             if (!d.isValid())
             {
                 cout << "Not a valid date." << endl;
@@ -446,7 +446,7 @@ void Interface::edit_menu(unsigned int i)
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line); // breytir inputinu í QString
-            d = QDate::fromString(date, format); // breytir inputi í QDate
+            d = QDate::fromString(date, constants::DATE_FORMAT); // breytir inputi í QDate
             if (!d.isValid())
             {
                 cout << "Not a valid date." << endl;
@@ -468,7 +468,7 @@ void Interface::edit_menu(unsigned int i)
             exit = true;
             break;
         default:
-            cout << "Invalid menu item." << endl;
+            cout << constants::SELECTION_NOT_VALID << endl;
             break;
     }
     if (!exit)
@@ -481,5 +481,5 @@ void Interface::print_header()
 {
     const int MAX_NAME = 36;
     cout << "Name" << string(MAX_NAME, ' ') << "Gender\tDoB\t\tDoD\n";
-    cout << string(101, '-') << endl;
+    cout << constants::MENU_DELIMITER << endl;
 }

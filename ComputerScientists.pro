@@ -15,7 +15,8 @@ SOURCES += main.cpp \
 HEADERS += \
     scientist.h \
     database.h \
-    interface.h
+    interface.h \
+    constants.h
 
 DISTFILES += \
     data.txt
