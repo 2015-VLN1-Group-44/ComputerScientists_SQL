@@ -105,12 +105,11 @@ void Database::read_input()
     format = "d/M/yyyy";
     bool valid_date, deceased, valid;
     cout << "Input first name(s): ";
-    cin.ignore();                       //varð að setja git.ignore til að miðjunafnið fari með. Ingvi
+    cin.ignore();                //varð að setja ignore til að miðjunafnið fari með. Ingvi
     getline(cin, temp.first_name);
-    //cin >> temp.first_name;           //má eyða ef allt keyrir rétt. Ingvi
     cout << "Input last name: ";
     getline(cin, temp.last_name);
-    //cin >> temp.last_name;            //má eyða ef allt keyrir rétt. Ingvi
+
     do
     {
         cout << "Input gender (M/F): ";
@@ -149,7 +148,7 @@ void Database::read_input()
         }
     } while (!valid_date);
     temp.birth = in_date;
-    // bool valid_choice;
+
     do
     {
         cout << "Is this person living (y/n)?" << endl;
