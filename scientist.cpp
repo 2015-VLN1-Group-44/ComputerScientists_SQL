@@ -48,6 +48,10 @@ void Scientist::set_gender(bool g)
 {
     gender = g;
 }
+void Scientist::set_living(bool a)
+{
+    living = a;
+}
 
 string Scientist::get_first()
 {
@@ -72,6 +76,10 @@ QDate Scientist::get_death()
     return death;
 }
 
+bool Scientist::get_living()
+{
+    return living;
+}
 
 Scientist& Scientist::operator = (Scientist other)
 {

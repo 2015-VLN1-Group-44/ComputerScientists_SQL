@@ -6,14 +6,6 @@ Interface::Interface()
 {
 }
 
-Interface::Interface(vector<Scientist> v)
-{
-    for (unsigned int i = 0; i < v.size(); i++)
-    {
-        list_scientists.data.push_back(v[i]);
-    }
-}
-
 /* Bool breytan quit er false á meðan ekki er búið að velja quit möguleikann
  * Exit bool breytan tekur gildi úr föllunum fyrir undirvalmyndir, þau skila
  * false ef ekki er búið að velja exit inni í þeim, og þær undirvalmyndir keyra
@@ -60,7 +52,7 @@ bool Interface::start_menu()
             cout << "Input filename: ";
             cin >> f;
             f += ".txt";
-            list_scientists.print_to_file(f);
+            scientist_service.save_file(f);
             quit = false;
             break;
         case 0:
@@ -91,10 +83,10 @@ bool Interface::add_menu()
             cout << "Input filename: ";
             cin >> n;
             n += ".txt";
-            list_scientists.read_file(n);
+            scientist_service.load_file(n);
             break;
         case 2:
-            list_scientists.read_input();
+            scientist_service.read_input();
             break;
         case 0:
             exit = true;
@@ -125,26 +117,26 @@ bool Interface::list_menu()
     {
         case 1:
             print_header();
-            cout << list_scientists;
+            cout << scientist_service;
             break;
         case 2:
-            list_scientists.sort_name();
+            scientist_service.sort_name();
             cout << "List sorted by name." << endl;
             break;
         case 3:
-            list_scientists.sort_birth();
+            scientist_service.sort_birth();
             cout << "List sorted by date of birth." << endl;
             break;
         case 4:
-            list_scientists.sort_death();
+            scientist_service.sort_death();
             cout << "List sorted by date of death." << endl;
             break;
         case 5:
-            list_scientists.sort_gender();
+            scientist_service.sort_gender();
             cout << "List sorted by gender." << endl;
             break;
         case 6:
-            list_scientists.reverse_order();
+            scientist_service.reverse_order();
             cout << "List reversed." << endl;
             break;
         case 0:
@@ -252,7 +244,7 @@ bool Interface::search_menu()
             adding = line[0];
             if (tolower(adding) == 'y')
             {
-                list_scientists.read_input();
+                scientist_service.read_input();
                 exit = true;
                 legal_choice = true;
             }
@@ -274,9 +266,9 @@ bool Interface::search_menu()
 bool Interface::search_first(unsigned int& found_i, string n)
 {
     bool found = false;
-    for (unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < scientist_service.size(); i++)
     {
-        if (n == list_scientists.data[i].get_first())
+        if (n == scientist_service.data[i].get_first())
         {
             found = true;
             found_i = i;
@@ -288,9 +280,9 @@ bool Interface::search_first(unsigned int& found_i, string n)
 bool Interface::search_last(unsigned int& found_i, string n)
 {
     bool found = false;
-    for (unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < scientist_service.size(); i++)
     {
-        if (n == list_scientists.data[i].get_last())
+        if (n == scientist_service.data[i].get_last())
         {
             found = true;
             found_i = i;
@@ -302,9 +294,9 @@ bool Interface::search_last(unsigned int& found_i, string n)
 bool Interface::search_birth(unsigned int& found_i, QDate b)
 {
     bool found = false;
-    for (unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < scientist_service.size(); i++)
     {
-        if (b == list_scientists.data[i].get_birth())
+        if (b == scientist_service.data[i].get_birth())
         {
             found = true;
             found_i = i;
@@ -317,9 +309,9 @@ bool Interface::search_birth(unsigned int& found_i, QDate b)
 bool Interface::search_death(unsigned int& found_i, QDate d)
 {
     bool found = false;
-    for (unsigned int i = 0; i < list_scientists.size(); i++)
+    for (unsigned int i = 0; i < scientist_service.size(); i++)
     {
-        if (d == list_scientists.data[i].get_death())
+        if (d == scientist_service.data[i].get_death())
         {
             found = true;
             found_i = i;
@@ -336,7 +328,7 @@ void Interface::found_menu(unsigned int i)
     cout << "Found entry: " << endl;
     cout << constants::MENU_DELIMITER << endl;
     print_header();
-    cout << list_scientists.data[i];
+    cout << scientist_service.data[i];
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
     cout << "0. Search menu" << endl;
@@ -349,7 +341,7 @@ void Interface::found_menu(unsigned int i)
             valid = true;
             break;
         case 2:
-            list_scientists.data.erase(list_scientists.data.begin() + (i));
+            scientist_service.data.erase(scientist_service.data.begin() + (i));
             valid = true;
             break;
         case 0:
@@ -390,17 +382,17 @@ void Interface::edit_menu(unsigned int i)
             cout << "Enter new first name: ";
             cin.ignore();
             getline(cin, n);
-            list_scientists.data[i].set_first(n);
+            scientist_service.data[i].set_first(n);
             print_header();
-            cout << list_scientists.data[i];
+            cout << scientist_service.data[i];
             break;
         case 2:
             cout << "Enter new last name: ";
             cin.ignore();
             getline(cin, n);
-            list_scientists.data[i].set_last(n);
+            scientist_service.data[i].set_last(n);
             print_header();
-            cout << list_scientists.data[i];
+            cout << scientist_service.data[i];
             break;
         case 3:
             cout << "Enter gender: ";
@@ -408,13 +400,13 @@ void Interface::edit_menu(unsigned int i)
             getline(cin, line);
             g = line[0];
             if (g == 'm' || g == 'M')
-                list_scientists.data[i].set_gender(1);
+                scientist_service.data[i].set_gender(1);
             else if (g == 'f' || g == 'F')
-                list_scientists.data[i].set_gender(0);
+                scientist_service.data[i].set_gender(0);
             else
                 cout << "Not a valid gender." << endl;
             print_header();
-            cout << list_scientists.data[i];
+            cout << scientist_service.data[i];
             break;
         case 4:
             cout << "Enter date of birth (dd/mm/yyyy): ";
@@ -426,7 +418,7 @@ void Interface::edit_menu(unsigned int i)
             {
                 cout << "Not a valid date." << endl;
             }
-            else if (list_scientists.data[i].get_death() < d)
+            else if (scientist_service.data[i].get_death() < d)
             {
                 cout << "Date of birth after date of death. Please correct." << endl;
             }
@@ -436,9 +428,9 @@ void Interface::edit_menu(unsigned int i)
             }
             else
             {
-                list_scientists.data[i].set_birth(d);
+                scientist_service.data[i].set_birth(d);
                 print_header();
-                cout << list_scientists.data[i];
+                cout << scientist_service.data[i];
             }
             break;
         case 5:
@@ -451,7 +443,7 @@ void Interface::edit_menu(unsigned int i)
             {
                 cout << "Not a valid date." << endl;
             }
-            else if (d < list_scientists.data[i].get_birth())
+            else if (d < scientist_service.data[i].get_birth())
                 cout << "Date of death before date of birth. Please correct." << endl;
             else if (current < d)
             {
@@ -459,9 +451,9 @@ void Interface::edit_menu(unsigned int i)
             }
             else
             {
-                list_scientists.data[i].set_death(d);
+                scientist_service.data[i].set_death(d);
                 print_header();
-                cout << list_scientists.data[i];
+                cout << scientist_service.data[i];
             }
             break;
         case 0:

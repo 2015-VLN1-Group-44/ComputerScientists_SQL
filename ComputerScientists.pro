@@ -9,14 +9,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     scientist.cpp \
-    database.cpp \
-    interface.cpp
+    interface.cpp \
+    service.cpp \
+    repository.cpp
 
 HEADERS += \
     scientist.h \
-    database.h \
     interface.h \
-    constants.h
+    constants.h \
+    service.h \
+    repository.h
 
 DISTFILES += \
     data.txt
