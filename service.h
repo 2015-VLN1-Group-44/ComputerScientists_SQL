@@ -21,6 +21,11 @@ public:
     void sort_death();
     void sort_gender();
     void reverse_order();
+    
+    bool search_first(vector<int>& found_i, string n);
+    bool search_last(vector<int>& found_i, string n);
+    bool search_birth(vector<int>& found_i, QDate b);
+    bool search_death(vector<int>& found_i, QDate d);
 
     void load_file(string file);
     void read_input();

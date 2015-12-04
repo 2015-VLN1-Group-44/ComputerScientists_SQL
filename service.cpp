@@ -69,6 +69,8 @@ bool gender_order(Scientist n1, Scientist n2)
     return g;
 }
 
+
+
 // Sort föll úr C++ library
 void Service::sort_name()
 {
@@ -100,6 +102,64 @@ void Service::load_file(string file)
     data = scientist_repo.read_file(file);
 }
 
+bool Service::search_first(vector<int>& found_i, string n)
+{
+    bool found = false;
+    for (unsigned int i = 0; i < data.size(); i++)
+    {
+        if (n == data[i].get_first())
+        {
+            found = true;
+            found_i.push_back(i);
+        }
+    }
+    return found;
+}
+
+bool Service::search_last(vector<int>& found_i, string n)
+{
+    bool found = false;
+    for (unsigned int i = 0; i < data.size(); i++)
+    {
+        if (n == data[i].get_last())
+        {
+            found = true;
+            found_i.push_back(i);
+        }
+    }
+    return found;
+}
+
+bool Service::search_birth(vector<int>& found_i, QDate b)
+{
+    bool found = false;
+    for (unsigned int i = 0; i < data.size(); i++)
+    {
+        if (b == data[i].get_birth())
+        {
+            found = true;
+            found_i.push_back(i);
+        }
+    }
+    return found;
+}
+
+
+bool Service::search_death(vector<int>& found_i, QDate d)
+{
+    bool found = false;
+    for (unsigned int i = 0; i < data.size(); i++)
+    {
+        if (d == data[i].get_death())
+        {
+            found = true;
+            found_i.push_back(i);
+        }
+    }
+    return found;
+}
+
+
 // Les upplýsingar frá notanda
 void Service::read_input()
 {
@@ -112,9 +172,11 @@ void Service::read_input()
     bool valid_date, deceased, valid;
     cout << "Input first name(s): ";
     cin.ignore();                //varð að setja ignore til að miðjunafnið fari með. Ingvi
-    getline(cin, temp.first_name);
+    getline(cin, line);
+    temp.set_first(line);
     cout << "Input last name: ";
-    getline(cin, temp.last_name);
+    getline(cin, line);
+    temp.set_last(line);
 
     do
     {
@@ -124,11 +186,11 @@ void Service::read_input()
         switch(tolower(cgender))
         {
             case 'm':
-                temp.gender = true;
+                temp.set_gender(true);
                 valid = true;
                 break;
             case 'f':
-                temp.gender = false;
+                temp.set_gender(false);
                 valid = true;
                 break;
             default:
@@ -153,7 +215,7 @@ void Service::read_input()
             valid_date = false;
         }
     } while (!valid_date);
-    temp.birth = in_date;
+    temp.set_birth(in_date);
 
     do
     {
@@ -164,7 +226,7 @@ void Service::read_input()
         {
             case 'y':
                 deceased = false;
-                temp.living = true;
+                temp.set_living(true);
             break;
             case 'n':
                 deceased = true;
@@ -187,7 +249,7 @@ void Service::read_input()
             {
                 cout << "Date is not valid." << endl;
             }
-            else if (in_date < temp.birth) // fæðing ekki eftir dauða
+            else if (in_date < temp.get_birth()) // fæðing ekki eftir dauða
             {
                 cout << "Date of death before date of birth. Please correct." << endl;
                 valid_date = false;
@@ -203,7 +265,7 @@ void Service::read_input()
     {
         in_date.setDate(0, 0, 0);
     }
-    temp.death = in_date;
+    temp.set_death(in_date);
     data.push_back(temp);
 }
 

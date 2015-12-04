@@ -152,12 +152,12 @@ bool Interface::list_menu()
 bool Interface::search_menu()
 {
     int select;
-    unsigned int found_index;
     string name, line;
     bool found, valid_date;
     bool exit = false;
     QDate sdate;
     QString date;
+    vector<int> found_index;
 
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Search by first name\t\t";
@@ -173,14 +173,14 @@ bool Interface::search_menu()
             cout << "Enter name: ";
             cin.ignore();
             getline(cin, name);
-            found = search_first(found_index, name);
+            found = scientist_service.search_first(found_index, name);
             exit = true;
             break;
         case 2:
             cout << "Enter name: ";
             cin.ignore();
             getline(cin, name);
-            found = search_last(found_index, name);
+            found = scientist_service.search_last(found_index, name);
             exit = true;
             break;
         case 3:
@@ -192,7 +192,7 @@ bool Interface::search_menu()
             valid_date = sdate.isValid();
             if (valid_date)
             {
-                found = search_birth(found_index, sdate);
+                found = scientist_service.search_birth(found_index, sdate);
             }
             else
             {
@@ -209,7 +209,7 @@ bool Interface::search_menu()
             valid_date = sdate.isValid();
             if (valid_date)
             {
-                found = search_death(found_index, sdate);
+                found = scientist_service.search_death(found_index, sdate);
             }
             else
             {
@@ -263,6 +263,7 @@ bool Interface::search_menu()
     return exit;
 }
 
+/*
 bool Interface::search_first(unsigned int& found_i, string n)
 {
     bool found = false;
@@ -319,16 +320,20 @@ bool Interface::search_death(unsigned int& found_i, QDate d)
     }
     return found;
 }
+*/
 
-
-void Interface::found_menu(unsigned int i)
+void Interface::found_menu(vector<int> found_i)
 {
     int select;
     bool valid;
-    cout << "Found entry: " << endl;
+    cout << "Found entries: " << endl;
     cout << constants::MENU_DELIMITER << endl;
     print_header();
-    cout << scientist_service.data[i];
+    for (unsigned int i = 0; i < found_i.size(); i++)
+    {
+        cout << "Entry " << i + 1 << ":" << endl;
+        cout << scientist_service.data[found_i[i]];
+    }
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
     cout << "0. Search menu" << endl;
@@ -337,12 +342,32 @@ void Interface::found_menu(unsigned int i)
     switch (select)
     {
         case 1:
-            edit_menu(i);
-            valid = true;
+            do
+            {
+                cout << "Choose entry to edit: ";
+                cin >> select;
+                if(select > 0 && select < (int) found_i.size())
+                {
+                    edit_menu(found_i[select - 1]);
+                    valid = true;
+                }
+                else
+                    valid = false;
+            } while (!valid);
             break;
         case 2:
-            scientist_service.data.erase(scientist_service.data.begin() + (i));
-            valid = true;
+            do
+            {
+                cout << "Choose entry to delete: ";
+                cin >> select;
+                if (select > 0 && select < (int) found_i.size())
+                {
+                    scientist_service.data.erase(scientist_service.data.begin() + (found_i[select - 1]));
+                    valid = true;
+                }
+                else
+                    valid = false;
+            } while (!valid);
             break;
         case 0:
             valid = true;
@@ -354,7 +379,7 @@ void Interface::found_menu(unsigned int i)
     if (!valid)
     {
         cout << constants::SELECTION_NOT_VALID << endl;
-        found_menu(i);
+        found_menu(found_i);
     }
 }
 

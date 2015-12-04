@@ -20,10 +20,12 @@ public:
     void set_birth(QDate b);
     void set_death(QDate d);
     void set_gender(bool g);
+    void set_living(bool a);
 
     string get_first();
     string get_last();
     bool get_gender();
+    bool get_living();
     QDate get_birth();
     QDate get_death();
 
