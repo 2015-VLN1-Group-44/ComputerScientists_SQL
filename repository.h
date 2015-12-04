@@ -2,6 +2,7 @@
 #define REPOSITORY_H
 #include <iostream>
 #include <vector>
+#include <iomanip>
 #include "scientist.h"
 
 using namespace std;

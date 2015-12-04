@@ -289,7 +289,7 @@ void Interface::found_menu(vector<int> found_i)
             {
                 cout << "Choose entry to edit: ";
                 cin >> select;
-                if(select > 0 && select < (int) found_i.size())
+                if(select > 0 && select <= (int) found_i.size())
                 {
                     edit_menu(found_i[select - 1]);
                     valid = true;
@@ -303,7 +303,7 @@ void Interface::found_menu(vector<int> found_i)
             {
                 cout << "Choose entry to delete: ";
                 cin >> select;
-                if (select > 0 && select < (int) found_i.size())
+                if (select > 0 && select <= (int) found_i.size())
                 {
                     scientist_service.data.erase(scientist_service.data.begin() + (found_i[select - 1]));
                     valid = true;

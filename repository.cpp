@@ -67,12 +67,12 @@ void Repository::print_to_file(string filename, vector<Scientist> s)
     {
         out_file << s[i].get_first()<< endl;
         out_file << s[i].get_last() << endl;
-        out_file << s[i].get_birth().day() << "." << s[i].get_birth().month();
-        out_file << "." << s[i].get_birth().year() << endl;
+        out_file << s[i].get_birth().day() << "." << s[i].get_birth().month() << "." ;
+        out_file << setfill('0') << setw(4) << s[i].get_birth().year() << endl;
         if (!s[i].get_living())
         {
             out_file << s[i].get_death().day() << "." << s[i].get_death().month() << ".";
-            out_file << s[i].get_death().year() << endl;
+            out_file << setfill('0') << setw(4) << s[i].get_death().year() << endl;
         }
         else
         {
