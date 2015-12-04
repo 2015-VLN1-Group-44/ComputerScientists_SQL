@@ -263,64 +263,7 @@ bool Interface::search_menu()
     return exit;
 }
 
-/*
-bool Interface::search_first(unsigned int& found_i, string n)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < scientist_service.size(); i++)
-    {
-        if (n == scientist_service.data[i].get_first())
-        {
-            found = true;
-            found_i = i;
-        }
-    }
-    return found;
-}
 
-bool Interface::search_last(unsigned int& found_i, string n)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < scientist_service.size(); i++)
-    {
-        if (n == scientist_service.data[i].get_last())
-        {
-            found = true;
-            found_i = i;
-        }
-    }
-    return found;
-}
-
-bool Interface::search_birth(unsigned int& found_i, QDate b)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < scientist_service.size(); i++)
-    {
-        if (b == scientist_service.data[i].get_birth())
-        {
-            found = true;
-            found_i = i;
-        }
-    }
-    return found;
-}
-
-
-bool Interface::search_death(unsigned int& found_i, QDate d)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < scientist_service.size(); i++)
-    {
-        if (d == scientist_service.data[i].get_death())
-        {
-            found = true;
-            found_i = i;
-        }
-    }
-    return found;
-}
-*/
 
 void Interface::found_menu(vector<int> found_i)
 {
