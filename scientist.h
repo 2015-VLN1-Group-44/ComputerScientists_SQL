@@ -7,8 +7,6 @@
 
 using namespace std;
 
-const int date_format = 3;
-
 class Scientist
 {
 public:
@@ -32,6 +30,7 @@ public:
     Scientist& operator = (Scientist other);
     friend ostream& operator << (ostream& out, Scientist sc);
     friend class Database;
+
 private:
     string first_name;
     string last_name;

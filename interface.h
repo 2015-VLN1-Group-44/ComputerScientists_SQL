@@ -16,7 +16,6 @@ public:
     bool add_menu();
     bool list_menu();
     bool search_menu();
-
     void found_menu(vector<int> found_i);
     void edit_menu(unsigned int i);
     void print_header();
