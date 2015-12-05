@@ -73,7 +73,7 @@ bool gender_order(Scientist n1, Scientist n2)
 // Sort föll úr C++ library
 vector<Scientist> Service::sort_name()
 {
-    QString command = "SELECT * FROM scientists ORDER BY firstname";
+    QString command = "SELECT * FROM scientists ORDER BY lastname, firstname";
     vector<Scientist> temp = scientist_repo.open_scientist_db(command);
     return temp;
 }
