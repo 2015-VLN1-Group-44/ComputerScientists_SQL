@@ -1,6 +1,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+#include "constants.h"
 #include "service.h"
 #include <iostream>
 #include <string>

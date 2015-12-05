@@ -1,5 +1,6 @@
 QT += core
 QT -= gui
+QT += core sql
 
 TARGET = ComputerScientists
 CONFIG += console
@@ -23,3 +24,4 @@ HEADERS += \
 DISTFILES += \
     data.txt
 
+@QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9@

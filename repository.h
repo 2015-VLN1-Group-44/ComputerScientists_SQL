@@ -4,6 +4,9 @@
 #include <vector>
 #include <iomanip>
 #include "scientist.h"
+#include <QtSql>
+#include <QString>
+#include "constants.h"
 
 using namespace std;
 
@@ -14,6 +17,7 @@ public:
     Repository();
     void print_to_file(string filename, vector<Scientist> s);
     vector<Scientist> read_file(string filename);
+    vector<Scientist> open_scientist_db(QString sql_command);
 private:
 };
 

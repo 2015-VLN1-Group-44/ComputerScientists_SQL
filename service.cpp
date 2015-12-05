@@ -7,8 +7,7 @@
 #include "service.h"
 #include <fstream> 
 #include <sstream>
-#include "constants.h"
-#include "repository.h"
+
 
 using namespace std;
 
@@ -72,10 +71,13 @@ bool gender_order(Scientist n1, Scientist n2)
 
 
 // Sort föll úr C++ library
-void Service::sort_name()
+vector<Scientist> Service::sort_name()
 {
-    sort(data.begin(), data.end(), name_order);
+    QString command = "SELECT * FROM scientists ORDER BY firstname";
+    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
+    return temp;
 }
+
 
 void Service::sort_birth()
 {

@@ -1,6 +1,6 @@
 #include "interface.h"
-#include "constants.h"
-#include "constants.h"
+
+
 
 Interface::Interface()
 {
@@ -102,6 +102,7 @@ bool Interface::list_menu()
 {
     bool exit = false;
     int select;
+    vector<Scientist> data;
 
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Display list\t\t\t";
@@ -120,8 +121,12 @@ bool Interface::list_menu()
             cout << scientist_service;
             break;
         case 2:
-            scientist_service.sort_name();
-            cout << "List sorted by name." << endl;
+            print_header();
+            data = scientist_service.sort_name();
+            for (unsigned int i = 0; i < data.size(); i++)
+            {
+                cout << data[i];
+            }
             break;
         case 3:
             scientist_service.sort_birth();

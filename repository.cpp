@@ -1,4 +1,6 @@
 #include "repository.h"
+
+
 using namespace std;
 
 Repository::Repository()
@@ -86,3 +88,45 @@ void Repository::print_to_file(string filename, vector<Scientist> s)
     out_file.close();
 }
 
+vector<Scientist> Repository::open_scientist_db(QString sql_command)
+{
+    vector<Scientist> data;
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "scientists.sqlite";
+    db.setDatabaseName(dbName);
+    db.open();
+//    if (!db.isOpen())
+//    {
+//        cout << endl << "not opened" << endl;
+//    }
+    QSqlQuery query(db);
+
+
+    query.exec(sql_command);
+    // qDebug() << query.lastQuery();
+
+    while (query.next())
+    {
+        string first, last;
+        QDate b, d;
+        bool g, a;
+
+        // qDebug() << query.lastQuery();
+        first = query.value("firstname").toString().toStdString();
+        last = query.value("lastname").toString().toStdString();
+        b = QDate::fromString(query.value("birth").toString(), constants::IMPORT_DATE_FORMAT);
+        d = QDate::fromString(query.value("death").toString(), constants::IMPORT_DATE_FORMAT);
+
+        g = query.value("gender").toBool();
+
+        a = query.value("alive").toBool();
+
+        Scientist temp(first, last, g, b, d, a);
+
+        data.push_back(temp);
+    }
+
+    db.close();
+    return data;
+}
