@@ -94,9 +94,15 @@ vector<Scientist> Service::sort_birth(bool asc)
     return temp;
 }
 
-void Service::sort_death()
+vector<Scientist> Service::sort_death(bool asc)
 {
-    sort(data.begin(), data.end(), death_order);
+    QString command;
+    if (asc)
+        command = "SELECT * FROM scientists ORDER BY death";
+    else
+        command = "SELECT * FROM scientists ORDER BY death DESC";
+    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
+    return temp;
 }
 
 void Service::sort_gender()

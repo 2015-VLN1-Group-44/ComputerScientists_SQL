@@ -140,8 +140,13 @@ bool Interface::list_menu()
             }
             break;
         case 4:
-            scientist_service.sort_death();
-            cout << "List sorted by date of death." << endl;
+            asc = asc_desc();
+            data = scientist_service.sort_death(asc);
+            print_header();
+            for (unsigned int i = 0; i < data.size(); i++)
+            {
+                cout << data[i];
+            }
             break;
         case 5:
             scientist_service.sort_gender();
