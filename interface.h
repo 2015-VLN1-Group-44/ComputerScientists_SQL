@@ -17,8 +17,8 @@ public:
     bool add_menu();
     bool list_menu();
     bool search_menu();
-    void found_menu(vector<int> found_i);
-    void edit_menu(unsigned int i);
+    void found_menu(vector<Scientist> found);
+    void edit_menu(int edit_id);
     void print_header();
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();

@@ -94,6 +94,11 @@ bool Scientist::get_living()
     return living;
 }
 
+int Scientist::get_id()
+{
+    return id;
+}
+
 Scientist& Scientist::operator = (Scientist other)
 {
     first_name = other.first_name;

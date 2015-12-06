@@ -111,14 +111,13 @@ vector<Scientist> Repository::open_scientist_db(QString sql_command)
         last = query.value("lastname").toString().toStdString();
         b = QDate::fromString(query.value("birth").toString(), constants::IMPORT_DATE_FORMAT);
         d = QDate::fromString(query.value("death").toString(), constants::IMPORT_DATE_FORMAT);
-        id_n = query.value("scientist_id").toInt();         // Magnea bætti við ("scientist_id") þar sem var ("id")
+        id_n = query.value("id").toInt();
         g = query.value("gender").toBool();
         a = query.value("alive").toBool();
         act = query.value("active").toBool();
         Scientist temp(first, last, g, b, d, a, id_n, act);
         data.push_back(temp);
     }
-
     db.close();
     return data;
 }

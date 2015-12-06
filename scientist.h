@@ -27,6 +27,7 @@ public:
     bool get_living();
     QDate get_birth();
     QDate get_death();
+    int get_id();
 
     Scientist& operator = (Scientist other);
     friend ostream& operator << (ostream& out, Scientist sc);
