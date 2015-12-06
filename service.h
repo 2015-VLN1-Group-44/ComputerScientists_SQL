@@ -20,7 +20,7 @@ public:
     vector<Scientist> sort_name(bool asc);
     vector<Scientist> sort_birth(bool asc);
     vector<Scientist> sort_death(bool asc);
-    void sort_gender();
+    vector<Scientist> sort_gender(bool asc);
     void reverse_order();
     
     bool search_first(vector<int>& found_i, string n);

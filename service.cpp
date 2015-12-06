@@ -96,18 +96,25 @@ vector<Scientist> Service::sort_birth(bool asc)
 
 vector<Scientist> Service::sort_death(bool asc)
 {
+    // Sorterar með alive fyrst til að lifandi raðist með nýlega látnum
     QString command;
     if (asc)
-        command = "SELECT * FROM scientists ORDER BY death";
+        command = "SELECT * FROM scientists ORDER BY alive, death";
     else
-        command = "SELECT * FROM scientists ORDER BY death DESC";
+        command = "SELECT * FROM scientists ORDER BY alive DESC, death DESC";
     vector<Scientist> temp = scientist_repo.open_scientist_db(command);
     return temp;
 }
 
-void Service::sort_gender()
+vector<Scientist> Service::sort_gender(bool asc)
 {
-    sort(data.begin(), data.end(), gender_order);
+    QString command;
+    if (asc)
+        command = "SELECT * FROM scientists ORDER BY gender, name";
+    else
+        command = "SELECT * FROM scientists ORDER BY gender DESC, name";
+    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
+    return temp;
 }
 
 void Service::reverse_order()

@@ -112,7 +112,6 @@ bool Interface::list_menu()
     cout << "2. Sort list by name\t\t";
     cout << "5. Sort list by gender" << endl;
     cout << "3. Sort list by date of birth\t";
-    cout << "6. Reverse order" << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch(select)
@@ -149,12 +148,13 @@ bool Interface::list_menu()
             }
             break;
         case 5:
-            scientist_service.sort_gender();
-            cout << "List sorted by gender." << endl;
-            break;
-        case 6:
-            scientist_service.reverse_order();
-            cout << "List reversed." << endl;
+            asc = asc_desc();
+            data = scientist_service.sort_gender(asc);
+            print_header();
+            for (unsigned int i = 0; i < data.size(); i++)
+            {
+                cout << data[i];
+            }
             break;
         case 0:
             exit = true;
