@@ -93,7 +93,7 @@ vector<Scientist> Repository::open_scientist_db(QString sql_command)
     vector<Scientist> data;
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "scientists.sqlite";
+    QString dbName = "db.sqlite";       // Magnea breytti scientists.sqlite í db.sqlite
     db.setDatabaseName(dbName);
     db.open();
     QSqlQuery query(db);
@@ -111,7 +111,7 @@ vector<Scientist> Repository::open_scientist_db(QString sql_command)
         last = query.value("lastname").toString().toStdString();
         b = QDate::fromString(query.value("birth").toString(), constants::IMPORT_DATE_FORMAT);
         d = QDate::fromString(query.value("death").toString(), constants::IMPORT_DATE_FORMAT);
-        id_n = query.value("id").toInt();
+        id_n = query.value("scientist_id").toInt();         // Magnea bætti við ("scientist_id") þar sem var ("id")
         g = query.value("gender").toBool();
         a = query.value("alive").toBool();
         act = query.value("active").toBool();
