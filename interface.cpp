@@ -339,11 +339,15 @@ void Interface::found_menu(vector<Scientist> found)
         case 1:
             do
             {
-                cout << "Choose entry to edit: ";
+                cout << "Choose entry to edit (0 to cancel): ";
                 cin >> select;
                 if(select > 0 && select <= (int) found.size())
                 {
-                    edit_menu(found[select - 1]);
+                    edit_menu(found[select - 1].get_id());
+                    valid = true;
+                }
+                else if (select == 0)
+                {
                     valid = true;
                 }
                 else
@@ -356,11 +360,15 @@ void Interface::found_menu(vector<Scientist> found)
         case 2:
             do
             {
-                cout << "Choose entry to delete: ";
+                cout << "Choose entry to delete (0 to cancel): ";
                 cin >> select;
                 if (select > 0 && select <= (int) found.size())
                 {
 
+                    valid = true;
+                }
+                else if (select == 0)
+                {
                     valid = true;
                 }
                 else
@@ -381,12 +389,12 @@ void Interface::found_menu(vector<Scientist> found)
     }
 }
 
-void Interface::edit_menu(Scientist to_edit)
+void Interface::edit_menu(int edit_id)
 {
     int select;
-    string n, line;
+    string line, n;
     char g;
-    QString date;
+    QString date, name;
     QDate d, current;
     current = QDate::currentDate(); // Sækir daginn í dag úr klukkunni
     bool exit = false;
@@ -405,6 +413,8 @@ void Interface::edit_menu(Scientist to_edit)
             cout << "Enter new first name: ";
             cin.ignore();
             getline(cin, n);
+            
+            scientist_service.edit_name("firstname", QString::fromStdString(n), edit_id);
 
             break;
         case 2:
@@ -484,7 +494,7 @@ void Interface::edit_menu(Scientist to_edit)
     }
     if (!exit)
     {
-        edit_menu(to_edit);
+        edit_menu(edit_id);
     }
 }
 

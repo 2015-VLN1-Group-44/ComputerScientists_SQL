@@ -13,6 +13,7 @@ namespace constants
     const QString SCIENTISTS_FILENAME = "scientists.sqlite";
     const QString SEARCH_SCIENTIST_TEMPLATE = "SELECT * FROM scientists WHERE %1 LIKE '%%2%' ";
     const std::string FOUND = "Found entries:";
+    const QString SCIENTIST_EDIT = "UPDATE scientists SET %1 = '%2' WHERE id = %3";
 }
 
 #endif // CONSTANTS

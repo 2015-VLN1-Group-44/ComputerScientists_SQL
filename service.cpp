@@ -124,6 +124,13 @@ vector<Scientist> Service::search(QString search_arg, QString column)
     return temp;
 }
 
+void Service::edit_name(QString column, QString name, int id)
+{
+    QString command = QString(constants::SCIENTIST_EDIT.arg(column).arg(name).arg(id));
+    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
+    cout << command.toStdString() << endl;
+}
+
 void Service::reverse_order()
 {
     reverse(data.begin(), data.end());
