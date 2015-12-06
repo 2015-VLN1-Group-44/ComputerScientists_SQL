@@ -20,6 +20,17 @@ Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l)
     living = l;
 }
 
+Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l, int id_num)
+{
+    first_name = fn;
+    last_name = ln;
+    gender = g;
+    birth = b;
+    death = d;
+    living = l;
+    id = id_num;
+}
+
 void Scientist::set_first(string n)
 {
     first_name = n;

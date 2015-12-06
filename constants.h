@@ -12,6 +12,7 @@ namespace constants
     const std::string SELECTION_NOT_VALID = "Invalid selection. Please try again.";
     const int MAX_NAME_LENGTH = 36;
     const QString SCIENTISTS_FILENAME = "scientists.sqlite";
+    const QString SEARCH_SCIENTIST_TEMPLATE = "SELECT * FROM scientists WHERE %1 LIKE '%%2%' ";
 }
 
 #endif // CONSTANTS

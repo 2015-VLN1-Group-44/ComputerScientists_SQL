@@ -28,6 +28,8 @@ public:
     bool search_birth(vector<int>& found_i, QDate b);
     bool search_death(vector<int>& found_i, QDate d);
 
+    vector<Scientist> search_name(QString search_arg);
+
     void load_file(string file);
     void read_input();
     void save_file(string filename);

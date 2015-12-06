@@ -173,8 +173,9 @@ bool Interface::search_menu()
     bool found, valid_date;
     bool exit = false;
     QDate sdate;
-    QString date;
+    QString date, name_search;
     vector<int> found_index;
+    vector<Scientist> found_scientists;
 
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Search by first name\t\t";
@@ -190,7 +191,22 @@ bool Interface::search_menu()
             cout << "Enter name: ";
             cin.ignore();
             getline(cin, name);
-            found = scientist_service.search_first(found_index, name);
+            cout << name << endl;
+            name_search = QString::fromStdString(name);
+            cout << name_search.toStdString() << endl;
+            found_scientists = scientist_service.search_name(name_search);
+
+            if (!found_scientists.empty())
+            {
+                found = true;
+                print_header();
+                for (unsigned int i = 0; i < found_scientists.size(); i++)
+                {
+                    cout << found_scientists[i];
+                }
+            }
+            else
+                found = false;
             exit = true;
             break;
         case 2:

@@ -117,6 +117,14 @@ vector<Scientist> Service::sort_gender(bool asc)
     return temp;
 }
 
+vector<Scientist> Service::search_name(QString search_arg)
+{
+    QString command = QString(constants::SEARCH_SCIENTIST_TEMPLATE.arg("firstname").arg(search_arg));
+    cout << command.toStdString() << endl;
+    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
+    return temp;
+}
+
 void Service::reverse_order()
 {
     reverse(data.begin(), data.end());

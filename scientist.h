@@ -12,6 +12,7 @@ class Scientist
 public:
     Scientist();
     Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l);
+    Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l, int id_num);
 
     void set_first(string n);
     void set_last(string n);
@@ -38,6 +39,7 @@ private:
     QDate birth;
     QDate death;
     bool living;
+    int id;
 };
 
 #endif // SCIENTIST_H
