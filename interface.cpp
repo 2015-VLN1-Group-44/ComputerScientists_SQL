@@ -170,7 +170,7 @@ bool Interface::search_menu()
 {
     int select;
     string name, line;
-    bool found, valid_date;
+    bool found;
     bool exit = false;
     QDate sdate;
     QString date, name_search;
@@ -197,7 +197,7 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-                print_header();
+                cout << constants::FOUND << endl;
                 for (unsigned int i = 0; i < found_scientists.size(); i++)
                 {
                     cout << found_scientists[i];
@@ -217,7 +217,7 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-                print_header();
+                cout << constants::FOUND << endl;
                 for (unsigned int i = 0; i < found_scientists.size(); i++)
                 {
                     cout << found_scientists[i];
@@ -228,39 +228,47 @@ bool Interface::search_menu()
                 exit = true;
             break;
         case 3:
-            cout << "Enter date of birth (dd/mm/yyyy): ";
+            cout << "Enter date of birth 'yyyy-mm-dd' (month/day optional): ";
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line);
-            sdate = QDate::fromString(date, constants::DATE_FORMAT);
-            valid_date = sdate.isValid();
-            if (valid_date)
+            found_scientists = scientist_service.search(date, "birth");
+            if (!found_scientists.empty())
             {
-                found = scientist_service.search_birth(found_index, sdate);
+                found = true;
+                cout << constants::FOUND << endl;
+                for (unsigned int i = 0; i < found_scientists.size(); i++)
+                {
+                    cout << found_scientists[i];
+                }
             }
             else
             {
-                found = valid_date;
+                found = false;
             }
             exit = true;
             break;
         case 4:
-            cout << "Enter date of death (dd/mm/yyyy): ";
+            cout << "Enter date of death 'yyyy-mm-dd' (month/day optional): ";
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line);
-            sdate = QDate::fromString(date, constants::DATE_FORMAT);
-            valid_date = sdate.isValid();
-            if (valid_date)
+            found_scientists = scientist_service.search(date, "death");
+            if (!found_scientists.empty())
             {
-                found = scientist_service.search_death(found_index, sdate);
+                found = true;
+                cout << constants::FOUND << endl;
+                for (unsigned int i = 0; i < found_scientists.size(); i++)
+                {
+                    cout << found_scientists[i];
+                }
             }
             else
             {
-                found = valid_date;
+                found = false;
             }
             exit = true;
-        break;
+            break;
         case 0:
             exit = true;
             found = true;
@@ -272,7 +280,7 @@ bool Interface::search_menu()
     }
     if (found)
     {
-        found_menu(found_index);
+        found_menu(found_scientists);
         exit = false;
     }
     if (!found && exit) // Val löglegt en ekkert fundið
@@ -309,17 +317,17 @@ bool Interface::search_menu()
 
 
 
-void Interface::found_menu(vector<int> found_i)
+void Interface::found_menu(vector<Scientist> found)
 {
     int select;
     bool valid;
     cout << "Found entries: " << endl;
     cout << constants::MENU_DELIMITER << endl;
     print_header();
-    for (unsigned int i = 0; i < found_i.size(); i++)
+    for (unsigned int i = 0; i < found.size(); i++)
     {
         cout << "Entry " << i + 1 << ":" << endl;
-        cout << scientist_service.data[found_i[i]];
+        cout << found[i];
     }
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
@@ -333,13 +341,16 @@ void Interface::found_menu(vector<int> found_i)
             {
                 cout << "Choose entry to edit: ";
                 cin >> select;
-                if(select > 0 && select <= (int) found_i.size())
+                if(select > 0 && select <= (int) found.size())
                 {
-                    edit_menu(found_i[select - 1]);
+                    edit_menu(found[select - 1]);
                     valid = true;
                 }
                 else
+                {
+                    cout << constants::SELECTION_NOT_VALID << endl;
                     valid = false;
+                }
             } while (!valid);
             break;
         case 2:
@@ -347,9 +358,9 @@ void Interface::found_menu(vector<int> found_i)
             {
                 cout << "Choose entry to delete: ";
                 cin >> select;
-                if (select > 0 && select <= (int) found_i.size())
+                if (select > 0 && select <= (int) found.size())
                 {
-                    scientist_service.data.erase(scientist_service.data.begin() + (found_i[select - 1]));
+
                     valid = true;
                 }
                 else
@@ -366,11 +377,11 @@ void Interface::found_menu(vector<int> found_i)
     if (!valid)
     {
         cout << constants::SELECTION_NOT_VALID << endl;
-        found_menu(found_i);
+        found_menu(found);
     }
 }
 
-void Interface::edit_menu(unsigned int i)
+void Interface::edit_menu(Scientist to_edit)
 {
     int select;
     string n, line;
@@ -394,31 +405,27 @@ void Interface::edit_menu(unsigned int i)
             cout << "Enter new first name: ";
             cin.ignore();
             getline(cin, n);
-            scientist_service.data[i].set_first(n);
-            print_header();
-            cout << scientist_service.data[i];
+
             break;
         case 2:
             cout << "Enter new last name: ";
             cin.ignore();
             getline(cin, n);
-            scientist_service.data[i].set_last(n);
-            print_header();
-            cout << scientist_service.data[i];
+
             break;
         case 3:
             cout << "Enter gender: ";
             cin.ignore();
             getline(cin, line);
             g = line[0];
-            if (g == 'm' || g == 'M')
-                scientist_service.data[i].set_gender(1);
-            else if (g == 'f' || g == 'F')
-                scientist_service.data[i].set_gender(0);
-            else
-                cout << "Not a valid gender." << endl;
-            print_header();
-            cout << scientist_service.data[i];
+//            if (g == 'm' || g == 'M')
+//                scientist_service.data[to_edit].set_gender(1);
+//            else if (g == 'f' || g == 'F')
+//                scientist_service.data[to_edit].set_gender(0);
+//            else
+//                cout << "Not a valid gender." << endl;
+//            print_header();
+//            cout << scientist_service.data[to_edit];
             break;
         case 4:
             cout << "Enter date of birth (dd/mm/yyyy): ";
@@ -426,24 +433,24 @@ void Interface::edit_menu(unsigned int i)
             getline(cin, line);
             date = QString::fromStdString(line);
             d = QDate::fromString(date, constants::DATE_FORMAT);
-            if (!d.isValid())
-            {
-                cout << "Not a valid date." << endl;
-            }
-            else if (scientist_service.data[i].get_death() < d)
-            {
-                cout << "Date of birth after date of death. Please correct." << endl;
-            }
-            else if (current < d)
-            {
-                cout << "Date of birth after current date. Please correct." << endl;
-            }
-            else
-            {
-                scientist_service.data[i].set_birth(d);
-                print_header();
-                cout << scientist_service.data[i];
-            }
+//            if (!d.isValid())
+//            {
+//                cout << "Not a valid date." << endl;
+//            }
+//            else if (scientist_service.data[to_edit].get_death() < d)
+//            {
+//                cout << "Date of birth after date of death. Please correct." << endl;
+//            }
+//            else if (current < d)
+//            {
+//                cout << "Date of birth after current date. Please correct." << endl;
+//            }
+//            else
+//            {
+//                scientist_service.data[to_edit].set_birth(d);
+//                print_header();
+//                cout << scientist_service.data[to_edit];
+//            }
             break;
         case 5:
             cout << "Enter date of death (dd/mm/yyyy): ";
@@ -451,22 +458,22 @@ void Interface::edit_menu(unsigned int i)
             getline(cin, line);
             date = QString::fromStdString(line); // breytir inputinu í QString
             d = QDate::fromString(date, constants::DATE_FORMAT); // breytir inputi í QDate
-            if (!d.isValid())
-            {
-                cout << "Not a valid date." << endl;
-            }
-            else if (d < scientist_service.data[i].get_birth())
-                cout << "Date of death before date of birth. Please correct." << endl;
-            else if (current < d)
-            {
-                cout << "Date of death after current date. Please correct." << endl;
-            }
-            else
-            {
-                scientist_service.data[i].set_death(d);
-                print_header();
-                cout << scientist_service.data[i];
-            }
+//            if (!d.isValid())
+//            {
+//                cout << "Not a valid date." << endl;
+//            }
+//            else if (d < scientist_service.data[to_edit].get_birth())
+//                cout << "Date of death before date of birth. Please correct." << endl;
+//            else if (current < d)
+//            {
+//                cout << "Date of death after current date. Please correct." << endl;
+//            }
+//            else
+//            {
+//                scientist_service.data[to_edit].set_death(d);
+//                print_header();
+//                cout << scientist_service.data[to_edit];
+//            }
             break;
         case 0:
             exit = true;
@@ -477,7 +484,7 @@ void Interface::edit_menu(unsigned int i)
     }
     if (!exit)
     {
-        edit_menu(i);
+        edit_menu(to_edit);
     }
 }
 

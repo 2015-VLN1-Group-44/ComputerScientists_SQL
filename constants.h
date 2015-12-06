@@ -1,6 +1,5 @@
 #ifndef CONSTANTS
 #define CONSTANTS
-#include <string>
 #include <QString>
 
 namespace constants
@@ -13,6 +12,7 @@ namespace constants
     const int MAX_NAME_LENGTH = 36;
     const QString SCIENTISTS_FILENAME = "scientists.sqlite";
     const QString SEARCH_SCIENTIST_TEMPLATE = "SELECT * FROM scientists WHERE %1 LIKE '%%2%' ";
+    const std::string FOUND = "Found entries:";
 }
 
 #endif // CONSTANTS
