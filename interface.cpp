@@ -111,7 +111,7 @@ bool Interface::list_menu()
     cout << "0. Main menu" << endl;
     cout << "2. Sort list by name\t\t";
     cout << "5. Sort list by gender" << endl;
-    cout << "3. Sort list by date of birth\t";
+    cout << "3. Sort list by date of birth" << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch(select)

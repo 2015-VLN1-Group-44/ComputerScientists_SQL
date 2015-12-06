@@ -110,9 +110,9 @@ vector<Scientist> Service::sort_gender(bool asc)
 {
     QString command;
     if (asc)
-        command = "SELECT * FROM scientists ORDER BY gender, name";
+        command = "SELECT * FROM scientists ORDER BY gender";
     else
-        command = "SELECT * FROM scientists ORDER BY gender DESC, name";
+        command = "SELECT * FROM scientists ORDER BY gender DESC";
     vector<Scientist> temp = scientist_repo.open_scientist_db(command);
     return temp;
 }
