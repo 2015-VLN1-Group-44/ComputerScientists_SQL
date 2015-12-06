@@ -122,7 +122,12 @@ bool Interface::list_menu()
             break;
         case 2:
             asc = asc_desc();
-            data = scientist_service.sort_name(asc);
+            if (asc)
+            {
+                data = scientist_service.sort("lastname, firstname");
+            }
+            else
+                data = scientist_service.sort("lastname DESC, firstname DESC");
             print_header();
             for (unsigned int i = 0; i < data.size(); i++)
             {
@@ -130,8 +135,12 @@ bool Interface::list_menu()
             }
             break;
         case 3:
-            asc = asc_desc();
-            data = scientist_service.sort_birth(asc);
+            if ( (asc = asc_desc()) )
+            {
+            data = scientist_service.sort("birth");
+            }
+            else
+                data = scientist_service.sort("birth DESC");
             print_header();
             for (unsigned int i = 0; i < data.size(); i++)
             {
@@ -139,8 +148,12 @@ bool Interface::list_menu()
             }
             break;
         case 4:
-            asc = asc_desc();
-            data = scientist_service.sort_death(asc);
+            if ((asc = asc_desc()))
+            {
+            data = scientist_service.sort("death");
+            }
+            else
+                data = scientist_service.sort("death DESC");
             print_header();
             for (unsigned int i = 0; i < data.size(); i++)
             {
@@ -148,8 +161,12 @@ bool Interface::list_menu()
             }
             break;
         case 5:
-            asc = asc_desc();
-            data = scientist_service.sort_gender(asc);
+            if ((asc = asc_desc()))
+            {
+            data = scientist_service.sort("gender");
+            }
+            else
+                data = scientist_service.sort("gender DESC");
             print_header();
             for (unsigned int i = 0; i < data.size(); i++)
             {
@@ -197,11 +214,6 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-//                cout << constants::FOUND << endl;
-//                for (unsigned int i = 0; i < found_scientists.size(); i++)
-//                {
-//                    cout << found_scientists[i];
-//                }
             }
             else
                 found = false;
@@ -217,11 +229,6 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-//                cout << constants::FOUND << endl;
-//                for (unsigned int i = 0; i < found_scientists.size(); i++)
-//                {
-//                    cout << found_scientists[i];
-//                }
             }
             else
                 found = false;
@@ -236,11 +243,6 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-//                cout << constants::FOUND << endl;
-//                for (unsigned int i = 0; i < found_scientists.size(); i++)
-//                {
-//                    cout << found_scientists[i];
-//                }
             }
             else
             {
@@ -257,11 +259,7 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-//                cout << constants::FOUND << endl;
-//                for (unsigned int i = 0; i < found_scientists.size(); i++)
-//                {
-//                    cout << found_scientists[i];
-//                }
+
             }
             else
             {

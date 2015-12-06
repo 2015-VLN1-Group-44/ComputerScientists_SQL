@@ -1,6 +1,6 @@
 #ifndef SCIENTIST_H
 #define SCIENTIST_H
-
+#include "constants.h"
 #include <iostream>
 #include <QDate>
 #include <fstream>

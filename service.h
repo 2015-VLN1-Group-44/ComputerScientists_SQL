@@ -17,10 +17,7 @@ public:
     Service(vector<Scientist> &d);
     unsigned int size();
 
-    vector<Scientist> sort_name(bool asc);
-    vector<Scientist> sort_birth(bool asc);
-    vector<Scientist> sort_death(bool asc);
-    vector<Scientist> sort_gender(bool asc);
+    vector<Scientist> sort(QString order);
     void reverse_order();
     
     bool search_first(vector<int>& found_i, string n);

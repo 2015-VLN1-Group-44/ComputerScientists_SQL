@@ -68,53 +68,10 @@ bool gender_order(Scientist n1, Scientist n2)
     return g;
 }
 
-
-
-// Sort föll úr C++ library
-vector<Scientist> Service::sort_name(bool asc)
+vector<Scientist> Service::sort(QString order)
 {
-    QString command;
-    if (asc)
-        command = "SELECT * FROM scientists ORDER BY lastname, firstname";
-    else
-        command = "SELECT * FROM scientists ORDER BY lastname DESC, firstname DESC";
-    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
-    return temp;
-}
-
-
-vector<Scientist> Service::sort_birth(bool asc)
-{
-    QString command;
-    if (asc)
-        command = "SELECT * FROM scientists ORDER BY birth";
-    else
-        command = "SELECT * FROM scientists ORDER BY birth DESC";
-    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
-    return temp;
-}
-
-vector<Scientist> Service::sort_death(bool asc)
-{
-    // Sorterar með alive fyrst til að lifandi raðist með nýlega látnum
-    QString command;
-    if (asc)
-        command = "SELECT * FROM scientists ORDER BY alive, death";
-    else
-        command = "SELECT * FROM scientists ORDER BY alive DESC, death DESC";
-    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
-    return temp;
-}
-
-vector<Scientist> Service::sort_gender(bool asc)
-{
-    QString command;
-    if (asc)
-        command = "SELECT * FROM scientists ORDER BY gender";
-    else
-        command = "SELECT * FROM scientists ORDER BY gender DESC";
-    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
-    return temp;
+    QString command = QString(constants::SCIENTISTS_ORDER.arg(order));
+    return scientist_repo.open_scientist_db(command);
 }
 
 vector<Scientist> Service::search(QString search_arg, QString column)

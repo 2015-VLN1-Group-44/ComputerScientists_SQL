@@ -112,13 +112,13 @@ Scientist& Scientist::operator = (Scientist other)
 // Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)
 {
-    const int MAX_NAME_LENGTH = 36;                    //Constant sem þarf að færa
+
     int name_length = sc.first_name.size() + sc.last_name.size() +1;    //búa til pláss fyrir nafn
 
     out << sc.first_name << " " << sc.last_name;
-    if (name_length < MAX_NAME_LENGTH)  //Fyllir línuna ef nafnið er undir max_name_length
+    if (name_length < constants::MAX_NAME_LENGTH)  //Fyllir línuna ef nafnið er undir max_name_length
         {
-            name_length = MAX_NAME_LENGTH - name_length;
+            name_length = constants::MAX_NAME_LENGTH - name_length;
             out << string(name_length , ' ');
         }
 
