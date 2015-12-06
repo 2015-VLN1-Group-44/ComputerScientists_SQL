@@ -30,7 +30,10 @@ public:
 
     vector<Scientist> search(QString search_arg, QString column);
 
-    void edit_name(QString column, QString name, int id);
+    Scientist find_from_id(int scientist_id);
+
+    void edit_entry(QString column, QString insert, int id);
+    void edit_gender(QString column, bool g, int id);
 
     void load_file(string file);
     void read_input();
