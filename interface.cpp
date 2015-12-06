@@ -413,15 +413,13 @@ void Interface::edit_menu(int edit_id)
             cout << "Enter new first name: ";
             cin.ignore();
             getline(cin, n);
-            
             scientist_service.edit_name("firstname", QString::fromStdString(n), edit_id);
-
             break;
         case 2:
             cout << "Enter new last name: ";
             cin.ignore();
             getline(cin, n);
-
+            scientist_service.edit_name("lastname", QString::fromStdString(n), edit_id);
             break;
         case 3:
             cout << "Enter gender: ";
