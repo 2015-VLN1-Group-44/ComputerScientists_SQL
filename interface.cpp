@@ -101,6 +101,7 @@ bool Interface::add_menu()
 bool Interface::list_menu()
 {
     bool exit = false;
+    bool asc;
     int select;
     vector<Scientist> data;
 
@@ -121,8 +122,9 @@ bool Interface::list_menu()
             cout << scientist_service;
             break;
         case 2:
+            asc = asc_desc();
             print_header();
-            data = scientist_service.sort_name();
+            data = scientist_service.sort_name(asc);
             for (unsigned int i = 0; i < data.size(); i++)
             {
                 cout << data[i];
@@ -447,4 +449,31 @@ void Interface::print_header()
     const int MAX_NAME = 36;
     cout << "Name" << string(MAX_NAME, ' ') << "Gender\tDoB\t\tDoD\n";
     cout << constants::MENU_DELIMITER << endl;
+}
+
+bool Interface::asc_desc()
+{
+    bool asc, valid;
+    string command;
+    do
+    {
+        cout << "Order ascending or descending (asc/desc)?" << endl;
+        cin >> command;
+        if (command == "asc")
+        {
+            asc = true;
+            valid = true;
+        }
+        else if (command == "desc")
+        {
+            asc = false;
+            valid = true;
+        }
+        else
+        {
+            cout << constants::SELECTION_NOT_VALID << endl;
+            valid = false;
+        }
+    } while (!valid);
+    return asc;
 }

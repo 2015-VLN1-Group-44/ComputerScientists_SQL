@@ -17,7 +17,7 @@ public:
     Service(vector<Scientist> &d);
     unsigned int size();
 
-    vector<Scientist> sort_name();
+    vector<Scientist> sort_name(bool asc);
     void sort_birth();
     void sort_death();
     void sort_gender();

@@ -20,6 +20,8 @@ public:
     void found_menu(vector<int> found_i);
     void edit_menu(unsigned int i);
     void print_header();
+    // spyr notanda í hvaða átt hann vill raða
+    bool asc_desc();
 private:
     Service scientist_service;
 };
