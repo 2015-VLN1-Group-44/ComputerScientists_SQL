@@ -117,10 +117,9 @@ vector<Scientist> Service::sort_gender(bool asc)
     return temp;
 }
 
-vector<Scientist> Service::search_name(QString search_arg)
+vector<Scientist> Service::search(QString search_arg, QString column)
 {
-    QString command = QString(constants::SEARCH_SCIENTIST_TEMPLATE.arg("firstname").arg(search_arg));
-    cout << command.toStdString() << endl;
+    QString command = QString(constants::SEARCH_SCIENTIST_TEMPLATE.arg(column).arg(search_arg));
     vector<Scientist> temp = scientist_repo.open_scientist_db(command);
     return temp;
 }

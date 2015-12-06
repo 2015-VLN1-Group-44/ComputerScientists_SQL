@@ -191,10 +191,8 @@ bool Interface::search_menu()
             cout << "Enter name: ";
             cin.ignore();
             getline(cin, name);
-            cout << name << endl;
             name_search = QString::fromStdString(name);
-            cout << name_search.toStdString() << endl;
-            found_scientists = scientist_service.search_name(name_search);
+            found_scientists = scientist_service.search(name_search, "firstname");
 
             if (!found_scientists.empty())
             {
@@ -213,8 +211,21 @@ bool Interface::search_menu()
             cout << "Enter name: ";
             cin.ignore();
             getline(cin, name);
-            found = scientist_service.search_last(found_index, name);
-            exit = true;
+            name_search = QString::fromStdString(name);
+            found_scientists = scientist_service.search(name_search, "lastname");
+
+            if (!found_scientists.empty())
+            {
+                found = true;
+                print_header();
+                for (unsigned int i = 0; i < found_scientists.size(); i++)
+                {
+                    cout << found_scientists[i];
+                }
+            }
+            else
+                found = false;
+                exit = true;
             break;
         case 3:
             cout << "Enter date of birth (dd/mm/yyyy): ";
