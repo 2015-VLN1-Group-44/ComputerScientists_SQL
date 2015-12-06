@@ -52,7 +52,7 @@ bool Interface::start_menu()
             cout << "Input filename: ";
             cin >> f;
             f += ".txt";
-            scientist_service.save_file(f);
+            // scientist_service.save_file(f);
             quit = false;
             break;
         case 0:
@@ -83,7 +83,7 @@ bool Interface::add_menu()
             cout << "Input filename: ";
             cin >> n;
             n += ".txt";
-            scientist_service.load_file(n);
+            // scientist_service.load_file(n);
             break;
         case 2:
             scientist_service.read_input();
@@ -532,25 +532,6 @@ bool Interface::asc_desc()
                 valid = false;
 
         }
-
-//        string command;                                               ***************Má eyða ef allir eru sáttir
-//        cout << "Order ascending or descending (asc/desc)?" << endl;
-//        cin >> command;
-//        if (command == "asc")
-//        {
-//            asc = true;
-//            valid = true;
-//        }
-//        else if (command == "desc")
-//        {
-//            asc = false;
-//            valid = true;
-//        }
-//        else
-//        {
-//            cout << constants::SELECTION_NOT_VALID << endl;
-//            valid = false;
-//        }
     } while (!valid);
     return asc;
 }

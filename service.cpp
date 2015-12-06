@@ -23,51 +23,6 @@ Service::Service(vector<Scientist>& d)
     }
 }
 
-// Nokkur föll sem gera samanburð á tveimur elementum, skila true ef í réttri röð
-bool name_order(Scientist n1, Scientist n2)
-{
-    bool order = false;
-    if (n1.get_last() < n2.get_last())
-    {
-        order = true;
-    }
-    else if (n1.get_last() == n2.get_last() && n1.get_first() <= n2.get_first())
-    {
-        order = true;
-    }
-    return order;
-}
-
-bool birth_order(Scientist n1, Scientist n2)
-{
-    bool b = false;
-    if (n1.get_birth() < n2.get_birth())
-    {
-        b = true;
-    }
-    return b;
-}
-
-bool death_order(Scientist n1, Scientist n2)
-{
-    bool d = false;
-    if (n1.get_death() < n2.get_death())
-    {
-        d = true;
-    }
-    return d;
-}
-
-bool gender_order(Scientist n1, Scientist n2)
-{
-    bool g = false;
-    if (n1.get_gender() < n2.get_gender())
-    {
-        g = true;
-    }
-    return g;
-}
-
 vector<Scientist> Service::sort(QString order)
 {
     QString command = QString(constants::SCIENTISTS_ORDER.arg(order));
@@ -79,6 +34,7 @@ vector<Scientist> Service::search(QString search_arg, QString column)
     QString command = QString(constants::SEARCH_SCIENTIST_TEMPLATE.arg(column).arg(search_arg));
     return scientist_repo.open_scientist_db(command);
 }
+
 Scientist Service::find_from_id(int scientist_id)
 {
     QString command = QString(constants::SCIENTIST_FROM_ID.arg(scientist_id));
@@ -91,74 +47,6 @@ void Service::edit_entry(QString column, QString insert, int id)
     vector<Scientist> temp = scientist_repo.open_scientist_db(command);
     cout << command.toStdString() << endl;
 }
-
-void Service::reverse_order()
-{
-    reverse(data.begin(), data.end());
-}
-
-void Service::load_file(string file)
-{
-    data = scientist_repo.read_file(file);
-}
-
-bool Service::search_first(vector<int>& found_i, string n)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < data.size(); i++)
-    {
-        if (n == data[i].get_first())
-        {
-            found = true;
-            found_i.push_back(i);
-        }
-    }
-    return found;
-}
-
-bool Service::search_last(vector<int>& found_i, string n)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < data.size(); i++)
-    {
-        if (n == data[i].get_last())
-        {
-            found = true;
-            found_i.push_back(i);
-        }
-    }
-    return found;
-}
-
-bool Service::search_birth(vector<int>& found_i, QDate b)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < data.size(); i++)
-    {
-        if (b == data[i].get_birth())
-        {
-            found = true;
-            found_i.push_back(i);
-        }
-    }
-    return found;
-}
-
-
-bool Service::search_death(vector<int>& found_i, QDate d)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < data.size(); i++)
-    {
-        if (d == data[i].get_death())
-        {
-            found = true;
-            found_i.push_back(i);
-        }
-    }
-    return found;
-}
-
 
 // Les upplýsingar frá notanda
 void Service::read_input()
@@ -269,11 +157,6 @@ void Service::read_input()
     data.push_back(temp);
 }
 
-void Service::save_file(string filename)
-{
-    scientist_repo.print_to_file(filename, data);
-}
-
 unsigned int Service::size()
 {
     return data.size();
@@ -287,4 +170,3 @@ ostream& operator << (ostream& out, Service d)
     }
     return out;
 }
-
