@@ -20,7 +20,7 @@ Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l)
     living = l;
 }
 
-Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l, int id_num)
+Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l, int id_num, bool act)
 {
     first_name = fn;
     last_name = ln;
@@ -29,6 +29,7 @@ Scientist::Scientist(string fn, string ln, bool g, QDate b, QDate d, bool l, int
     death = d;
     living = l;
     id = id_num;
+    active = act;
 }
 
 void Scientist::set_first(string n)

@@ -197,7 +197,7 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-                print_header();
+                cout << constants::FOUND << endl;
                 for (unsigned int i = 0; i < found_scientists.size(); i++)
                 {
                     cout << found_scientists[i];
@@ -217,7 +217,7 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-                print_header();
+                cout << constants::FOUND << endl;
                 for (unsigned int i = 0; i < found_scientists.size(); i++)
                 {
                     cout << found_scientists[i];
@@ -236,7 +236,7 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-                print_header();
+                cout << constants::FOUND << endl;
                 for (unsigned int i = 0; i < found_scientists.size(); i++)
                 {
                     cout << found_scientists[i];
@@ -257,7 +257,7 @@ bool Interface::search_menu()
             if (!found_scientists.empty())
             {
                 found = true;
-                print_header();
+                cout << constants::FOUND << endl;
                 for (unsigned int i = 0; i < found_scientists.size(); i++)
                 {
                     cout << found_scientists[i];
