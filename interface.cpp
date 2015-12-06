@@ -170,7 +170,7 @@ bool Interface::search_menu()
 {
     int select;
     string name, line;
-    bool found, valid_date;
+    bool found;
     bool exit = false;
     QDate sdate;
     QString date, name_search;
@@ -228,39 +228,47 @@ bool Interface::search_menu()
                 exit = true;
             break;
         case 3:
-            cout << "Enter date of birth (dd/mm/yyyy): ";
+            cout << "Enter date of birth 'yyyy-mm-dd' (month/day optional): ";
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line);
-            sdate = QDate::fromString(date, constants::DATE_FORMAT);
-            valid_date = sdate.isValid();
-            if (valid_date)
+            found_scientists = scientist_service.search(date, "birth");
+            if (!found_scientists.empty())
             {
-                found = scientist_service.search_birth(found_index, sdate);
+                found = true;
+                print_header();
+                for (unsigned int i = 0; i < found_scientists.size(); i++)
+                {
+                    cout << found_scientists[i];
+                }
             }
             else
             {
-                found = valid_date;
+                found = false;
             }
             exit = true;
             break;
         case 4:
-            cout << "Enter date of death (dd/mm/yyyy): ";
+            cout << "Enter date of death 'yyyy-mm-dd' (month/day optional): ";
             cin.ignore();
             getline(cin, line);
             date = QString::fromStdString(line);
-            sdate = QDate::fromString(date, constants::DATE_FORMAT);
-            valid_date = sdate.isValid();
-            if (valid_date)
+            found_scientists = scientist_service.search(date, "death");
+            if (!found_scientists.empty())
             {
-                found = scientist_service.search_death(found_index, sdate);
+                found = true;
+                print_header();
+                for (unsigned int i = 0; i < found_scientists.size(); i++)
+                {
+                    cout << found_scientists[i];
+                }
             }
             else
             {
-                found = valid_date;
+                found = false;
             }
             exit = true;
-        break;
+            break;
         case 0:
             exit = true;
             found = true;
