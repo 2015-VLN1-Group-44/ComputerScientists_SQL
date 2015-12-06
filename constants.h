@@ -11,11 +11,11 @@ namespace constants
     const std::string SELECTION_NOT_VALID = "Invalid selection. Please try again.";
     const int MAX_NAME_LENGTH = 36;
     const QString SCIENTISTS_FILENAME = "scientists.sqlite";
-    const QString SEARCH_SCIENTIST_TEMPLATE = "SELECT * FROM scientists WHERE %1 LIKE '%%2%' ";
+    const QString SEARCH_SCIENTIST_TEMPLATE = "SELECT * FROM scientists WHERE %1 LIKE '%%2%' AND WHERE active LIKE 1";
     const std::string FOUND = "Found entries:";
     const QString SCIENTIST_EDIT = "UPDATE scientists SET %1 = '%2' WHERE id = %3";
     const QString SCIENTIST_FROM_ID = "SELECT * FROM scientists WHERE id LIKE '%%1%'";
-    const QString SCIENTISTS_ORDER = "SELECT * FROM scientists ORDER BY %1";
+    const QString SCIENTISTS_ORDER = "SELECT * FROM scientists WHERE active LIKE 1 ORDER BY %1 ";
 }
 
 #endif // CONSTANTS

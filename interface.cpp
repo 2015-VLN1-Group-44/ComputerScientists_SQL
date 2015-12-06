@@ -431,7 +431,6 @@ void Interface::edit_menu(int edit_id)
                 scientist_service.edit_entry("gender", "1", edit_id);
             }
 
-
             else if (g == 'f' || g == 'F')
                 scientist_service.edit_entry("gender", "0", edit_id);
             else
