@@ -510,23 +510,49 @@ bool Interface::asc_desc()
     string command;
     do
     {
-        cout << "Order ascending or descending (asc/desc)?" << endl;
+        int command = 0;
+        cout << "\n1. Ascending\t";
+        cout << "2. Descending" << endl;
+        cout << "Enter selection ";
         cin >> command;
-        if (command == "asc")
+        cout << endl;
+
+        switch (command)                    //Val fyrir Ascending/Descending
         {
-            asc = true;
-            valid = true;
+            case 1:
+                asc = true;
+                valid = true;
+            break;
+
+            case 2:
+                asc = false;
+                valid = true;
+            break;
+
+            default:
+                cout << "Invalid selection " << command << endl;
+                valid = false;
+
         }
-        else if (command == "desc")
-        {
-            asc = false;
-            valid = true;
-        }
-        else
-        {
-            cout << constants::SELECTION_NOT_VALID << endl;
-            valid = false;
-        }
+
+//        string command;                                               ***************Má eyða ef allir eru sáttir
+//        cout << "Order ascending or descending (asc/desc)?" << endl;
+//        cin >> command;
+//        if (command == "asc")
+//        {
+//            asc = true;
+//            valid = true;
+//        }
+//        else if (command == "desc")
+//        {
+//            asc = false;
+//            valid = true;
+//        }
+//        else
+//        {
+//            cout << constants::SELECTION_NOT_VALID << endl;
+//            valid = false;
+//        }
     } while (!valid);
     return asc;
 }

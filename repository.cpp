@@ -93,7 +93,7 @@ vector<Scientist> Repository::open_scientist_db(QString sql_command)
     vector<Scientist> data;
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "scientists.sqlite";       // Magnea breytti scientists.sqlite í db.sqlite
+    QString dbName = "db.sqlite";       // Magnea breytti scientists.sqlite í db.sqlite
     db.setDatabaseName(dbName);
     db.open();
     QSqlQuery query(db);

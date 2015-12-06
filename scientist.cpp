@@ -2,6 +2,7 @@
 #include "scientist.h"
 #include <string>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -130,11 +131,11 @@ ostream& operator << (ostream& out, Scientist sc)
     {
         out << "\tFemale\t";
     }
-    out << sc.birth.day() << "/" << sc.birth.month() << "/";
+    out << std::setfill('0') << std::setw(2) << sc.birth.day() << "/" << std::setfill('0') << std::setw(2) << sc.birth.month() << "/";
     out << sc.birth.year() << "\t";
     if (!sc.living)
     {
-        out << sc.death.day() << "/" << sc.death.month() << "/";
+        out << std::setfill('0') << std::setw(2) << sc.death.day() << "/" << std::setfill('0') << std::setw(2) << sc.death.month() << "/";
         out << sc.death.year() << "\n";
     }
     else
