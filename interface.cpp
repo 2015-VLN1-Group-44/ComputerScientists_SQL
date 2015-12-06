@@ -123,16 +123,21 @@ bool Interface::list_menu()
             break;
         case 2:
             asc = asc_desc();
-            print_header();
             data = scientist_service.sort_name(asc);
+            print_header();
             for (unsigned int i = 0; i < data.size(); i++)
             {
                 cout << data[i];
             }
             break;
         case 3:
-            scientist_service.sort_birth();
-            cout << "List sorted by date of birth." << endl;
+            asc = asc_desc();
+            data = scientist_service.sort_birth(asc);
+            print_header();
+            for (unsigned int i = 0; i < data.size(); i++)
+            {
+                cout << data[i];
+            }
             break;
         case 4:
             scientist_service.sort_death();

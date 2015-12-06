@@ -18,7 +18,7 @@ public:
     unsigned int size();
 
     vector<Scientist> sort_name(bool asc);
-    void sort_birth();
+    vector<Scientist> sort_birth(bool asc);
     void sort_death();
     void sort_gender();
     void reverse_order();
