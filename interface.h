@@ -13,7 +13,7 @@ class Interface
 public:
     Interface();
     Interface(vector<Scientist> v);
-    bool start_menu();
+    void start_menu();
     bool add_menu();
     bool list_menu();
     bool search_menu();

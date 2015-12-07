@@ -11,21 +11,22 @@ Interface::Interface()
  * false ef ekki er búið að velja exit inni í þeim, og þær undirvalmyndir keyra
  * þá aftur.
  */
-bool Interface::start_menu()
+void Interface::start_menu()
 {
     int selection = 0;
     bool quit, exit;
-    string f; // strengur til að lesa inn filename
-    cout << constants::MENU_DELIMITER << endl;
-    cout << "1. Add Scientists to list\t";
-    cout << "3. Search list\t\t\t";
-    cout << "0. Quit" << endl;
-    cout << "2. Display list of Scientists\t";
-    cout << "4. Save list to .txt file"  << endl;
-    cout << "Enter selection: ";
-    cin >> selection;
-    switch (selection)
+    // scientist_service.initialize("db.sqlite");
+    do
     {
+        cout << constants::MENU_DELIMITER << endl;
+        cout << "1. Add Scientists to list\t";
+        cout << "3. Search list\t\t\t";
+        cout << "0. Quit" << endl;
+        cout << "2. Display list of Scientists" << endl;
+        cout << "Enter selection: ";
+        cin >> selection;
+        switch (selection)
+        {
         case 1:
 
             do
@@ -48,13 +49,6 @@ bool Interface::start_menu()
             } while (!exit);
             quit = false;
             break;
-        case 4:
-            cout << "Input filename: ";
-            cin >> f;
-            f += ".txt";
-            // scientist_service.save_file(f);
-            quit = false;
-            break;
         case 0:
             quit = true;
             break;
@@ -63,39 +57,14 @@ bool Interface::start_menu()
             cout << selection << " is not a valid menu item.\n";
             quit = false;
             break;
-    }
-    return quit;
+        }
+    } while (!quit);
 }
 
 bool Interface::add_menu()
 {
-    int select;
-    bool exit = false;
-    string n;
-    cout << constants::MENU_DELIMITER << endl;
-    cout << "1. Read from .txt file\t\t";
-    cout << "2. Add Scientist manually\t";
-    cout << "0. Main menu" << endl << constants::SELECTION_PROMPT;
-    cin >> select;
-    switch(select)
-    {
-        case 1:
-            cout << "Input filename: ";
-            cin >> n;
-            n += ".txt";
-            // scientist_service.load_file(n);
-            break;
-        case 2:
-            scientist_service.read_input();
-            break;
-        case 0:
-            exit = true;
-            break;
-        default:
-            cout << constants::SELECTION_NOT_VALID << endl;
-            break;
-    }
-    return exit;
+    scientist_service.read_input();
+    return true;
 }
 
 bool Interface::list_menu()
@@ -106,21 +75,16 @@ bool Interface::list_menu()
     vector<Scientist> data;
 
     cout << constants::MENU_DELIMITER << endl;
-    cout << "1. Display list\t\t\t";
-    cout << "4. Sort list by date of death\t";
+    cout << "1. Sort list by name\t\t";
+    cout << "3. Sort list by date of death\t";
     cout << "0. Main menu" << endl;
-    cout << "2. Sort list by name\t\t";
-    cout << "5. Sort list by gender" << endl;
-    cout << "3. Sort list by date of birth" << endl;
+    cout << "2. Sort list by date of birth\t";
+    cout << "4. Sort list by gender" << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch(select)
     {
         case 1:
-            print_header();
-            cout << scientist_service;
-            break;
-        case 2:
             asc = asc_desc();
             if (asc)
             {
@@ -134,7 +98,7 @@ bool Interface::list_menu()
                 cout << data[i];
             }
             break;
-        case 3:
+        case 2:
             if ( (asc = asc_desc()) )
             {
             data = scientist_service.sort("birth");
@@ -147,7 +111,7 @@ bool Interface::list_menu()
                 cout << data[i];
             }
             break;
-        case 4:
+        case 3:
             if ((asc = asc_desc()))
             {
             data = scientist_service.sort("death");
@@ -160,7 +124,7 @@ bool Interface::list_menu()
                 cout << data[i];
             }
             break;
-        case 5:
+        case 4:
             if ((asc = asc_desc()))
             {
             data = scientist_service.sort("gender");

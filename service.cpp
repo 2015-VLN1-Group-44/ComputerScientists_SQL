@@ -23,6 +23,11 @@ Service::Service(vector<Scientist>& d)
     }
 }
 
+void Service::initialize(QString db_name)
+{
+    scientist_repo.connect_db(db_name);
+}
+
 vector<Scientist> Service::sort(QString order)
 {
     QString command = QString(constants::SCIENTISTS_ORDER.arg(order));
@@ -154,7 +159,6 @@ void Service::read_input()
         in_date.setDate(0, 0, 0);
     }
     temp.set_death(in_date);
-    data.push_back(temp);
 }
 
 unsigned int Service::size()
