@@ -2,7 +2,7 @@
 #define INTERFACE_H
 
 #include "constants.h"
-#include "service.h"
+#include "scientist_service.h"
 #include <iostream>
 #include <string>
 
@@ -23,7 +23,7 @@ public:
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
 private:
-    Service scientist_service;
+    Scientist_service scientist_service;
 };
 
 

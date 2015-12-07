@@ -11,15 +11,15 @@ TEMPLATE = app
 SOURCES += main.cpp \
     scientist.cpp \
     interface.cpp \
-    service.cpp \
-    repository.cpp
+    repository.cpp \
+    scientist_service.cpp
 
 HEADERS += \
     scientist.h \
     interface.h \
     constants.h \
-    service.h \
-    repository.h
+    repository.h \
+    scientist_service.h
 
 DISTFILES += \
     data.txt

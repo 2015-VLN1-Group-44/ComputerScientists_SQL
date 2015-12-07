@@ -1,5 +1,5 @@
-#ifndef SERVICE_H
-#define SERVICE_H
+#ifndef SCIENTIST_SERVICE_H
+#define SCIENTIST_SERVICE_H
 
 #include <iostream>
 #include <vector>
@@ -10,11 +10,11 @@
 
 using namespace std;
 
-class Service : public Scientist
+class Scientist_service : public Scientist
 {
 public:
-    Service();
-    Service(vector<Scientist> &d);
+    Scientist_service();
+    Scientist_service(vector<Scientist> &d);
     unsigned int size();
     void initialize(QString db_name);
     vector<Scientist> sort(QString order);
@@ -27,7 +27,7 @@ public:
     void read_input();
 
     friend class Interface;
-    friend ostream& operator << (ostream& out, Service d);
+    friend ostream& operator << (ostream& out, Scientist_service d);
 
 private:
     vector<Scientist> data;
@@ -35,4 +35,4 @@ private:
 
 };
 
-#endif // SERVICE_H
+#endif // SCIENTIST_SERVICE_H

@@ -327,6 +327,7 @@ void Interface::found_menu(vector<Scientist> found)
                 if (select > 0 && select <= (int) found.size())
                 {
                     valid = true;
+                    scientist_service.edit_entry("active", "0", found[select - 1].get_id());
                 }
                 else if (select == 0)
                 {
@@ -490,7 +491,7 @@ bool Interface::asc_desc()
             break;
 
             default:
-                cout << "Invalid selection " << command << endl;
+                cout << constants::SELECTION_NOT_VALID << endl;
                 valid = false;
 
         }

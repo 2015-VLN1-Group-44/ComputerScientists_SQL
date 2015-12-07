@@ -4,18 +4,18 @@
 #include <stdio.h>
 #include <QString>
 #include <QDate>
-#include "service.h"
+#include "scientist_service.h"
 #include <fstream> 
 #include <sstream>
 
 
 using namespace std;
 
-Service::Service()
+Scientist_service::Scientist_service()
 {
 }
 
-Service::Service(vector<Scientist>& d)
+Scientist_service::Scientist_service(vector<Scientist>& d)
 {
     for (unsigned int i = 0; i < d.size(); i++)
     {
@@ -23,38 +23,37 @@ Service::Service(vector<Scientist>& d)
     }
 }
 
-void Service::initialize(QString db_name)
+void Scientist_service::initialize(QString db_name)
 {
     scientist_repo.connect_db(db_name);
 }
 
-vector<Scientist> Service::sort(QString order)
+vector<Scientist> Scientist_service::sort(QString order)
 {
     QString command = QString(constants::SCIENTISTS_ORDER.arg(order));
     return scientist_repo.open_scientist_db(command);
 }
 
-vector<Scientist> Service::search(QString search_arg, QString column)
+vector<Scientist> Scientist_service::search(QString search_arg, QString column)
 {
     QString command = QString(constants::SEARCH_SCIENTIST_TEMPLATE.arg(column).arg(search_arg));
     return scientist_repo.open_scientist_db(command);
 }
 
-Scientist Service::find_from_id(int scientist_id)
+Scientist Scientist_service::find_from_id(int scientist_id)
 {
     QString command = QString(constants::SCIENTIST_FROM_ID.arg(scientist_id));
     return scientist_repo.open_scientist_db(command)[0];
 }
 
-void Service::edit_entry(QString column, QString insert, int id)
+void Scientist_service::edit_entry(QString column, QString insert, int id)
 {
     QString command = QString(constants::SCIENTIST_EDIT.arg(column).arg(insert).arg(id));
     vector<Scientist> temp = scientist_repo.open_scientist_db(command);
-    cout << command.toStdString() << endl;
 }
 
 // Les upplýsingar frá notanda
-void Service::read_input()
+void Scientist_service::read_input()
 {
     Scientist temp;
     char cgender, answer;
@@ -162,12 +161,12 @@ void Service::read_input()
     scientist_repo.add_scientist(temp);
 }
 
-unsigned int Service::size()
+unsigned int Scientist_service::size()
 {
     return data.size();
 }
 
-ostream& operator << (ostream& out, Service d)
+ostream& operator << (ostream& out, Scientist_service d)
 {
     for (unsigned int i = 0; i < d.size(); i++)
     {

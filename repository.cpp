@@ -16,24 +16,16 @@ void Repository::connect_db(QString name)
 vector<Scientist> Repository::open_scientist_db(QString sql_command)
 {
     vector<Scientist> data;
-
-//    db = QSqlDatabase::addDatabase("QSQLITE");
-//    QString dbName = "db.sqlite";
-//    db.setDatabaseName(dbName);
-    cout << db.databaseName().toStdString() << endl;
-
     db.open();
     QSqlQuery query(db);
     query.exec(sql_command);
 
-    qDebug() << query.lastQuery();
     while (query.next())
     {
         string first, last;
         QDate b, d;
         bool g, a, act;
         int id_n;
-        // qDebug() << query.lastQuery();
         first = query.value("firstname").toString().toStdString();
         last = query.value("lastname").toString().toStdString();
         b = QDate::fromString(query.value("birth").toString(), constants::IMPORT_DATE_FORMAT);
@@ -60,7 +52,6 @@ void Repository::add_scientist(Scientist s)
     query.bindValue(":d", s.get_death());
     query.bindValue(":g", s.get_gender());
     query.bindValue(":a", s.get_living());
-    query.bindValue(":act", s.get_living());
+    query.bindValue(":act", 1);
     query.exec();
-    qDebug() << query.lastQuery();
 }
