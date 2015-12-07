@@ -15,7 +15,7 @@ void Interface::start_menu()
 {
     int selection = 0;
     bool quit, exit;
-    // scientist_service.initialize("db.sqlite");
+    scientist_service.initialize(constants::DATABASE_NAME);
     do
     {
         cout << constants::MENU_DELIMITER << endl;
@@ -326,7 +326,6 @@ void Interface::found_menu(vector<Scientist> found)
                 cin >> select;
                 if (select > 0 && select <= (int) found.size())
                 {
-
                     valid = true;
                 }
                 else if (select == 0)

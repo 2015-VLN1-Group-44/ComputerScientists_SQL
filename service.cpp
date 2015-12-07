@@ -159,6 +159,7 @@ void Service::read_input()
         in_date.setDate(0, 0, 0);
     }
     temp.set_death(in_date);
+    scientist_repo.add_scientist(temp);
 }
 
 unsigned int Service::size()

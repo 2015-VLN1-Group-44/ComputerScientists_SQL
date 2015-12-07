@@ -18,6 +18,7 @@ namespace constants
     const QString SCIENTISTS_ORDER = "SELECT * FROM scientists WHERE active LIKE 1 ORDER BY %1 ";
     const QString INSERT_FORM =  "INSERT INTO scientists (firstname, lastname, birth, death, gender, alive, active)" 
                                  "VALUES (:first, :last, :b, :d, :g, :a, :act)";
+    const QString DATABASE_NAME = "db.sqlite";
 }
 
 #endif // CONSTANTS

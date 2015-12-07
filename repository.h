@@ -15,10 +15,10 @@ class Repository
 {
 public:
     Repository();
-//    void print_to_file(string filename, vector<Scientist> s);
-//    vector<Scientist> read_file(string filename);
+
     void connect_db(QString name);  
     vector<Scientist> open_scientist_db(QString sql_command);
+    void add_scientist(Scientist s);
 private:
     QSqlDatabase db;
 };
