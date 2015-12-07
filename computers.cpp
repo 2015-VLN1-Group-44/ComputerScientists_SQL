@@ -66,11 +66,12 @@ ostream& operator << (ostream& out, Computers comp)
     {
         out << "Not built\t";
     }
-    if (comp.comp_t == computer_type::mechanical)
+    // tékk tékk
+    if (comp.comp_t == 1)
     {
         out << "Mechanical";
     }
-    else if (comp.comp_t == computer_type::transistor)
+    else if (comp.comp_t == 2)
     {
         out << "Transistor";
     }
