@@ -17,7 +17,7 @@ public:
     Scientist_service(vector<Scientist> &d);
     unsigned int size();
 
-    void initialize(QString db_name);
+//    void initialize(QString db_name);
     vector<Scientist> sort(QString order);
     vector<Scientist> search(QString search_arg, QString column);
 

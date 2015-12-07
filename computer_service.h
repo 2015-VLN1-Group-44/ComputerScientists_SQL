@@ -9,7 +9,7 @@ class Computer_service
 public:
     Computer_service();
 
-    void initialize(QString db_name);
+//    void initialize(QString db_name);
     vector<Computers> sort(QString sort_order);
 
 

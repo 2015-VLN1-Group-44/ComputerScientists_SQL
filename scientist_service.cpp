@@ -23,10 +23,10 @@ Scientist_service::Scientist_service(vector<Scientist>& d)
     }
 }
 
-void Scientist_service::initialize(QString db_name)
-{
-    scientist_repo.connect_db(db_name);
-}
+//void Scientist_service::initialize(QString db_name)
+//{
+//    scientist_repo.connect_db(db_name);
+//}
 
 vector<Scientist> Scientist_service::sort(QString order)
 {

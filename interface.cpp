@@ -17,8 +17,8 @@ void Interface::start_menu()
     bool quit, exit;
     // tempbreyta til að prófa útprent
     vector<Computers> temp;
-    scientist_service.initialize(constants::DATABASE_NAME);
-    computer_service.initialize(constants::DATABASE_NAME);
+//    scientist_service.initialize(constants::DATABASE_NAME);
+//    computer_service.initialize(constants::DATABASE_NAME);
     do
     {
         cout << constants::MENU_DELIMITER << endl;

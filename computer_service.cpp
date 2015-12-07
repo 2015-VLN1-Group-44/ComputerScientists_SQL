@@ -4,10 +4,10 @@ Computer_service::Computer_service()
 {
 }
 
-void Computer_service::initialize(QString db_name)
-{
-    computer_repo.connect_db(db_name);
-}
+//void Computer_service::initialize(QString db_name)
+//{
+//    computer_repo.connect_db(db_name);
+//}
 
 vector<Computers> Computer_service::sort(QString sort_order)
 {
