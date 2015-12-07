@@ -3,6 +3,7 @@
 
 #include "constants.h"
 #include "scientist_service.h"
+#include "computer_service.h"
 #include <iostream>
 #include <string>
 
@@ -24,6 +25,7 @@ public:
     bool asc_desc();
 private:
     Scientist_service scientist_service;
+    Computer_service computer_service;
 };
 
 

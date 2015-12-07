@@ -7,6 +7,7 @@
 #include <QtSql>
 #include <QString>
 #include "constants.h"
+#include "computers.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
 
     void connect_db(QString name);  
     vector<Scientist> open_scientist_db(QString sql_command);
+    vector<Computers> open_computer_db(QString sql_command);
     void add_scientist(Scientist s);
 private:
     QSqlDatabase db;

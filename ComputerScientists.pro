@@ -12,14 +12,18 @@ SOURCES += main.cpp \
     scientist.cpp \
     interface.cpp \
     repository.cpp \
-    scientist_service.cpp
+    scientist_service.cpp \
+    computers.cpp \
+    computer_service.cpp
 
 HEADERS += \
     scientist.h \
     interface.h \
     constants.h \
     repository.h \
-    scientist_service.h
+    scientist_service.h \
+    computers.h \
+    computer_service.h
 
 DISTFILES += \
     data.txt

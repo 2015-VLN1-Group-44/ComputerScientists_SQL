@@ -15,14 +15,18 @@ void Interface::start_menu()
 {
     int selection = 0;
     bool quit, exit;
+    // tempbreyta til að prófa útprent
+    vector<Computers> temp;
     scientist_service.initialize(constants::DATABASE_NAME);
+    computer_service.initialize(constants::DATABASE_NAME);
     do
     {
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
         cout << "3. Search list\t\t\t";
         cout << "0. Quit" << endl;
-        cout << "2. Display list of Scientists" << endl;
+        cout << "2. Display list of Scientists\t";
+        cout << "4. Display list of Computers" << endl;
         cout << "Enter selection: ";
         cin >> selection;
         switch (selection)
@@ -47,6 +51,14 @@ void Interface::start_menu()
             {
                 exit = search_menu();
             } while (!exit);
+            quit = false;
+            break;
+        case 4:
+            temp = computer_service.sort("name");
+            for (unsigned int i = 0; i < temp.size(); i++)
+            {
+                cout << temp[i];
+            }
             quit = false;
             break;
         case 0:

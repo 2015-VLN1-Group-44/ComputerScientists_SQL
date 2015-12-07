@@ -31,7 +31,6 @@ public:
 
     Scientist& operator = (Scientist other);
     friend ostream& operator << (ostream& out, Scientist sc);
-    friend class Database;
 
 private:
     string first_name;

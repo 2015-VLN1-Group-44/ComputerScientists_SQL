@@ -41,6 +41,33 @@ vector<Scientist> Repository::open_scientist_db(QString sql_command)
     return data;
 }
 
+vector<Computers> Repository::open_computer_db(QString sql_command)
+{
+    vector<Computers> data;
+    db.open();
+    QSqlQuery query(db);
+    query.exec(sql_command);
+
+    while (query.next())
+    {
+        string name;
+        int year, id_n;
+        bool b, act;
+        enum computer_type ct;
+
+        name = query.value("name").toString().toStdString();
+        ct = static_cast<computer_type>(query.value("type").toInt());
+        year = query.value("built_year").toInt();
+        id_n = query.value("id").toInt();
+        b = query.value("built").toBool();
+        act = query.value("active").toBool();
+        Computers temp(name, year, b, ct, id_n, act);
+        data.push_back(temp);
+    }
+    db.close();
+    return data;    
+}
+
 void Repository::add_scientist(Scientist s)
 {
     db.open();
