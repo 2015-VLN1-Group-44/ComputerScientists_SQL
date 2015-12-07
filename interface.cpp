@@ -54,11 +54,7 @@ void Interface::start_menu()
             quit = false;
             break;
         case 4:
-            temp = computer_service.sort("name");
-            for (unsigned int i = 0; i < temp.size(); i++)
-            {
-                cout << temp[i];
-            }
+            computer_list_menu();
             quit = false;
             break;
         case 0:
@@ -157,6 +153,73 @@ bool Interface::list_menu()
             break;
     }
     return exit;
+}
+
+void Interface::computer_list_menu()
+{
+    bool exit = false;
+    do
+    {
+        bool asc;
+        int select;
+        vector<Computers> data;
+
+        cout << constants::MENU_DELIMITER << endl;
+        cout << "1. Sort list by name\t\t";
+        cout << "3. Sort list by type\t\t";
+        cout << "0. Main menu" << endl;
+        cout << "2. Sort list by date built" << endl;
+        cout << constants::SELECTION_PROMPT;
+        cin >> select;
+        switch(select)
+        {
+            case 1:
+                asc = asc_desc();
+                if (asc)
+                {
+                    data = computer_service.sort("name");
+                }
+                else
+                    data = computer_service.sort("name DESC");
+                for (unsigned int i = 0; i < data.size(); i++)
+                {
+                    cout << data[i];
+                }
+                break;
+            case 2:
+                if ( (asc = asc_desc()) )
+                {
+                data = computer_service.sort("built_year");
+                }
+                else
+                    data = computer_service.sort("built_year DESC");
+                print_header();
+                for (unsigned int i = 0; i < data.size(); i++)
+                {
+                    cout << data[i];
+                }
+                break;
+            case 3:
+                if ((asc = asc_desc()))
+                {
+                data = computer_service.sort("type");
+                }
+                else
+                    data = computer_service.sort("type DESC");
+                print_header();
+                for (unsigned int i = 0; i < data.size(); i++)
+                {
+                    cout << data[i];
+                }
+                break;
+            case 0:
+                exit = true;
+                break;
+            default:
+                cout << select << " is not a valid menu item." << endl;
+                break;
+        }
+    } while (!exit);
 }
 
 bool Interface::search_menu()

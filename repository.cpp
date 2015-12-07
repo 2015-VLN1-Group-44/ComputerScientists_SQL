@@ -93,4 +93,5 @@ void Repository::add_scientist(Scientist s)
     query.bindValue(":a", s.get_living());
     query.bindValue(":act", 1);
     query.exec();
+
 }
