@@ -50,13 +50,27 @@ void Computer_service::add_connection(int sci_id, int comp_id)
 //void Computer_service::read_input()
 //{
 //    string name;
-//    bool built;
-//    enum computer_type ct;
-//    int year;
+//    bool built = false;
+//    int year, ct;
 //    char test;
 //    cout << "Enter name: ";
-//    cin >> name;
+//    cin.ignore();
+//    getline(cin, name);
 //    cout << "Was the computer built (y/n)?";
 //    cin >> test;
-//    if (test.tolower() == 'y')
+//    if (test == 'y' || test == 'Y')
+//    {
+//        cout << "Enter year built: ";
+//        cin >> year;
+//        built = true;
+//    }
+//    else
+//    {
+//        year = 0;
+//    }
+//    cout << "Enter computer type (1 for mechanical, 2 for transistor, 3 for electronic): ";
+//    cin >> ct;
+//    enum computer_type t = static_cast<computer_type>(ct);
+//    Computers temp(name, year, built, t);
+//    computer_repo.add_computer(temp);
 //}
