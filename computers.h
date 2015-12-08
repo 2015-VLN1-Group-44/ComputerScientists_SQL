@@ -21,6 +21,7 @@ public:
     int get_year();
     bool get_built();
     enum computer_type get_type();
+    int get_id();
     void set_name(string n);
     void set_year(int y);
     void set_built(bool b);

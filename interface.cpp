@@ -363,7 +363,6 @@ void Interface::computer_search_menu()
     do
     {
         int select;
-        // bool found;
         string name;
         int year, type;
         QString search_term;
@@ -405,9 +404,13 @@ void Interface::computer_search_menu()
                 cout << constants::SELECTION_NOT_VALID;
             break;
         }
-        for (unsigned int i = 0; i < found_computers.size(); i++)
+        if (!found_computers.empty())
         {
-            cout << found_computers[i];
+           found_computers_menu(found_computers);
+        }
+        else
+        {
+            cout << "No entries found. Search again?" << endl;
         }
     } while (!exit);
 }
@@ -483,6 +486,81 @@ void Interface::found_menu(vector<Scientist> found)
         found_menu(found);
     }
 }
+
+void Interface::found_computers_menu(vector<Computers> found)
+{
+    int select;
+    bool valid;
+    cout << constants::FOUND << endl;
+    cout << constants::MENU_DELIMITER << endl;
+    for (unsigned int i = 0; i < found.size(); i++)
+    {
+        cout << "Entry " << i + 1 << ":" << endl;
+        cout << found[i];
+    }
+    cout << "1. Edit entry" << endl;
+    cout << "2. Remove entry" << endl;
+    cout << "0. Search menu" << endl;
+    cout << constants::SELECTION_PROMPT;
+    cin >> select;
+    switch (select)
+    {
+        case 1:
+            do
+            {
+                cout << "Choose entry to edit (0 to cancel): ";
+                cin >> select;
+                if(select > 0 && select <= (int) found.size())
+                {
+                    edit_computers(found[select - 1]);
+                    valid = true;
+                }
+                else if (select == 0)
+                {
+                    valid = true;
+                }
+                else
+                {
+                    cout << constants::SELECTION_NOT_VALID << endl;
+                    valid = false;
+                }
+            } while (!valid);
+            break;
+        case 2:
+            do
+            {
+                cout << "Choose entry to delete (0 to cancel): ";
+                cin >> select;
+                if (select > 0 && select <= (int) found.size())
+                {
+                    valid = true;
+                    computer_service.edit_entry("active", "0", found[select - 1].get_id());
+                }
+                else if (select == 0)
+                {
+                    valid = true;
+                }
+                else
+                {
+                    valid = false;
+                    cout << constants::SELECTION_NOT_VALID << endl;
+                }
+            } while (!valid);
+            break;
+        case 0:
+            valid = true;
+            break;
+        default:
+            valid = false;
+            break;
+    }
+    if (!valid)
+    {
+        cout << constants::SELECTION_NOT_VALID << endl;
+        found_computers_menu(found);
+    }
+}
+
 
 void Interface::edit_menu(int edit_id)
 {
@@ -588,6 +666,68 @@ void Interface::edit_menu(int edit_id)
     if (!exit)
     {
         edit_menu(edit_id);
+    }
+}
+
+void Interface::edit_computers(Computers c_edit)
+{
+    int select;
+    string line;
+    bool exit = false;
+    int type;
+
+    cout << constants::MENU_DELIMITER << endl;
+    cout << c_edit;
+    cout << "1. Edit name" << endl;
+    cout << "2. Edit year built" << endl;
+    cout << "3. Edit type" << endl;
+    cout << "0. Search menu" << endl;
+    cout << constants::SELECTION_PROMPT;
+    cin >> select;
+    switch (select)
+    {
+        case 1:
+            cout << "Enter new name: ";
+            cin.ignore();
+            getline(cin, line);
+            computer_service.edit_entry("name", QString::fromStdString(line), c_edit.get_id());
+            break;
+        case 2:
+            cout << "Enter year: ";
+            cin.ignore();
+            getline(cin, line);
+            computer_service.edit_entry("built_year", QString::fromStdString(line), c_edit.get_id());
+            break;
+        case 3:
+            cout << "Enter type." << endl;
+            cout << "(1 for mechanical, 2 for transistor, 3 for electronic): ";
+            cin >> type;
+            if (type == 1)
+            {
+                computer_service.edit_entry("type", "1", c_edit.get_id());
+            }
+
+            else if (type == 2)
+            {
+                computer_service.edit_entry("type", "2", c_edit.get_id());
+            }
+            else if (type == 3)
+            {
+                computer_service.edit_entry("type", "3", c_edit.get_id());
+            }
+            else
+                cout << "Not a valid type." << endl;
+            break;
+        case 0:
+            exit = true;
+            break;
+        default:
+            cout << constants::SELECTION_NOT_VALID << endl;
+            break;
+    }
+    if (!exit)
+    {
+        edit_computers(computer_service.from_id(c_edit.get_id()));
     }
 }
 

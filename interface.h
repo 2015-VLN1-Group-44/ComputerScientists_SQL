@@ -21,7 +21,9 @@ public:
     bool search_menu();
     void computer_search_menu();
     void found_menu(vector<Scientist> found);
+    void found_computers_menu(vector<Computers> found);
     void edit_menu(int edit_id);
+    void edit_computers(Computers c_edit);
     void print_header();
     void print_header_computers();
     // spyr notanda í hvaða átt hann vill raða
