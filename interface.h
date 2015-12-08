@@ -18,6 +18,7 @@ public:
     bool add_menu();
     bool list_menu();
     void computer_list_menu();
+    void clear_screen();
     bool search_menu();
     void computer_search_menu();
     void found_menu(vector<Scientist> found);

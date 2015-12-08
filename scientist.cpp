@@ -112,7 +112,6 @@ Scientist& Scientist::operator = (Scientist other)
 // Operator overload til að prenta instance af klasanum
 ostream& operator << (ostream& out, Scientist sc)
 {
-
     int name_length = sc.first_name.size() + sc.last_name.size() +1;    //búa til pláss fyrir nafn
 
     out << sc.first_name << " " << sc.last_name;
