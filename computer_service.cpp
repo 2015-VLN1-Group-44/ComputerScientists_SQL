@@ -30,7 +30,7 @@ Computers Computer_service::from_id(int id)
 
 void Computer_service::delete_id(int id)
 {
-    QString command = QString(constants::DELETE_SCIENTIST.arg(id));
+    QString command = QString(constants::DELETE_COMPUTER.arg(id));
     computer_repo.open_computer_db(command);
 }
 

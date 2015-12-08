@@ -39,6 +39,12 @@ void Scientist_service::edit_entry(QString column, QString insert, int id)
     vector<Scientist> temp = scientist_repo.open_scientist_db(command);
 }
 
+void Scientist_service::delete_id(int id)
+{
+    QString command = QString(constants::DELETE_SCIENTIST.arg(id));
+    scientist_repo.open_scientist_db(command);
+}
+
 // Les upplýsingar frá notanda
 void Scientist_service::read_input()
 {

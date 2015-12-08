@@ -23,6 +23,7 @@ public:
     void read_input();
     vector <string> connected_computers(int id);
     friend class Interface;
+    void delete_id(int id);
 
 private:
     Repository scientist_repo;
