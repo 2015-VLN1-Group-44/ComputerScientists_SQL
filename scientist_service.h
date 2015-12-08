@@ -14,7 +14,6 @@ class Scientist_service : public Scientist
 {
 public:
     Scientist_service();
-//    Scientist_service(vector<Scientist> &d);
 
     vector<Scientist> sort(QString order);
     vector<Scientist> search(QString search_arg, QString column);
@@ -24,7 +23,6 @@ public:
     void read_input();
     vector <string> connected_computers(int id);
     friend class Interface;
-//    friend ostream& operator << (ostream& out, Scientist_service d);
 
 private:
     Repository scientist_repo;

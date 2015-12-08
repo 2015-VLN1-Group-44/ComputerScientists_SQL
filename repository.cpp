@@ -5,9 +5,16 @@ using namespace std;
 
 Repository::Repository()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(constants::DATABASE_NAME);
-    db.open();
+    if(QSqlDatabase::contains(constants::CONNECTION_NAME))
+        {
+            db = QSqlDatabase::database(constants::CONNECTION_NAME);
+        }
+        else
+        {
+            db = QSqlDatabase::addDatabase("QSQLITE", constants::CONNECTION_NAME);
+            db.setDatabaseName(constants::DATABASE_NAME);
+            db.open();
+        }
 }
 
 vector<Scientist> Repository::open_scientist_db(QString sql_command)
