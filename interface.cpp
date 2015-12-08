@@ -22,7 +22,7 @@ void Interface::start_menu()
 
     do
     {
-        clear_screen();
+
         cout << "\n- Main menu ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
@@ -77,6 +77,7 @@ void Interface::start_menu()
             quit = true;
             break;
         default:
+            clear_screen();
             cout << endl;
             cout << selection << " is not a valid menu item.\n";
             quit = false;
@@ -112,6 +113,7 @@ bool Interface::list_menu()
     switch(select)
     {
         case 1:
+            clear_screen();
             asc = asc_desc();
             if (asc)
             {
@@ -121,6 +123,7 @@ bool Interface::list_menu()
                 data = scientist_service.sort("lastname DESC, firstname DESC");
             break;
         case 2:
+        clear_screen();
             if ( (asc = asc_desc()) )
             {
             data = scientist_service.sort("birth");
@@ -130,6 +133,7 @@ bool Interface::list_menu()
 
             break;
         case 3:
+        clear_screen();
             if ((asc = asc_desc()))
             {
             data = scientist_service.sort("death");
@@ -139,6 +143,7 @@ bool Interface::list_menu()
 
             break;
         case 4:
+        clear_screen();
             if ((asc = asc_desc()))
             {
             data = scientist_service.sort("gender");
@@ -148,11 +153,14 @@ bool Interface::list_menu()
 
             break;
         case 5:
+        clear_screen();
              edit_remove();
         case 0:
+        clear_screen();
             exit = true;
             break;
         default:
+        clear_screen();
             cout << select << " is not a valid menu item." << endl;
             break;
     }
@@ -203,6 +211,7 @@ void Interface::computer_list_menu()
         switch(select)
         {
             case 1:
+                clear_screen();
                 asc = asc_desc();
                 if (asc)
                 {
@@ -212,6 +221,7 @@ void Interface::computer_list_menu()
                     data = computer_service.sort("name DESC");
                 break;
             case 2:
+                clear_screen();
                 if ( (asc = asc_desc()) )
                 {
                 data = computer_service.sort("built_year");
@@ -220,6 +230,7 @@ void Interface::computer_list_menu()
                     data = computer_service.sort("built_year DESC");
                 break;
             case 3:
+                clear_screen();
                 if ((asc = asc_desc()))
                 {
                 data = computer_service.sort("type");
@@ -228,9 +239,11 @@ void Interface::computer_list_menu()
                     data = computer_service.sort("type DESC");
                 break;
             case 0:
+                clear_screen();
                 exit = true;
                 break;
             default:
+                clear_screen();
                 cout << select << " is not a valid menu item." << endl;
                 break;
         }
@@ -816,14 +829,12 @@ void Interface::edit_computers(int edit_id)
 
 void Interface::print_header()
 {
-    clear_screen();
     cout << "Name" << string(constants::MAX_NAME_LENGTH , ' ') << "Gender\tDoB\t\tDoD\n";
     cout << constants::MENU_DELIMITER << endl;
 }
 
 void Interface::print_header_computers()
 {
-    clear_screen();
     cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\tType\n";      //-4 vegna "name" í header
     cout << constants::MENU_DELIMITER << endl;
 }
@@ -834,7 +845,6 @@ bool Interface::asc_desc()
     string command;
     do
     {
-        clear_screen();
         cout << constants::MENU_DELIMITER;
         int command = 0;
         cout << "\n1. Ascending\t";
