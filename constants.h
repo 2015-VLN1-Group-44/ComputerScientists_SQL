@@ -29,6 +29,9 @@ namespace constants
     const QString SCIENTIST_JOIN =  "SELECT lastname FROM scientists s, owners o WHERE s.id = o.scientist_id AND %1 = o.computer_id";
     const QString COMPUTER_JOIN =  "SELECT name FROM computers c, owners o WHERE c.id = o.computer_id AND %1 = o.scientist_id";
     const QString ADD_CONNECTION = "INSERT INTO owners (scientist_id, computer_id) VALUES %1, %2";
+    const QString CREATE_SCIENTISTS_TABLE = "CREATE TABLE IF NOT EXISTS Scientists(id INTEGER PRIMARY KEY AUTOINCREMENT, firstname VARCHAR NOT NULL, lastname VARCHAR NOT NULL, birth DATE NOT NULL, death DATE, gender BOOL, alive BOOL, active BOOL)";
+    const QString CREATE_COMPUTERS_TABLE = "CREATE TABLE IF NOT EXISTS Computers(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL, built_year DATETIME, type ENUM, built BOOL, active BOOL)";
+    const QString CREATE_OWNERS_TABLE = "CREATE TABLE IF NOT EXISTS Owners(scientist_id INTEGER, computer_id INTEGER, FOREIGN KEY (scientist_id) REFERENCES Scientists(id), FOREIGN KEY (computer_id) REFERENCES Computers(id), PRIMARY KEY (scientist_id, computer_id))";
 }
 
 #endif // CONSTANTS

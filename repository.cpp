@@ -15,6 +15,10 @@ Repository::Repository()
             db.setDatabaseName(constants::DATABASE_NAME);
             db.open();
         }
+        QSqlQuery query(db);
+        query.exec(constants::CREATE_SCIENTISTS_TABLE);
+        query.exec(constants::CREATE_COMPUTERS_TABLE);
+        query.exec(constants::CREATE_OWNERS_TABLE);
 }
 
 vector<Scientist> Repository::open_scientist_db(QString sql_command)
