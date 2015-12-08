@@ -23,7 +23,7 @@ public:
     void add_scientist(Scientist s);
     vector<string> connected(QString command);
 private:
-
+    QSqlDatabase db;
 };
 
 #endif // REPOSITORY_H

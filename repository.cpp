@@ -5,6 +5,9 @@ using namespace std;
 
 Repository::Repository()
 {
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(constants::DATABASE_NAME);
+    db.open();
 }
 
 //void Repository::connect_db(QString name)
@@ -16,10 +19,10 @@ Repository::Repository()
 vector<Scientist> Repository::open_scientist_db(QString sql_command)
 {
     vector<Scientist> data;
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(constants::DATABASE_NAME);
-    db.open();
+//    QSqlDatabase db;
+//    db = QSqlDatabase::addDatabase("QSQLITE");
+//    db.setDatabaseName(constants::DATABASE_NAME);
+//    db.open();
     // cerr << db.lastError().text().toStdString();
     QSqlQuery query(db);
     query.exec(sql_command);
@@ -42,17 +45,17 @@ vector<Scientist> Repository::open_scientist_db(QString sql_command)
         data.push_back(temp);
     }
     query.exec(constants::SCIENTIST_JOIN);
-    db.close();
+//    db.close();
     return data;
 }
 
 vector<Computers> Repository::open_computer_db(QString sql_command)
 {
     vector<Computers> data;
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(constants::DATABASE_NAME);
-    db.open();
+//    QSqlDatabase db;
+//    db = QSqlDatabase::addDatabase("QSQLITE");
+//    db.setDatabaseName(constants::DATABASE_NAME);
+//    db.open();
     // cerr << db.lastError().text().toStdString();
     QSqlQuery query(db);
     query.exec(sql_command);
@@ -72,16 +75,16 @@ vector<Computers> Repository::open_computer_db(QString sql_command)
         Computers temp(name, year, b, ct, id_n, act);
         data.push_back(temp);
     }
-    db.close();
+//    db.close();
     return data;    
 }
 
 void Repository::add_scientist(Scientist s)
 {
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(constants::DATABASE_NAME);
-    db.open();
+//    QSqlDatabase db;
+//    db = QSqlDatabase::addDatabase("QSQLITE");
+//    db.setDatabaseName(constants::DATABASE_NAME);
+//    db.open();
     QSqlQuery query(db);
     query.prepare(constants::INSERT_FORM);
     query.bindValue(":first", QString::fromStdString(s.get_first()));
@@ -98,10 +101,10 @@ void Repository::add_scientist(Scientist s)
 vector<string> Repository::connected(QString command)
 {
     vector<string> data;
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(constants::DATABASE_NAME);
-    db.open();
+//    QSqlDatabase db;
+//    db = QSqlDatabase::addDatabase("QSQLITE");
+//    db.setDatabaseName(constants::DATABASE_NAME);
+//    db.open();
     QSqlQuery query(db);
     query.exec(command);
     while (query.next())
