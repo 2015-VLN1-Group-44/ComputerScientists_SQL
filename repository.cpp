@@ -15,6 +15,9 @@ Repository::Repository()
             db.setDatabaseName(constants::DATABASE_NAME);
             db.open();
         }
+    /* Býr til töflur ef þær eru ekki til fyrir
+     *
+     */
         QSqlQuery query(db);
         query.exec(constants::CREATE_SCIENTISTS_TABLE);
         query.exec(constants::CREATE_COMPUTERS_TABLE);
