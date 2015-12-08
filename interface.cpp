@@ -23,7 +23,7 @@ void Interface::start_menu()
     do
     {
         clear_screen();
-
+        cout << "\n- Main menu ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
         cout << "4. Display list of computers\t";
@@ -96,6 +96,7 @@ bool Interface::list_menu()
     int select;
     vector<Scientist> data;
 
+    cout << "\n- List of scientists ";
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Sort list by name\t\t";
     cout << "3. Sort list by date of death\t";
@@ -187,7 +188,7 @@ void Interface::computer_list_menu()
         bool asc;
         int select;
         vector<Computers> data;
-
+        cout << "\n- List of computers ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Sort list by name\t\t";
         cout << "3. Sort list by type\t\t";
@@ -215,11 +216,6 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("built_year DESC");
-//                print_header_computers();
-//                for (unsigned int i = 0; i < data.size(); i++)
-//                {
-//                    cout << data[i];
-//                }
                 break;
             case 3:
                 if ((asc = asc_desc()))
@@ -228,11 +224,6 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("type DESC");
-//                print_header_computers();
-//                for (unsigned int i = 0; i < data.size(); i++)
-//                {
-//                    cout << data[i];
-//                }
                 break;
             case 0:
                 exit = true;
@@ -278,6 +269,7 @@ bool Interface::search_menu()
     vector<int> found_index;
     vector<Scientist> found_scientists;
 
+    cout << "\n- Search menu ";
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Search by first name\t\t";
     cout << "3. Search by date of birth\t";
@@ -408,6 +400,7 @@ void Interface::computer_search_menu()
         QString search_term;
         vector<Computers> found_computers;
 
+        cout << "\n- Search computer ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Search by name\t\t";
         cout << "3. Search by type\t\t";
@@ -497,7 +490,7 @@ void Interface::found_menu(vector<Scientist> found)
     switch (select)
     {
         case 1:
-            clear_screen();
+            //clear_screen();
             do
             {
                 cout << "Choose entry to edit (0 to cancel): ";
@@ -519,7 +512,7 @@ void Interface::found_menu(vector<Scientist> found)
             } while (!valid);
             break;
         case 2:
-            clear_screen();
+            //clear_screen();
             do
             {
                 cout << "Choose entry to delete (0 to cancel): ";
@@ -562,10 +555,24 @@ void Interface::found_computers_menu(vector<Computers> found)
     {
         cout << "Entry " << i + 1 << ":" << endl;
         cout << found[i];
+        vector<string> connected = computer_service.connected_scientists(found[i].get_id());
+        cout << "\tDesigned by: ";
+        for (int j = 0; j < (int) connected.size(); j++)
+        {
+            cout << connected[j];
+            if (j < ((int) connected.size()) - 3)
+            {
+                cout << ", ";
+            }
+            else if (j == ((int) connected.size()) - 2)
+            {
+                cout << " & ";
+            }
+        }
         cout << endl;
     }
-    cout << "1. Edit entry" << endl;
-    cout << "2. Remove entry" << endl;
+    cout << "1. Edit entry\t\t\t";
+    cout << "2. Remove entry\t\t\t";
     cout << "0. Search menu" << endl;
     cout << endl;
     cout << constants::SELECTION_PROMPT;
@@ -579,7 +586,7 @@ void Interface::found_computers_menu(vector<Computers> found)
                 cin >> select;
                 if(select > 0 && select <= (int) found.size())
                 {
-                    edit_computers(found[select - 1]);
+                    edit_computers(found[select - 1].get_id());
                     valid = true;
                 }
                 else if (select == 0)
@@ -737,19 +744,20 @@ void Interface::edit_menu(int edit_id)
     }
 }
 
-void Interface::edit_computers(Computers c_edit)
+void Interface::edit_computers(int edit_id)
 {
     int select;
     string line;
     bool exit = false;
     int type;
+    QString search_term;
+    vector<Scientist> temp;
 
     cout << constants::MENU_DELIMITER << endl;
-    cout << c_edit;
     cout << "1. Edit name" << endl;
     cout << "2. Edit year built" << endl;
     cout << "3. Edit type" << endl;
-    cout << "4. Add connected scientist" << endl;
+    cout << "4. Add scientist connection" << endl;
     cout << "0. Search menu" << endl;
     cout << endl;
     cout << constants::SELECTION_PROMPT;
@@ -760,13 +768,13 @@ void Interface::edit_computers(Computers c_edit)
             cout << "Enter new name: ";
             cin.ignore();
             getline(cin, line);
-            computer_service.edit_entry("name", QString::fromStdString(line), c_edit.get_id());
+            computer_service.edit_entry("name", QString::fromStdString(line), edit_id);
             break;
         case 2:
             cout << "Enter year: ";
             cin.ignore();
             getline(cin, line);
-            computer_service.edit_entry("built_year", QString::fromStdString(line), c_edit.get_id());
+            computer_service.edit_entry("built_year", QString::fromStdString(line), edit_id);
             break;
         case 3:
             cout << "Enter type." << endl;
@@ -774,22 +782,22 @@ void Interface::edit_computers(Computers c_edit)
             cin >> type;
             if (type == 1)
             {
-                computer_service.edit_entry("type", "1", c_edit.get_id());
+                computer_service.edit_entry("type", "1", edit_id);
             }
 
             else if (type == 2)
             {
-                computer_service.edit_entry("type", "2", c_edit.get_id());
+                computer_service.edit_entry("type", "2", edit_id);
             }
             else if (type == 3)
             {
-                computer_service.edit_entry("type", "3", c_edit.get_id());
+                computer_service.edit_entry("type", "3", edit_id);
             }
             else
                 cout << "Not a valid type." << endl;
             break;
         case 4:
-
+            connect_scientist(edit_id);
         break;
         case 0:
             exit = true;
@@ -800,7 +808,7 @@ void Interface::edit_computers(Computers c_edit)
     }
     if (!exit)
     {
-        edit_computers(computer_service.from_id(c_edit.get_id()));
+        edit_computers(edit_id);
     }
 }
 
@@ -855,7 +863,6 @@ bool Interface::asc_desc()
     return asc;
 }
 
-
 bool Interface::edit_remove()
 {
     vector <Scientist> d;
@@ -884,6 +891,40 @@ bool Interface::edit_remove()
         return true;
     }
     return true;
+}
+
+void Interface::connect_scientist(int computer_id)
+{
+    string line;
+    QString search_term;
+    int scientist_id;
+    int index;
+    bool valid = true;
+    cout << "Enter last name of the scientist to connect: ";
+    cin >> line;
+    search_term = QString::fromStdString(line);
+    vector<Scientist> temp = scientist_service.search(search_term, "lastname");
+    cout << constants::FOUND;
+    for (unsigned int i = 0; i < (temp.size()); i++)
+    {
+        cout << "Entry " << i + 1 << ": " << temp[0].get_last() << endl;
+    }
+    do
+    {
+        cout << endl << "Choose scientist to connect: ";
+        cin >> index;
+        if(index < 0 || index > (int) temp.size())
+        {
+            cout << constants::SELECTION_NOT_VALID << endl;
+            valid = false;
+        }
+        else
+        {
+            valid = true;
+            scientist_id = temp[index - 1].get_id();
+        }
+    } while (!valid);
+    computer_service.add_connection(scientist_id, computer_id);
 }
 
 void Interface::clear_screen()

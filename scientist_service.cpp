@@ -15,14 +15,6 @@ Scientist_service::Scientist_service()
 {
 }
 
-//Scientist_service::Scientist_service(vector<Scientist>& d)
-//{
-//    for (unsigned int i = 0; i < d.size(); i++)
-//    {
-//        data.push_back(d[i]);
-//    }
-//}
-
 vector<Scientist> Scientist_service::sort(QString order)
 {
     QString command = QString(constants::SCIENTISTS_ORDER.arg(order));
@@ -163,11 +155,3 @@ vector <string> Scientist_service::connected_computers(int id)
     return scientist_names;
 }
 
-//ostream& operator << (ostream& out, Scientist_service d)
-//{
-//    for (unsigned int i = 0; i < d.size(); i++)
-//    {
-//        out << d.data[i]; // notar overload << virkjann í Scientist
-//    }
-//    return out;
-//}
