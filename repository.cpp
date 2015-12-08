@@ -1,5 +1,5 @@
 #include "repository.h"
-
+#include <QDebug>
 
 using namespace std;
 
@@ -56,7 +56,6 @@ vector<Computers> Repository::open_computer_db(QString sql_command)
     cerr << db.lastError().text().toStdString();
     QSqlQuery query(db);
     query.exec(sql_command);
-
     while (query.next())
     {
         string name;

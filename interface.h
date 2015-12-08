@@ -19,6 +19,7 @@ public:
     bool list_menu();
     void computer_list_menu();
     bool search_menu();
+    void computer_search_menu();
     void found_menu(vector<Scientist> found);
     void edit_menu(int edit_id);
     void print_header();

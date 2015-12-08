@@ -23,16 +23,16 @@ void Interface::start_menu()
     {
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
-        cout << "3. Search list\t\t\t";
+        cout << "3. Search scientists\t\t";
         cout << "0. Quit" << endl;
-        cout << "2. Display list of Scientists\t";
-        cout << "4. Display list of Computers" << endl;
+        cout << "2. Display list of scientists\t";
+        cout << "4. Display list of computers" << endl;
+        cout << "5. Search computers" << endl;
         cout << "Enter selection: ";
         cin >> selection;
         switch (selection)
         {
         case 1:
-
             do
             {
                 exit = add_menu();
@@ -57,6 +57,10 @@ void Interface::start_menu()
             computer_list_menu();
             quit = false;
             break;
+        case 5:
+            computer_search_menu();
+            quit = false;
+        break;
         case 0:
             quit = true;
             break;
@@ -352,7 +356,60 @@ bool Interface::search_menu()
     return exit;
 }
 
+void Interface::computer_search_menu()
+{
+    bool exit = false;
+    do
+    {
+        int select;
+        // bool found;
+        string name;
+        int year, type;
+        QString search_term;
+        vector<Computers> found_computers;
 
+        cout << constants::MENU_DELIMITER << endl;
+        cout << "1. Search by name\t\t";
+        cout << "3. Search by type\t\t";
+        cout << "0. Main menu" << endl;
+        cout << "2. Search by year built" << endl;
+        cout << constants::SELECTION_PROMPT;
+        cin >> select;
+        switch (select)
+        {
+            case 1:
+                cout << "Enter name: ";
+                cin.ignore();
+                getline (cin, name);
+                search_term = QString::fromStdString(name);
+                found_computers = computer_service.search("name", search_term);
+            break;
+            case 2:
+                cout << "Enter year: ";
+                cin >> year;
+                search_term = QString::number(year);
+                found_computers = computer_service.search("built_year", search_term);
+            break;
+            case 3:
+                cout << "Choose search term." << endl;
+                cout << "(1 for mechanical, 2 for transistor, 3 for electronic): ";
+                cin >> type;
+                search_term = QString::number(type);
+                found_computers = computer_service.search("type", search_term);
+            break;
+            case 0:
+                exit = true;
+            break;
+            default:
+                cout << constants::SELECTION_NOT_VALID;
+            break;
+        }
+        for (unsigned int i = 0; i < found_computers.size(); i++)
+        {
+            cout << found_computers[i];
+        }
+    } while (!exit);
+}
 
 void Interface::found_menu(vector<Scientist> found)
 {

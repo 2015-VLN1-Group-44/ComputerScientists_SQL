@@ -11,6 +11,7 @@ public:
 
 //    void initialize(QString db_name);
     vector<Computers> sort(QString sort_order);
+    vector<Computers> search(QString column, QString search_arg);
 
 
 private:
