@@ -46,4 +46,3 @@ void Computer_service::add_connection(int sci_id, int comp_id)
     QString command = QString(constants::ADD_CONNECTION.arg(sci_id).arg(comp_id));
     computer_repo.edit_remove(command);
 }
-
