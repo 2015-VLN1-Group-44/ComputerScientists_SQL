@@ -18,7 +18,8 @@ class Computers
 {
 public:
     Computers();
-    Computers(string n, int y, bool b, enum computer_type ct, int id, bool act);
+    Computers(string n, int y, bool b, computer_type ct);
+    Computers(string n, int y, bool b, enum computer_type ct, int id);
     string get_name();
     int get_year();
     bool get_built();
