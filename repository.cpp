@@ -106,3 +106,4 @@ void Repository::edit_remove(QString command)
     QSqlQuery query(db);
     query.exec(command);
 }
+

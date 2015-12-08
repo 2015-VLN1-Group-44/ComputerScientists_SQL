@@ -25,11 +25,13 @@ public:
     void found_menu(vector<Scientist> found);
     void found_computers_menu(vector<Computers> found);
     void edit_menu(int edit_id);
-    void edit_computers(Computers c_edit);
+    void edit_computers(int edit_id);
     void print_header();
     void print_header_computers();
+    void connect_scientist(int computer_id);
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
+    bool edit_remove();
 private:
     Scientist_service scientist_service;
     Computer_service computer_service;
