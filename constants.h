@@ -23,6 +23,8 @@ namespace constants
     const QString COMPUTERS_SEARCH = "SELECT * FROM computers WHERE %1 LIKE '%%2%' ";
     const QString COMPUTERS_EDIT = "UPDATE computers SET %1 = '%2' WHERE id = %3";
     const QString COMPUTER_FROM_ID = "SELECT * FROM computers WHERE id LIKE '%%1%'";
+    const QString CONNECTED_SCIENTIST_ID = "SELECT scientist_id FROM owners WHERE computer_id LIKE '%%1%'";
+    const QString SCIENTIST_JOIN = "SELECT * FROM scientists s, computers c, owners o WHERE s.id = o.scientist_id AND c.id = o.computer_id";
 }
 
 #endif // CONSTANTS

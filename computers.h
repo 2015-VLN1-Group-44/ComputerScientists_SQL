@@ -1,7 +1,9 @@
 #ifndef COMPUTERS_H
 #define COMPUTERS_H
 
+#include <vector>
 #include <iostream>
+#include "scientist.h"
 using namespace std;
 
 enum computer_type
@@ -34,6 +36,7 @@ private:
     enum computer_type comp_t;
     int id;
     bool active;
+    vector<Scientist> connected_scientists;
 };
 
 #endif // COMPUTERS_H
