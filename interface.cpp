@@ -23,12 +23,12 @@ void Interface::start_menu()
     {
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
-        cout << "3. Search scientists\t\t";
+        cout << "4. Display list of computers\t";
         cout << "0. Quit" << endl;
         cout << "2. Display list of scientists\t";
-        cout << "4. Display list of computers" << endl;
         cout << "5. Search computers" << endl;
-        cout << "Enter selection: ";
+        cout << "3. Search scientists\n";
+        cout << constants::SELECTION_PROMPT;
         cin >> selection;
         switch (selection)
         {
@@ -185,6 +185,7 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("name DESC");
+                print_header_computers();
                 for (unsigned int i = 0; i < data.size(); i++)
                 {
                     cout << data[i];
@@ -197,7 +198,7 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("built_year DESC");
-                print_header();
+                print_header_computers();
                 for (unsigned int i = 0; i < data.size(); i++)
                 {
                     cout << data[i];
@@ -210,7 +211,7 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("type DESC");
-                print_header();
+                print_header_computers();
                 for (unsigned int i = 0; i < data.size(); i++)
                 {
                     cout << data[i];
@@ -592,8 +593,13 @@ void Interface::edit_menu(int edit_id)
 
 void Interface::print_header()
 {
-    const int MAX_NAME = 36;
-    cout << "Name" << string(MAX_NAME, ' ') << "Gender\tDoB\t\tDoD\n";
+    cout << "Name" << string(constants::MAX_NAME_LENGTH , ' ') << "Gender\tDoB\t\tDoD\n";
+    cout << constants::MENU_DELIMITER << endl;
+}
+
+void Interface::print_header_computers()
+{
+    cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\tType\n";      //-4 vegna "name" í header
     cout << constants::MENU_DELIMITER << endl;
 }
 
@@ -606,7 +612,8 @@ bool Interface::asc_desc()
         int command = 0;
         cout << "\n1. Ascending\t";
         cout << "2. Descending" << endl;
-        cout << "Enter selection ";
+        //cout << "Enter selection ";
+        cout << constants::SELECTION_PROMPT;
         cin >> command;
         cout << endl;
 

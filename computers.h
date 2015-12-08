@@ -1,5 +1,6 @@
 #ifndef COMPUTERS_H
 #define COMPUTERS_H
+#include "constants.h"
 
 #include <iostream>
 using namespace std;

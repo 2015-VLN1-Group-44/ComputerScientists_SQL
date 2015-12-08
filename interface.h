@@ -23,6 +23,7 @@ public:
     void found_menu(vector<Scientist> found);
     void edit_menu(int edit_id);
     void print_header();
+    void print_header_computers();
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
 private:

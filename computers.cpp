@@ -1,4 +1,5 @@
 #include "computers.h"
+#include <string>
 
 
 Computers::Computers()
@@ -57,7 +58,14 @@ void Computers::set_type(computer_type ct)
 
 ostream& operator << (ostream& out, Computers comp)
 {
-    out << comp.name << "\t";
+    int comp_name_length = comp.name.size();    //búa til pláss fyrir nafn
+
+    out << comp.name;
+    if (comp_name_length < constants::MAX_COMP_NAME_LENGTH )  //Fyllir línuna ef nafnið er undir max_name_length
+        {
+            //name_length = constants::MAX_NAME_LENGTH - name_length;
+            out << string(constants::MAX_COMP_NAME_LENGTH - comp_name_length , ' ');
+        }
     if (comp.built)
     {
         out << comp.year << "\t";
