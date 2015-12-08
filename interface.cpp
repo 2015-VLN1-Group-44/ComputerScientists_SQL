@@ -735,6 +735,7 @@ void Interface::edit_computers(Computers c_edit)
     cout << "1. Edit name" << endl;
     cout << "2. Edit year built" << endl;
     cout << "3. Edit type" << endl;
+    cout << "4. Add connected scientist" << endl;
     cout << "0. Search menu" << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
@@ -772,6 +773,9 @@ void Interface::edit_computers(Computers c_edit)
             else
                 cout << "Not a valid type." << endl;
             break;
+        case 4:
+
+        break;
         case 0:
             exit = true;
             break;
@@ -843,5 +847,4 @@ void Interface::clear_screen()
     #else
         system("CLEAR");
     #endif
-
 }

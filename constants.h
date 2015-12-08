@@ -4,6 +4,7 @@
 
 namespace constants
 {
+    const QString CONNECTION_NAME = "db_connection";
     const QString DATE_FORMAT = "d/M/yyyy";
     const QString IMPORT_DATE_FORMAT = "yyyy-M-d";
     const std::string MENU_DELIMITER(101, '-');
