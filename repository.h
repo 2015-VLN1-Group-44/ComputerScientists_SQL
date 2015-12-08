@@ -21,8 +21,11 @@ public:
     vector<Scientist> open_scientist_db(QString sql_command);
     vector<Computers> open_computer_db(QString sql_command);
     void add_scientist(Scientist s);
-private:
+    vector<string> connected(QString command, QString column);
+    void edit_remove(QString command);
 
+private:
+    QSqlDatabase db;
 };
 
 #endif // REPOSITORY_H

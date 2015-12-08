@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 
+
 using namespace std;
 
 class Interface
@@ -18,6 +19,7 @@ public:
     bool add_menu();
     bool list_menu();
     void computer_list_menu();
+    void clear_screen();
     bool search_menu();
     void computer_search_menu();
     void found_menu(vector<Scientist> found);
@@ -25,6 +27,7 @@ public:
     void edit_menu(int edit_id);
     void edit_computers(Computers c_edit);
     void print_header();
+    void print_header_computers();
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
     bool edit_remove();

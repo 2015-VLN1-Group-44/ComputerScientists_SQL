@@ -1,4 +1,5 @@
 #include "interface.h"
+#include <stdlib.h>
 
 
 
@@ -17,23 +18,27 @@ void Interface::start_menu()
     bool quit, exit;
     // tempbreyta til að prófa útprent
     vector<Computers> temp;
-//    scientist_service.initialize(constants::DATABASE_NAME);
-//    computer_service.initialize(constants::DATABASE_NAME);
+
+
     do
     {
+        clear_screen();
+
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
-        cout << "3. Search scientists\t\t";
+        cout << "4. Display list of computers\t";
         cout << "0. Quit" << endl;
         cout << "2. Display list of scientists\t";
-        cout << "4. Display list of computers" << endl;
         cout << "5. Search computers" << endl;
+        cout << "3. Search scientists\n";
         cout << endl;
-        cout << "Enter selection: ";
+        cout << constants::SELECTION_PROMPT;
         cin >> selection;
+
         switch (selection)
         {
         case 1:
+            clear_screen();
             do
             {
                 exit = add_menu();
@@ -41,6 +46,7 @@ void Interface::start_menu()
             quit = false;
             break;
         case 2:
+            clear_screen();
             do
             {
                 exit = list_menu();
@@ -48,6 +54,7 @@ void Interface::start_menu()
             quit = false;
             break;
         case 3:
+            clear_screen();
             do
             {
                 exit = search_menu();
@@ -55,10 +62,12 @@ void Interface::start_menu()
             quit = false;
             break;
         case 4:
+            clear_screen();
             computer_list_menu();
             quit = false;
             break;
         case 5:
+            clear_screen();
             computer_search_menu();
             quit = false;
         break;
@@ -107,11 +116,6 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("lastname DESC, firstname DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
             break;
         case 2:
             if ( (asc = asc_desc()) )
@@ -120,11 +124,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("birth DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 3:
             if ((asc = asc_desc()))
@@ -133,11 +133,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("death DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 4:
             if ((asc = asc_desc()))
@@ -146,11 +142,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("gender DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 5:
              edit_remove();
@@ -160,6 +152,29 @@ bool Interface::list_menu()
         default:
             cout << select << " is not a valid menu item." << endl;
             break;
+    }
+    print_header();
+    for (unsigned int i = 0; i < data.size(); i++)
+    {
+        cout << data[i];
+        vector<string> connected = scientist_service.connected_computers(data[i].get_id());
+        if (!connected.empty())
+        {
+            cout << "\tDesigned: ";
+        for (int j = 0; j < (int) connected.size(); j++)
+        {
+            cout << connected[j];
+            if (j < ((int) connected.size()) - 3)
+            {
+                cout << ", ";
+            }
+            else if (j == ((int) connected.size()) - 2)
+            {
+                cout << " & ";
+            }
+        }
+        cout << endl;
+        }
     }
     return exit;
 }
@@ -181,6 +196,7 @@ void Interface::computer_list_menu()
         cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> select;
+
         switch(select)
         {
             case 1:
@@ -191,10 +207,6 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("name DESC");
-                for (unsigned int i = 0; i < data.size(); i++)
-                {
-                    cout << data[i];
-                }
                 break;
             case 2:
                 if ( (asc = asc_desc()) )
@@ -203,11 +215,11 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("built_year DESC");
-                print_header();
-                for (unsigned int i = 0; i < data.size(); i++)
-                {
-                    cout << data[i];
-                }
+//                print_header_computers();
+//                for (unsigned int i = 0; i < data.size(); i++)
+//                {
+//                    cout << data[i];
+//                }
                 break;
             case 3:
                 if ((asc = asc_desc()))
@@ -216,11 +228,11 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("type DESC");
-                print_header();
-                for (unsigned int i = 0; i < data.size(); i++)
-                {
-                    cout << data[i];
-                }
+//                print_header_computers();
+//                for (unsigned int i = 0; i < data.size(); i++)
+//                {
+//                    cout << data[i];
+//                }
                 break;
             case 0:
                 exit = true;
@@ -228,6 +240,29 @@ void Interface::computer_list_menu()
             default:
                 cout << select << " is not a valid menu item." << endl;
                 break;
+        }
+        if (!exit)
+        {
+            print_header_computers();
+            for (unsigned int i = 0; i < data.size(); i++)
+            {
+                vector<string> connected = computer_service.connected_scientists(data[i].get_id());
+                cout << data[i];
+                cout << "\tDesigned by: ";
+                for (int j = 0; j < (int) connected.size(); j++)
+                {
+                    cout << connected[j];
+                    if (j < ((int) connected.size()) - 3)
+                    {
+                        cout << ", ";
+                    }
+                    else if (j == ((int) connected.size()) - 2)
+                    {
+                        cout << " & ";
+                    }
+                }
+                cout << endl;
+            }
         }
     } while (!exit);
 }
@@ -275,7 +310,6 @@ bool Interface::search_menu()
             getline(cin, name);
             name_search = QString::fromStdString(name);
             found_scientists = scientist_service.search(name_search, "lastname");
-
             if (!found_scientists.empty())
             {
                 found = true;
@@ -434,9 +468,28 @@ void Interface::found_menu(vector<Scientist> found)
         cout << "Entry " << i + 1 << ":" << endl;
         cout << found[i];
         cout << endl;
+        vector<string> connected = scientist_service.connected_computers(found[i].get_id());
+        if (!connected.empty())
+        {
+            cout << "\tDesigned: ";
+        for (int j = 0; j < (int) connected.size(); j++)
+        {
+            cout << connected[j];
+            if (j < ((int) connected.size()) - 3)
+            {
+                cout << ", ";
+            }
+            else if (j == ((int) connected.size()) - 2)
+            {
+                cout << " & ";
+            }
+        }
+        cout << endl;
+        }
     }
-    cout << "1. Edit entry" << endl;
-    cout << "2. Remove entry" << endl;
+    cout << constants::MENU_DELIMITER << endl;
+    cout << "1. Edit entry\t\t\t";
+    cout << "2. Remove entry\t\t\t";
     cout << "0. Search menu" << endl;
     cout << endl;
     cout << constants::SELECTION_PROMPT;
@@ -444,6 +497,7 @@ void Interface::found_menu(vector<Scientist> found)
     switch (select)
     {
         case 1:
+            clear_screen();
             do
             {
                 cout << "Choose entry to edit (0 to cancel): ";
@@ -465,6 +519,7 @@ void Interface::found_menu(vector<Scientist> found)
             } while (!valid);
             break;
         case 2:
+            clear_screen();
             do
             {
                 cout << "Choose entry to delete (0 to cancel): ";
@@ -483,6 +538,7 @@ void Interface::found_menu(vector<Scientist> found)
             } while (!valid);
             break;
         case 0:
+            clear_screen();
             valid = true;
             break;
         default:
@@ -693,6 +749,7 @@ void Interface::edit_computers(Computers c_edit)
     cout << "1. Edit name" << endl;
     cout << "2. Edit year built" << endl;
     cout << "3. Edit type" << endl;
+    cout << "4. Add connected scientist" << endl;
     cout << "0. Search menu" << endl;
     cout << endl;
     cout << constants::SELECTION_PROMPT;
@@ -731,6 +788,9 @@ void Interface::edit_computers(Computers c_edit)
             else
                 cout << "Not a valid type." << endl;
             break;
+        case 4:
+
+        break;
         case 0:
             exit = true;
             break;
@@ -746,8 +806,15 @@ void Interface::edit_computers(Computers c_edit)
 
 void Interface::print_header()
 {
-    const int MAX_NAME = 36;
-    cout << "Name" << string(MAX_NAME, ' ') << "Gender\tDoB\t\tDoD\n";
+    clear_screen();
+    cout << "Name" << string(constants::MAX_NAME_LENGTH , ' ') << "Gender\tDoB\t\tDoD\n";
+    cout << constants::MENU_DELIMITER << endl;
+}
+
+void Interface::print_header_computers()
+{
+    clear_screen();
+    cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\tType\n";      //-4 vegna "name" í header
     cout << constants::MENU_DELIMITER << endl;
 }
 
@@ -757,10 +824,13 @@ bool Interface::asc_desc()
     string command;
     do
     {
+        clear_screen();
+        cout << constants::MENU_DELIMITER;
         int command = 0;
         cout << "\n1. Ascending\t";
         cout << "2. Descending" << endl;
-        cout << "Enter selection ";
+        //cout << "Enter selection ";
+        cout << constants::SELECTION_PROMPT;
         cin >> command;
         cout << endl;
 
@@ -784,6 +854,7 @@ bool Interface::asc_desc()
     } while (!valid);
     return asc;
 }
+
 
 bool Interface::edit_remove()
 {
@@ -813,4 +884,14 @@ bool Interface::edit_remove()
         return true;
     }
     return true;
+}
+
+void Interface::clear_screen()
+{
+    #ifdef _WIN32
+        system("CLS");
+    #else
+        system("CLEAR");
+    #endif
+
 }

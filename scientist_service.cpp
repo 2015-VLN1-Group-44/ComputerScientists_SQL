@@ -15,17 +15,12 @@ Scientist_service::Scientist_service()
 {
 }
 
-Scientist_service::Scientist_service(vector<Scientist>& d)
-{
-    for (unsigned int i = 0; i < d.size(); i++)
-    {
-        data.push_back(d[i]);
-    }
-}
-
-//void Scientist_service::initialize(QString db_name)
+//Scientist_service::Scientist_service(vector<Scientist>& d)
 //{
-//    scientist_repo.connect_db(db_name);
+//    for (unsigned int i = 0; i < d.size(); i++)
+//    {
+//        data.push_back(d[i]);
+//    }
 //}
 
 vector<Scientist> Scientist_service::sort(QString order)
@@ -161,16 +156,18 @@ void Scientist_service::read_input()
     scientist_repo.add_scientist(temp);
 }
 
-unsigned int Scientist_service::size()
+vector <string> Scientist_service::connected_computers(int id)
 {
-    return data.size();
+    QString command = QString(constants::COMPUTER_JOIN.arg(id));
+    vector<string> scientist_names = scientist_repo.connected(command, "name");
+    return scientist_names;
 }
 
-ostream& operator << (ostream& out, Scientist_service d)
-{
-    for (unsigned int i = 0; i < d.size(); i++)
-    {
-        out << d.data[i]; // notar overload << virkjann í Scientist
-    }
-    return out;
-}
+//ostream& operator << (ostream& out, Scientist_service d)
+//{
+//    for (unsigned int i = 0; i < d.size(); i++)
+//    {
+//        out << d.data[i]; // notar overload << virkjann í Scientist
+//    }
+//    return out;
+//}
