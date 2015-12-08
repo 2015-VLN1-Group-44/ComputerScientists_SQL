@@ -26,13 +26,13 @@ void Interface::start_menu()
         cout << "\n- Main menu ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
-        cout << "5. Display list of computers\t";
+        cout << "4. Display list of computers\t";
         cout << "0. Quit" << endl;
         cout << "2. Display list of scientists\t";
-        cout << "6. Add computer" << endl;
+        cout << "5. Add computer" << endl;
         cout << "3. Search scientists\t\t";
-        cout << "7. Search computers" << endl;
-        cout << "4. Remove scientist" << endl;
+        cout << "6. Search computers" << endl;
+
         cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> selection;
@@ -60,15 +60,15 @@ void Interface::start_menu()
             quit = false;
             break;
         case 4:
-            edit_remove();
-            quit = false;
-            break;
-        case 5:
             clear_screen();
             computer_list_menu();
             quit = false;
             break;
-        case 7:
+        case 5:
+            // computer_service.read_input();
+            quit = false;
+            break;
+        case 6:
             clear_screen();
             computer_search_menu();
             quit = false;
@@ -175,7 +175,7 @@ bool Interface::list_menu()
         for (int j = 0; j < (int) connected.size(); j++)
         {
             cout << connected[j];
-            if (j < ((int) connected.size()) - 3)
+            if (j < ((int) connected.size()) - 2)
             {
                 cout << ", ";
             }
@@ -258,7 +258,7 @@ void Interface::computer_list_menu()
                 for (int j = 0; j < (int) connected.size(); j++)
                 {
                     cout << connected[j];
-                    if (j < ((int) connected.size()) - 3)
+                    if (j < ((int) connected.size()) - 2)
                     {
                         cout << ", ";
                     }
@@ -483,7 +483,7 @@ void Interface::found_menu(vector<Scientist> found)
         for (int j = 0; j < (int) connected.size(); j++)
         {
             cout << connected[j];
-            if (j < ((int) connected.size()) - 3)
+            if (j < ((int) connected.size()) - 2)
             {
                 cout << ", ";
             }
@@ -575,7 +575,7 @@ void Interface::found_computers_menu(vector<Computers> found)
         for (int j = 0; j < (int) connected.size(); j++)
         {
             cout << connected[j];
-            if (j < ((int) connected.size()) - 3)
+            if (j < ((int) connected.size()) - 2)
             {
                 cout << ", ";
             }
