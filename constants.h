@@ -26,6 +26,7 @@ namespace constants
     const QString COMPUTERS_EDIT = "UPDATE computers SET %1 = '%2' WHERE id = %3";
     const QString COMPUTER_FROM_ID = "SELECT * FROM computers WHERE id LIKE '%%1%'";
     const QString DELETE_SCIENTIST = "DELETE FROM scientists WHERE id = %1";
+    const QString DELETE_COMPUTER = "DELETE FROM computers WHERE id = %1";
     const QString CONNECTED_SCIENTIST_ID = "SELECT scientist_id FROM owners WHERE computer_id LIKE '%%1%'";
     const QString SCIENTIST_JOIN =  "SELECT lastname FROM scientists s, owners o WHERE s.id = o.scientist_id AND %1 = o.computer_id";
     const QString COMPUTER_JOIN =  "SELECT name FROM computers c, owners o WHERE c.id = o.computer_id AND %1 = o.scientist_id";

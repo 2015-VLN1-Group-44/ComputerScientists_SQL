@@ -886,7 +886,7 @@ bool Interface::edit_remove()
     else
     {
         id_del = d[remove - 1].get_id();
-        computer_service.delete_id(id_del);
+        scientist_service.delete_id(id_del);
         cout << "Entry removed." << endl;
         return true;
     }
