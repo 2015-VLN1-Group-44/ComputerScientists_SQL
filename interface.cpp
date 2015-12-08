@@ -23,7 +23,7 @@ void Interface::start_menu()
     do
     {
         clear_screen();
-
+        cout << "\n- Main menu ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
         cout << "4. Display list of computers\t";
@@ -94,6 +94,7 @@ bool Interface::list_menu()
     int select;
     vector<Scientist> data;
 
+    cout << "\n- List of scientists ";
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Sort list by name\t\t";
     cout << "3. Sort list by date of death\t";
@@ -181,7 +182,7 @@ void Interface::computer_list_menu()
         bool asc;
         int select;
         vector<Computers> data;
-
+        cout << "\n- List of computers ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Sort list by name\t\t";
         cout << "3. Sort list by type\t\t";
@@ -271,6 +272,7 @@ bool Interface::search_menu()
     vector<int> found_index;
     vector<Scientist> found_scientists;
 
+    cout << "\n- Search menu ";
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Search by first name\t\t";
     cout << "3. Search by date of birth\t";
@@ -400,6 +402,7 @@ void Interface::computer_search_menu()
         QString search_term;
         vector<Computers> found_computers;
 
+        cout << "\n- Search computer ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Search by name\t\t";
         cout << "3. Search by type\t\t";
@@ -486,7 +489,7 @@ void Interface::found_menu(vector<Scientist> found)
     switch (select)
     {
         case 1:
-            clear_screen();
+            //clear_screen();
             do
             {
                 cout << "Choose entry to edit (0 to cancel): ";
@@ -508,7 +511,7 @@ void Interface::found_menu(vector<Scientist> found)
             } while (!valid);
             break;
         case 2:
-            clear_screen();
+            //clear_screen();
             do
             {
                 cout << "Choose entry to delete (0 to cancel): ";
@@ -552,8 +555,8 @@ void Interface::found_computers_menu(vector<Computers> found)
         cout << "Entry " << i + 1 << ":" << endl;
         cout << found[i];
     }
-    cout << "1. Edit entry" << endl;
-    cout << "2. Remove entry" << endl;
+    cout << "1. Edit entry\t\t\t";
+    cout << "2. Remove entry\t\t\t";
     cout << "0. Search menu" << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
