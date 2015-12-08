@@ -32,3 +32,9 @@ Computers Computer_service::from_id(int id)
     QString command = QString(constants::COMPUTER_FROM_ID.arg(id));
     return computer_repo.open_computer_db(command)[0];
 }
+
+void Computer_service::delete_id(int id)
+{
+    QString command = QString(constants::DELETE_SCIENTIST.arg(id));
+    computer_repo.open_computer_db(command);
+}
