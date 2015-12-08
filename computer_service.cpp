@@ -28,6 +28,12 @@ Computers Computer_service::from_id(int id)
     return computer_repo.open_computer_db(command)[0];
 }
 
+void Computer_service::delete_id(int id)
+{
+    QString command = QString(constants::DELETE_SCIENTIST.arg(id));
+    computer_repo.open_computer_db(command);
+}
+
 vector<string> Computer_service::connected_scientists(int id)
 {
     QString command = QString(constants::SCIENTIST_JOIN.arg(id));
@@ -40,3 +46,4 @@ void Computer_service::add_connection(int sci_id, int comp_id)
     QString command = QString(constants::ADD_CONNECTION.arg(sci_id).arg(comp_id));
     computer_repo.edit_remove(command);
 }
+

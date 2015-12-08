@@ -15,6 +15,7 @@ Repository::Repository()
             db.setDatabaseName(constants::DATABASE_NAME);
             db.open();
         }
+
 }
 
 vector<Scientist> Repository::open_scientist_db(QString sql_command)
@@ -102,3 +103,4 @@ void Repository::edit_remove(QString command)
     QSqlQuery query(db);
     query.exec(command);
 }
+

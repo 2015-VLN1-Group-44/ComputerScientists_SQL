@@ -31,6 +31,7 @@ public:
     void connect_scientist(int computer_id);
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
+    bool edit_remove();
 private:
     Scientist_service scientist_service;
     Computer_service computer_service;

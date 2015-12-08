@@ -32,8 +32,11 @@ void Interface::start_menu()
         cout << "5. Add computer" << endl;
         cout << "3. Search scientists\t\t";
         cout << "6. Search computers" << endl;
+        cout << "3. Search scientists\n";
+        cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> selection;
+
         switch (selection)
         {
         case 1:
@@ -102,6 +105,8 @@ bool Interface::list_menu()
     cout << "0. Main menu" << endl;
     cout << "2. Sort list by date of birth\t";
     cout << "4. Sort list by gender" << endl;
+    cout << "5. Remove/delete entry" << endl;
+    cout << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch(select)
@@ -142,6 +147,8 @@ bool Interface::list_menu()
                 data = scientist_service.sort("gender DESC");
 
             break;
+        case 5:
+             edit_remove();
         case 0:
             exit = true;
             break;
@@ -189,6 +196,7 @@ void Interface::computer_list_menu()
         cout << "3. Sort list by type\t\t";
         cout << "0. Main menu" << endl;
         cout << "2. Sort list by date built" << endl;
+        cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> select;
 
@@ -271,6 +279,7 @@ bool Interface::search_menu()
     cout << "2. Search by last name\t\t";
     cout << "4. Search by date of death" << endl;
     cout << "Enter selection: ";
+    cout << endl;
     cin >> select;
     switch (select)
     {
@@ -399,6 +408,7 @@ void Interface::computer_search_menu()
         cout << "3. Search by type\t\t";
         cout << "0. Main menu" << endl;
         cout << "2. Search by year built" << endl;
+        cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> select;
         switch (select)
@@ -452,6 +462,7 @@ void Interface::found_menu(vector<Scientist> found)
     {
         cout << "Entry " << i + 1 << ":" << endl;
         cout << found[i];
+        cout << endl;
         vector<string> connected = scientist_service.connected_computers(found[i].get_id());
         if (!connected.empty())
         {
@@ -475,6 +486,7 @@ void Interface::found_menu(vector<Scientist> found)
     cout << "1. Edit entry\t\t\t";
     cout << "2. Remove entry\t\t\t";
     cout << "0. Search menu" << endl;
+    cout << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
@@ -564,6 +576,7 @@ void Interface::found_computers_menu(vector<Computers> found)
     cout << "1. Edit entry\t\t\t";
     cout << "2. Remove entry\t\t\t";
     cout << "0. Search menu" << endl;
+    cout << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
@@ -643,6 +656,7 @@ void Interface::edit_menu(int edit_id)
     cout << "4. Edit date of birth" << endl;
     cout << "5. Edit date of death" << endl;
     cout << "0. Search menu" << endl;
+    cout << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
@@ -747,6 +761,7 @@ void Interface::edit_computers(int edit_id)
     cout << "3. Edit type" << endl;
     cout << "4. Add scientist connection" << endl;
     cout << "0. Search menu" << endl;
+    cout << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
@@ -850,6 +865,36 @@ bool Interface::asc_desc()
     return asc;
 }
 
+bool Interface::edit_remove()
+{
+    vector <Scientist> d;
+    int remove;
+    int counter = 1;
+    int id_del;
+    d = scientist_service.sort("lastname, firstname");
+    for(unsigned long i = 0; i < d.size(); i++)
+    {
+        cout << counter++ << "  " << d[i];
+    }
+    cout << endl;
+    cout << "Choose the ID of the scientist you wish to remove from the list: ";
+    cin >> remove;
+    if(remove <= 0)
+    {
+        cout << endl;
+        cout << "No scientist has the ID-number: " << remove << endl;
+        return false;
+    }
+    else
+    {
+        id_del = d[remove - 1].get_id();
+        computer_service.delete_id(id_del);
+        cout << "Entry removed." << endl;
+        return true;
+    }
+    return true;
+}
+
 void Interface::connect_scientist(int computer_id)
 {
     string line;
@@ -891,4 +936,5 @@ void Interface::clear_screen()
     #else
         system("CLEAR");
     #endif
+
 }
