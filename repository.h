@@ -21,7 +21,7 @@ public:
     vector<Scientist> open_scientist_db(QString sql_command);
     vector<Computers> open_computer_db(QString sql_command);
     void add_scientist(Scientist s);
-    vector<string> connected(QString command);
+    vector<string> connected(QString command, QString column);
 private:
     QSqlDatabase db;
 };

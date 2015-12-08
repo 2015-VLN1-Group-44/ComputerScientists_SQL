@@ -17,8 +17,7 @@ void Interface::start_menu()
     bool quit, exit;
     // tempbreyta til að prófa útprent
     vector<Computers> temp;
-//    scientist_service.initialize(constants::DATABASE_NAME);
-//    computer_service.initialize(constants::DATABASE_NAME);
+
     do
     {
         cout << constants::MENU_DELIMITER << endl;
@@ -104,11 +103,6 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("lastname DESC, firstname DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
             break;
         case 2:
             if ( (asc = asc_desc()) )
@@ -117,11 +111,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("birth DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 3:
             if ((asc = asc_desc()))
@@ -130,11 +120,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("death DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 4:
             if ((asc = asc_desc()))
@@ -143,11 +129,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("gender DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 0:
             exit = true;
@@ -155,6 +137,29 @@ bool Interface::list_menu()
         default:
             cout << select << " is not a valid menu item." << endl;
             break;
+    }
+    print_header();
+    for (unsigned int i = 0; i < data.size(); i++)
+    {
+        cout << data[i];
+        vector<string> connected = scientist_service.connected_computers(data[i].get_id());
+        if (!connected.empty())
+        {
+            cout << "\tDesigned: ";
+        for (int j = 0; j < (int) connected.size(); j++)
+        {
+            cout << connected[j];
+            if (j < ((int) connected.size()) - 3)
+            {
+                cout << ", ";
+            }
+            else if (j == ((int) connected.size()) - 2)
+            {
+                cout << " & ";
+            }
+        }
+        cout << endl;
+        }
     }
     return exit;
 }
