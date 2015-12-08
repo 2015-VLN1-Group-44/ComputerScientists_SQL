@@ -58,10 +58,10 @@ vector<Computers> Repository::open_computer_db(QString sql_command)
         string name;
         int year, id_n;
         bool b;
-        enum computer_type ct;
+        int ct;
 
         name = query.value("name").toString().toStdString();
-        ct = static_cast<computer_type>(query.value("type").toInt());
+        ct = (query.value("type").toInt());
         year = query.value("built_year").toInt();
         id_n = query.value("id").toInt();
         b = query.value("built").toBool();
@@ -91,7 +91,14 @@ void Repository::add_computer(Computers c)
     QSqlQuery query(db);
     query.prepare(constants::INSERT_COMPUTER);
     query.bindValue(":name", QString::fromStdString(c.get_name()));
-    query.bindValue(":by", c.get_year());
+    if (c.get_year())
+    {
+        query.bindValue(":by", c.get_year());
+    }
+    else
+    {
+        query.bindValue(":by", "NULL");
+    }
     query.bindValue(":type", c.get_type());
     query.bindValue(":built", c.get_built());
     query.exec();

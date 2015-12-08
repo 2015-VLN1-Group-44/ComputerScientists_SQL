@@ -17,13 +17,13 @@ namespace constants
     const std::string FOUND = "Found entries:";
     const QString SCIENTIST_EDIT = "UPDATE scientists SET %1 = '%2' WHERE id = %3";
     const QString SCIENTIST_FROM_ID = "SELECT * FROM scientists WHERE id LIKE '%%1%'";
-    const QString SCIENTISTS_ORDER = "SELECT * FROM scientists WHERE active LIKE 1 ORDER BY %1 ";
+    const QString SCIENTISTS_ORDER = "SELECT * FROM scientists ORDER BY %1 ";
     const QString INSERT_FORM =  "INSERT INTO scientists (firstname, lastname, birth, death, gender, alive, active)" 
                                  "VALUES (:first, :last, :b, :d, :g, :a, :act)";
     const QString INSERT_COMPUTER = "INSERT INTO computers (name, built_year, type, built)"
                                 "VALUES (:name, :by, :type, :built)";
     const QString DATABASE_NAME = "db.sqlite";
-    const QString COMPUTERS_ORDER = "SELECT * FROM computers WHERE active LIKE 1 ORDER BY %1";
+    const QString COMPUTERS_ORDER = "SELECT * FROM computers ORDER BY %1";
     const QString COMPUTERS_SEARCH = "SELECT * FROM computers WHERE %1 LIKE '%%2%' ";
     const QString COMPUTERS_EDIT = "UPDATE computers SET %1 = '%2' WHERE id = %3";
     const QString COMPUTER_FROM_ID = "SELECT * FROM computers WHERE id LIKE '%%1%'";

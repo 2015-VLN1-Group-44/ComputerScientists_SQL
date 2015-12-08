@@ -65,7 +65,7 @@ void Interface::start_menu()
             quit = false;
             break;
         case 5:
-            // computer_service.read_input();
+            computer_service.read_input();
             quit = false;
             break;
         case 6:

@@ -18,7 +18,7 @@ public:
     void delete_id(int id);
     vector<string> connected_scientists(int id);
     void add_connection(int sci_id, int comp_id);
-//    void read_input();
+    void read_input();
 
 private:
     Repository computer_repo;
