@@ -16,6 +16,7 @@ public:
     void edit_entry (QString column, QString argument, int id);
     Computers from_id(int id);
     vector<string> connected_scientists(int id);
+    void add_connection(int sci_id, int comp_id);
 
 private:
     Repository computer_repo;

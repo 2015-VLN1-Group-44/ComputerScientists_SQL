@@ -31,8 +31,12 @@ Computers Computer_service::from_id(int id)
 vector<string> Computer_service::connected_scientists(int id)
 {
     QString command = QString(constants::SCIENTIST_JOIN.arg(id));
-
     vector<string> scientist_names = computer_repo.connected(command, "lastname");
-
     return scientist_names;
+}
+
+void Computer_service::add_connection(int sci_id, int comp_id)
+{
+    QString command = QString(constants::ADD_CONNECTION.arg(sci_id).arg(comp_id));
+    computer_repo.edit_remove(command);
 }

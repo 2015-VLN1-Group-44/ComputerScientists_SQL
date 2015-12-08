@@ -292,7 +292,6 @@ bool Interface::search_menu()
             getline(cin, name);
             name_search = QString::fromStdString(name);
             found_scientists = scientist_service.search(name_search, "lastname");
-
             if (!found_scientists.empty())
             {
                 found = true;

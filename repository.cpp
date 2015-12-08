@@ -89,3 +89,9 @@ vector<string> Repository::connected(QString command, QString column)
     }
     return data;
 }
+
+void Repository::edit_remove(QString command)
+{
+    QSqlQuery query(db);
+    query.exec(command);
+}

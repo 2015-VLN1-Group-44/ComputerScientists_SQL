@@ -27,6 +27,7 @@ namespace constants
     const QString CONNECTED_SCIENTIST_ID = "SELECT scientist_id FROM owners WHERE computer_id LIKE '%%1%'";
     const QString SCIENTIST_JOIN =  "SELECT lastname FROM scientists s, owners o WHERE s.id = o.scientist_id AND %1 = o.computer_id";
     const QString COMPUTER_JOIN =  "SELECT name FROM computers c, owners o WHERE c.id = o.computer_id AND %1 = o.scientist_id";
+    const QString ADD_CONNECTION = "INSERT INTO owners (scientist_id, computer_id) VALUES %1, %2";
 }
 
 #endif // CONSTANTS
