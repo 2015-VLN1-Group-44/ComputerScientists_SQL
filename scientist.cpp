@@ -144,3 +144,8 @@ ostream& operator << (ostream& out, Scientist sc)
     }
     return out;
 }
+
+void Scientist::add_computer(string n)
+{
+    computer_names.push_back(n);
+}

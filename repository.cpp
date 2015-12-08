@@ -41,6 +41,7 @@ vector<Scientist> Repository::open_scientist_db(QString sql_command)
         Scientist temp(first, last, g, b, d, a, id_n, act);
         data.push_back(temp);
     }
+    query.exec(constants::SCIENTIST_JOIN);
     db.close();
     return data;
 }
@@ -51,7 +52,6 @@ vector<Computers> Repository::open_computer_db(QString sql_command)
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(constants::DATABASE_NAME);
-    db.open();
     db.open();
     cerr << db.lastError().text().toStdString();
     QSqlQuery query(db);
@@ -93,4 +93,22 @@ void Repository::add_scientist(Scientist s)
     query.bindValue(":act", 1);
     query.exec();
 
+}
+
+vector<int> connected(QString command, QString column)
+{
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(constants::DATABASE_NAME);
+    db.open();
+    QSqlQuery query(db);
+    query.exec(command);
+    vector<int> connected_id;
+    while (query.next())
+    {
+        int id_n;
+        id_n = query.value(column).toInt();
+        connected_id.push_back(id_n);
+    }
+    return connected_id;
 }

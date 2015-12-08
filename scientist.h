@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QDate>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public:
     void set_death(QDate d);
     void set_gender(bool g);
     void set_living(bool a);
+    void add_computer(string n);
 
     string get_first();
     string get_last();
@@ -41,6 +43,7 @@ private:
     bool living;
     int id;
     bool active;
+    vector<string> computer_names;
 };
 
 #endif // SCIENTIST_H

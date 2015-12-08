@@ -10,6 +10,7 @@ namespace constants
     const std::string SELECTION_PROMPT = "Enter selection: ";
     const std::string SELECTION_NOT_VALID = "Invalid selection. Please try again.";
     const int MAX_NAME_LENGTH = 36;
+    const int MAX_COMP_NAME_LENGTH = 20;
     const QString SCIENTISTS_FILENAME = "scientists.sqlite";
     const QString SEARCH_SCIENTIST_TEMPLATE = "SELECT * FROM scientists WHERE %1 LIKE '%%2%' ";
     const std::string FOUND = "Found entries:";
@@ -23,6 +24,8 @@ namespace constants
     const QString COMPUTERS_SEARCH = "SELECT * FROM computers WHERE %1 LIKE '%%2%' ";
     const QString COMPUTERS_EDIT = "UPDATE computers SET %1 = '%2' WHERE id = %3";
     const QString COMPUTER_FROM_ID = "SELECT * FROM computers WHERE id LIKE '%%1%'";
+    const QString CONNECTED_SCIENTIST_ID = "SELECT scientist_id FROM owners WHERE computer_id LIKE '%%1%'";
+    const QString SCIENTIST_JOIN = "SELECT * FROM scientists s, computers c, owners o WHERE s.id = o.scientist_id AND c.id = o.computer_id";
 }
 
 #endif // CONSTANTS

@@ -25,6 +25,7 @@ public:
     void edit_menu(int edit_id);
     void edit_computers(Computers c_edit);
     void print_header();
+    void print_header_computers();
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
 private:
