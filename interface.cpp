@@ -1,4 +1,5 @@
 #include "interface.h"
+#include <stdlib.h>
 
 
 
@@ -17,11 +18,7 @@ void Interface::start_menu()
     bool quit, exit;
     // tempbreyta til að prófa útprent
     vector<Computers> temp;
-<<<<<<< HEAD
-//    scientist_service.initialize(constants::DATABASE_NAME);
-//    computer_service.initialize(constants::DATABASE_NAME);
-=======
->>>>>>> 3311d2208519e3de7e72ba903aac547828c0238a
+
 
     do
     {
@@ -844,7 +841,7 @@ void Interface::clear_screen()
     #ifdef _WIN32
         system("CLS");
     #else
-        SYSTEM("CLEAR");
-    #endif;
+        system("CLEAR");
+    #endif
 
 }
