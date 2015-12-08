@@ -57,7 +57,7 @@ vector<Computers> Repository::open_computer_db(QString sql_command)
     {
         string name;
         int year, id_n;
-        bool b, act;
+        bool b;
         enum computer_type ct;
 
         name = query.value("name").toString().toStdString();
@@ -65,8 +65,7 @@ vector<Computers> Repository::open_computer_db(QString sql_command)
         year = query.value("built_year").toInt();
         id_n = query.value("id").toInt();
         b = query.value("built").toBool();
-        act = query.value("active").toBool();
-        Computers temp(name, year, b, ct, id_n, act);
+        Computers temp(name, year, b, ct, id_n);
         data.push_back(temp);
     }
     return data;    
@@ -85,6 +84,17 @@ void Repository::add_scientist(Scientist s)
     query.bindValue(":act", 1);
     query.exec();
 
+}
+
+void Repository::add_computer(Computers c)
+{
+    QSqlQuery query(db);
+    query.prepare(constants::INSERT_COMPUTER);
+    query.bindValue(":name", QString::fromStdString(c.get_name()));
+    query.bindValue(":by", c.get_year());
+    query.bindValue(":type", c.get_type());
+    query.bindValue(":built", c.get_built());
+    query.exec();
 }
 
 vector<string> Repository::connected(QString command, QString column)

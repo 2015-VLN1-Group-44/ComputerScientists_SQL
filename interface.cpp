@@ -26,13 +26,13 @@ void Interface::start_menu()
         cout << "\n- Main menu ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
-        cout << "4. Display list of computers\t";
+        cout << "5. Display list of computers\t";
         cout << "0. Quit" << endl;
         cout << "2. Display list of scientists\t";
-        cout << "5. Add computer" << endl;
+        cout << "6. Add computer" << endl;
         cout << "3. Search scientists\t\t";
-        cout << "6. Search computers" << endl;
-        cout << "3. Search scientists\n";
+        cout << "7. Search computers" << endl;
+        cout << "4. Remove scientist" << endl;
         cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> selection;
@@ -41,11 +41,7 @@ void Interface::start_menu()
         {
         case 1:
             clear_screen();
-            do
-            {
-                exit = add_menu();
-            } while (!exit);
-            quit = false;
+            scientist_service.read_input();
             break;
         case 2:
             clear_screen();
@@ -64,11 +60,15 @@ void Interface::start_menu()
             quit = false;
             break;
         case 4:
+            edit_remove();
+            quit = false;
+            break;
+        case 5:
             clear_screen();
             computer_list_menu();
             quit = false;
             break;
-        case 6:
+        case 7:
             clear_screen();
             computer_search_menu();
             quit = false;

@@ -46,3 +46,17 @@ void Computer_service::add_connection(int sci_id, int comp_id)
     QString command = QString(constants::ADD_CONNECTION.arg(sci_id).arg(comp_id));
     computer_repo.edit_remove(command);
 }
+
+//void Computer_service::read_input()
+//{
+//    string name;
+//    bool built;
+//    enum computer_type ct;
+//    int year;
+//    char test;
+//    cout << "Enter name: ";
+//    cin >> name;
+//    cout << "Was the computer built (y/n)?";
+//    cin >> test;
+//    if (test.tolower() == 'y')
+//}
