@@ -29,7 +29,9 @@ void Interface::start_menu()
         cout << "4. Display list of computers\t";
         cout << "0. Quit" << endl;
         cout << "2. Display list of scientists\t";
-        cout << "5. Search computers" << endl;
+        cout << "5. Add computer" << endl;
+        cout << "3. Search scientists\t\t";
+        cout << "6. Search computers" << endl;
         cout << "3. Search scientists\n";
         cout << endl;
         cout << constants::SELECTION_PROMPT;
@@ -66,7 +68,7 @@ void Interface::start_menu()
             computer_list_menu();
             quit = false;
             break;
-        case 5:
+        case 6:
             clear_screen();
             computer_search_menu();
             quit = false;
