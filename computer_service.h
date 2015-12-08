@@ -18,6 +18,7 @@ public:
     vector<Computers> search(QString column, QString search_arg);
     void edit_entry (QString column, QString argument, int id);
     Computers from_id(int id);
+    vector<string> connected_scientists(int id);
 
 private:
     Repository computer_repo;

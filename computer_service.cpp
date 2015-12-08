@@ -33,15 +33,11 @@ Computers Computer_service::from_id(int id)
     return computer_repo.open_computer_db(command)[0];
 }
 
-//vector<string> Computer_service::connected_scientists(int id)
-//{
-//    QString command = QString(constants::CONNECTED_SCIENTIST_ID.arg(id));
-//    vector<int> scientist_id = computer_repo.connected(command, "scientist_id");
-//    vector<string> scientist_names;
+vector<string> Computer_service::connected_scientists(int id)
+{
+    QString command = QString(constants::SCIENTIST_JOIN.arg(id));
 
-//    for (unsigned int i = 0; i < scientist_id.size(); i++)
-//    {
-//        vector<Scientist> temp = computer_repo.connected(constants::SCIENTIST_FROM_ID.arg(scientist_id[i]));
-//    }
-//    return scientist_names;
-//}
+    vector<string> scientist_names = computer_repo.connected(command);
+
+    return scientist_names;
+}

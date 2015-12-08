@@ -188,7 +188,22 @@ void Interface::computer_list_menu()
                 print_header_computers();
                 for (unsigned int i = 0; i < data.size(); i++)
                 {
+                    vector<string> connected = computer_service.connected_scientists(data[i].get_id());
                     cout << data[i];
+                    cout << "Designed by: ";
+                    for (int j = 0; j < (int) connected.size(); j++)
+                    {
+                        cout << connected[j];
+                        if (j < ((int) connected.size()) - 3)
+                        {
+                            cout << ", ";
+                        }
+                        else if (j == ((int) connected.size()) - 2)
+                        {
+                            cout << " & ";
+                        }
+                    }
+                    cout << endl;
                 }
                 break;
             case 2:
