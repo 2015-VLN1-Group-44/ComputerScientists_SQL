@@ -17,9 +17,16 @@ void Interface::start_menu()
     bool quit, exit;
     // tempbreyta til að prófa útprent
     vector<Computers> temp;
+<<<<<<< HEAD
+//    scientist_service.initialize(constants::DATABASE_NAME);
+//    computer_service.initialize(constants::DATABASE_NAME);
+=======
+>>>>>>> 3311d2208519e3de7e72ba903aac547828c0238a
 
     do
     {
+        clear_screen();
+
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
         cout << "4. Display list of computers\t";
@@ -32,6 +39,7 @@ void Interface::start_menu()
         switch (selection)
         {
         case 1:
+            clear_screen();
             do
             {
                 exit = add_menu();
@@ -39,6 +47,7 @@ void Interface::start_menu()
             quit = false;
             break;
         case 2:
+            clear_screen();
             do
             {
                 exit = list_menu();
@@ -46,6 +55,7 @@ void Interface::start_menu()
             quit = false;
             break;
         case 3:
+            clear_screen();
             do
             {
                 exit = search_menu();
@@ -53,10 +63,12 @@ void Interface::start_menu()
             quit = false;
             break;
         case 4:
+            clear_screen();
             computer_list_menu();
             quit = false;
             break;
         case 5:
+            clear_screen();
             computer_search_menu();
             quit = false;
         break;
@@ -180,6 +192,7 @@ void Interface::computer_list_menu()
         cout << "2. Sort list by date built" << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> select;
+
         switch(select)
         {
             case 1:
@@ -467,14 +480,16 @@ void Interface::found_menu(vector<Scientist> found)
         cout << endl;
         }
     }
-    cout << "1. Edit entry" << endl;
-    cout << "2. Remove entry" << endl;
+    cout << constants::MENU_DELIMITER << endl;
+    cout << "1. Edit entry\t\t\t";
+    cout << "2. Remove entry\t\t\t";
     cout << "0. Search menu" << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
     {
         case 1:
+            clear_screen();
             do
             {
                 cout << "Choose entry to edit (0 to cancel): ";
@@ -496,6 +511,7 @@ void Interface::found_menu(vector<Scientist> found)
             } while (!valid);
             break;
         case 2:
+            clear_screen();
             do
             {
                 cout << "Choose entry to delete (0 to cancel): ";
@@ -514,6 +530,7 @@ void Interface::found_menu(vector<Scientist> found)
             } while (!valid);
             break;
         case 0:
+            clear_screen();
             valid = true;
             break;
         default:
@@ -773,12 +790,14 @@ void Interface::edit_computers(Computers c_edit)
 
 void Interface::print_header()
 {
+    clear_screen();
     cout << "Name" << string(constants::MAX_NAME_LENGTH , ' ') << "Gender\tDoB\t\tDoD\n";
     cout << constants::MENU_DELIMITER << endl;
 }
 
 void Interface::print_header_computers()
 {
+    clear_screen();
     cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\tType\n";      //-4 vegna "name" í header
     cout << constants::MENU_DELIMITER << endl;
 }
@@ -789,6 +808,8 @@ bool Interface::asc_desc()
     string command;
     do
     {
+        clear_screen();
+        cout << constants::MENU_DELIMITER;
         int command = 0;
         cout << "\n1. Ascending\t";
         cout << "2. Descending" << endl;
@@ -816,4 +837,14 @@ bool Interface::asc_desc()
         }
     } while (!valid);
     return asc;
+}
+
+void Interface::clear_screen()
+{
+    #ifdef _WIN32
+        system("CLS");
+    #else
+        SYSTEM("CLEAR");
+    #endif;
+
 }
