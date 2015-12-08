@@ -35,6 +35,11 @@ enum computer_type Computers::get_type()
     return comp_t;
 }
 
+int Computers::get_id()
+{
+    return id;
+}
+
 void Computers::set_name(string n)
 {
     name = n;
