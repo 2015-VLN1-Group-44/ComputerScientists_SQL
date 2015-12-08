@@ -541,6 +541,21 @@ void Interface::found_computers_menu(vector<Computers> found)
     {
         cout << "Entry " << i + 1 << ":" << endl;
         cout << found[i];
+        vector<string> connected = computer_service.connected_scientists(found[i].get_id());
+        cout << "\tDesigned by: ";
+        for (int j = 0; j < (int) connected.size(); j++)
+        {
+            cout << connected[j];
+            if (j < ((int) connected.size()) - 3)
+            {
+                cout << ", ";
+            }
+            else if (j == ((int) connected.size()) - 2)
+            {
+                cout << " & ";
+            }
+        }
+        cout << endl;
     }
     cout << "1. Edit entry" << endl;
     cout << "2. Remove entry" << endl;
