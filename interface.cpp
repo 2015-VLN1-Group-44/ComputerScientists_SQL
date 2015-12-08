@@ -17,8 +17,11 @@ void Interface::start_menu()
     bool quit, exit;
     // tempbreyta til að prófa útprent
     vector<Computers> temp;
+<<<<<<< HEAD
 //    scientist_service.initialize(constants::DATABASE_NAME);
 //    computer_service.initialize(constants::DATABASE_NAME);
+=======
+>>>>>>> 3311d2208519e3de7e72ba903aac547828c0238a
 
     do
     {
@@ -112,11 +115,6 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("lastname DESC, firstname DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
             break;
         case 2:
             if ( (asc = asc_desc()) )
@@ -125,11 +123,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("birth DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 3:
             if ((asc = asc_desc()))
@@ -138,11 +132,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("death DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 4:
             if ((asc = asc_desc()))
@@ -151,11 +141,7 @@ bool Interface::list_menu()
             }
             else
                 data = scientist_service.sort("gender DESC");
-            print_header();
-            for (unsigned int i = 0; i < data.size(); i++)
-            {
-                cout << data[i];
-            }
+
             break;
         case 0:
             exit = true;
@@ -163,6 +149,29 @@ bool Interface::list_menu()
         default:
             cout << select << " is not a valid menu item." << endl;
             break;
+    }
+    print_header();
+    for (unsigned int i = 0; i < data.size(); i++)
+    {
+        cout << data[i];
+        vector<string> connected = scientist_service.connected_computers(data[i].get_id());
+        if (!connected.empty())
+        {
+            cout << "\tDesigned: ";
+        for (int j = 0; j < (int) connected.size(); j++)
+        {
+            cout << connected[j];
+            if (j < ((int) connected.size()) - 3)
+            {
+                cout << ", ";
+            }
+            else if (j == ((int) connected.size()) - 2)
+            {
+                cout << " & ";
+            }
+        }
+        cout << endl;
+        }
     }
     return exit;
 }
@@ -194,11 +203,6 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("name DESC");
-                print_header_computers();
-                for (unsigned int i = 0; i < data.size(); i++)
-                {
-                    cout << data[i];
-                }
                 break;
             case 2:
                 if ( (asc = asc_desc()) )
@@ -207,11 +211,11 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("built_year DESC");
-                print_header_computers();
-                for (unsigned int i = 0; i < data.size(); i++)
-                {
-                    cout << data[i];
-                }
+//                print_header_computers();
+//                for (unsigned int i = 0; i < data.size(); i++)
+//                {
+//                    cout << data[i];
+//                }
                 break;
             case 3:
                 if ((asc = asc_desc()))
@@ -220,11 +224,11 @@ void Interface::computer_list_menu()
                 }
                 else
                     data = computer_service.sort("type DESC");
-                print_header_computers();
-                for (unsigned int i = 0; i < data.size(); i++)
-                {
-                    cout << data[i];
-                }
+//                print_header_computers();
+//                for (unsigned int i = 0; i < data.size(); i++)
+//                {
+//                    cout << data[i];
+//                }
                 break;
             case 0:
                 exit = true;
@@ -232,6 +236,29 @@ void Interface::computer_list_menu()
             default:
                 cout << select << " is not a valid menu item." << endl;
                 break;
+        }
+        if (!exit)
+        {
+            print_header_computers();
+            for (unsigned int i = 0; i < data.size(); i++)
+            {
+                vector<string> connected = computer_service.connected_scientists(data[i].get_id());
+                cout << data[i];
+                cout << "\tDesigned by: ";
+                for (int j = 0; j < (int) connected.size(); j++)
+                {
+                    cout << connected[j];
+                    if (j < ((int) connected.size()) - 3)
+                    {
+                        cout << ", ";
+                    }
+                    else if (j == ((int) connected.size()) - 2)
+                    {
+                        cout << " & ";
+                    }
+                }
+                cout << endl;
+            }
         }
     } while (!exit);
 }
@@ -435,6 +462,24 @@ void Interface::found_menu(vector<Scientist> found)
     {
         cout << "Entry " << i + 1 << ":" << endl;
         cout << found[i];
+        vector<string> connected = scientist_service.connected_computers(found[i].get_id());
+        if (!connected.empty())
+        {
+            cout << "\tDesigned: ";
+        for (int j = 0; j < (int) connected.size(); j++)
+        {
+            cout << connected[j];
+            if (j < ((int) connected.size()) - 3)
+            {
+                cout << ", ";
+            }
+            else if (j == ((int) connected.size()) - 2)
+            {
+                cout << " & ";
+            }
+        }
+        cout << endl;
+        }
     }
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Edit entry\t\t\t";
