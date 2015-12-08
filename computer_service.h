@@ -10,6 +10,10 @@ public:
     Computer_service();
 
 //    void initialize(QString db_name);
+
+    /* Takes column as argument, returns vector of computers
+     *
+     */
     vector<Computers> sort(QString sort_order);
     vector<Computers> search(QString column, QString search_arg);
 
