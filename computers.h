@@ -18,7 +18,8 @@ class Computers
 {
 public:
     Computers();
-    Computers(string n, int y, bool b, enum computer_type ct, int id, bool act);
+    Computers(string n, int y, bool b, int ct);
+    Computers(string n, int y, bool b, int ct, int id);
     string get_name();
     int get_year();
     bool get_built();
@@ -36,7 +37,6 @@ private:
     bool built;
     enum computer_type comp_t;
     int id;
-    bool active;
     vector<Scientist> connected_scientists;
 };
 

@@ -18,6 +18,10 @@ public:
     void delete_id(int id);
     vector<string> connected_scientists(int id);
     void add_connection(int sci_id, int comp_id);
+    void read_input();
+    vector<Scientist> connected_sci(int id);
+    void remove_connection(int scient_id, int comp_id);
+
 
 private:
     Repository computer_repo;

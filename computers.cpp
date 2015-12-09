@@ -6,14 +6,21 @@ Computers::Computers()
 {
 }
 
-Computers::Computers(string n, int y, bool b, computer_type ct, int id, bool act)
+Computers::Computers(string n, int y, bool b, int ct)
 {
     name = n;
     year = y;
     built = b;
-    comp_t = ct;
+    comp_t = static_cast<computer_type>(ct);
+}
+
+Computers::Computers(string n, int y, bool b, int ct, int id)
+{
+    name = n;
+    year = y;
+    built = b;
+    comp_t = static_cast<computer_type>(ct);
     this->id = id;
-    active = act;
 }
 
 string Computers::get_name()

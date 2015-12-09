@@ -29,6 +29,7 @@ public:
     void print_header();
     void print_header_computers();
     void connect_scientist(int computer_id);
+    void remove_connection(int comp_id);
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
     bool edit_remove();

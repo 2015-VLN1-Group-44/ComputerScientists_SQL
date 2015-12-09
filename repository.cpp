@@ -15,6 +15,9 @@ Repository::Repository()
             db.setDatabaseName(constants::DATABASE_NAME);
             db.open();
         }
+    /* Býr til töflur ef þær eru ekki til fyrir
+     *
+     */
         QSqlQuery query(db);
         query.exec(constants::CREATE_SCIENTISTS_TABLE);
         query.exec(constants::CREATE_COMPUTERS_TABLE);
@@ -57,16 +60,15 @@ vector<Computers> Repository::open_computer_db(QString sql_command)
     {
         string name;
         int year, id_n;
-        bool b, act;
-        enum computer_type ct;
+        bool b;
+        int ct;
 
         name = query.value("name").toString().toStdString();
-        ct = static_cast<computer_type>(query.value("type").toInt());
+        ct = (query.value("type").toInt());
         year = query.value("built_year").toInt();
         id_n = query.value("id").toInt();
         b = query.value("built").toBool();
-        act = query.value("active").toBool();
-        Computers temp(name, year, b, ct, id_n, act);
+        Computers temp(name, year, b, ct, id_n);
         data.push_back(temp);
     }
     return data;    
@@ -87,6 +89,24 @@ void Repository::add_scientist(Scientist s)
 
 }
 
+void Repository::add_computer(Computers c)
+{
+    QSqlQuery query(db);
+    query.prepare(constants::INSERT_COMPUTER);
+    query.bindValue(":name", QString::fromStdString(c.get_name()));
+    if (c.get_year())
+    {
+        query.bindValue(":by", c.get_year());
+    }
+    else
+    {
+        query.bindValue(":by", "NULL");
+    }
+    query.bindValue(":type", c.get_type());
+    query.bindValue(":built", c.get_built());
+    query.exec();
+}
+
 vector<string> Repository::connected(QString command, QString column)
 {
     vector<string> data;
@@ -101,9 +121,29 @@ vector<string> Repository::connected(QString command, QString column)
     return data;
 }
 
+vector<Scientist> Repository::connected_to_delete(QString command)
+{
+    vector<Scientist> data;
+    QSqlQuery query(db);
+    query.exec(command);
+    Scientist temp;
+    while (query.next())
+    {
+        string name;
+        int id;
+        name = query.value("lastname").toString().toStdString();
+        id = query.value("scientist_id").toInt();
+        temp.set_last(name);
+        temp.set_id(id);
+        data.push_back(temp);
+    }
+    return data;
+}
+
 void Repository::edit_remove(QString command)
 {
     QSqlQuery query(db);
     query.exec(command);
+    qDebug() << query.lastQuery();
 }
 

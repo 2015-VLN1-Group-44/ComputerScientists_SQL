@@ -21,6 +21,7 @@ public:
     void set_death(QDate d);
     void set_gender(bool g);
     void set_living(bool a);
+    void set_id(int idn);
     void add_computer(string n);
 
     string get_first();
