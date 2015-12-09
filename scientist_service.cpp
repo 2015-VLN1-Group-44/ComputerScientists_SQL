@@ -36,13 +36,13 @@ Scientist Scientist_service::find_from_id(int scientist_id)
 void Scientist_service::edit_entry(QString column, QString insert, int id)
 {
     QString command = QString(constants::SCIENTIST_EDIT.arg(column).arg(insert).arg(id));
-    vector<Scientist> temp = scientist_repo.open_scientist_db(command);
+    scientist_repo.edit_remove(command);
 }
 
 void Scientist_service::delete_id(int id)
 {
     QString command = QString(constants::DELETE_SCIENTIST.arg(id));
-    scientist_repo.open_scientist_db(command);
+    scientist_repo.edit_remove(command);
 }
 
 // Les upplýsingar frá notanda
