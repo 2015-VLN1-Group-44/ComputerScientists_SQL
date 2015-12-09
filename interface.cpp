@@ -496,7 +496,6 @@ void Interface::found_menu(vector<Scientist> found)
     {
         cout << "Entry " << i + 1 << ":" << endl;
         cout << found[i];
-        cout << endl;
         vector<string> connected = scientist_service.connected_computers(found[i].get_id());
         if (!connected.empty())
         {
@@ -515,6 +514,7 @@ void Interface::found_menu(vector<Scientist> found)
         }
         cout << endl;
         }
+        cout << endl;
     }
     cout << "\n- Edit/remove ";
     cout << constants::MENU_DELIMITER << endl;
