@@ -42,6 +42,7 @@ void Interface::start_menu()
         case 1:
             clear_screen();
             scientist_service.read_input();
+            clear_screen();
             break;
         case 2:
             clear_screen();
@@ -65,7 +66,9 @@ void Interface::start_menu()
             quit = false;
             break;
         case 5:
+            clear_screen();
             computer_service.read_input();
+            clear_screen();
             quit = false;
             break;
         case 6:
@@ -103,12 +106,11 @@ bool Interface::list_menu()
     cout << "\n- List of scientists ";
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Sort list by name\t\t";
-    cout << "3. Sort list by date of death\t";
+    cout << "4. Sort list by gender\t";
     cout << "0. Main menu" << endl;
     cout << "2. Sort list by date of birth\t";
-    cout << "4. Sort list by gender" << endl;
     cout << "5. Remove/delete entry" << endl;
-    cout << endl;
+    cout << "3. Sort list by date of death" << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch(select)
@@ -204,8 +206,10 @@ void Interface::computer_list_menu()
         cout << "1. Sort list by name\t\t";
         cout << "3. Sort list by type\t\t";
         cout << "0. Main menu" << endl;
-        cout << "2. Sort list by date built" << endl;
+        cout << "2. Sort list by date built\t";
         cout << "4. Remove/delete entry" << endl;
+
+
         cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> select;
@@ -373,6 +377,7 @@ bool Interface::search_menu()
             found = true;
             return exit;
         default:
+            clear_screen();
             cout << constants::SELECTION_NOT_VALID << endl;
             found = false;
             break;
@@ -396,6 +401,7 @@ bool Interface::search_menu()
             if (tolower(adding) == 'y')
             {
                 scientist_service.read_input();
+                clear_screen();
                 exit = true;
                 legal_choice = true;
             }
@@ -437,6 +443,7 @@ void Interface::computer_search_menu()
         switch (select)
         {
             case 1:
+                clear_screen();
                 cout << "Enter name: ";
                 cin.ignore();
                 getline (cin, name);
@@ -444,12 +451,14 @@ void Interface::computer_search_menu()
                 found_computers = computer_service.search("name", search_term);
             break;
             case 2:
+                clear_screen();
                 cout << "Enter year: ";
                 cin >> year;
                 search_term = QString::number(year);
                 found_computers = computer_service.search("built_year", search_term);
             break;
             case 3:
+                clear_screen();
                 cout << "Choose search term." << endl;
                 cout << "(1 for mechanical, 2 for transistor, 3 for electronic): ";
                 cin >> type;
@@ -457,9 +466,11 @@ void Interface::computer_search_menu()
                 found_computers = computer_service.search("type", search_term);
             break;
             case 0:
+                clear_screen();
                 exit = true;
             break;
             default:
+                clear_screen();
                 cout << constants::SELECTION_NOT_VALID;
             break;
         }
@@ -561,6 +572,7 @@ void Interface::found_menu(vector<Scientist> found)
             valid = true;
             break;
         default:
+            clear_screen();
             valid = false;
             break;
     }
@@ -653,6 +665,7 @@ void Interface::found_computers_menu(vector<Computers> found)
             valid = true;
             break;
         default:
+            clear_screen();
             valid = false;
             break;
     }
@@ -769,6 +782,7 @@ void Interface::edit_menu(int edit_id)
             exit = true;
             break;
         default:
+            clear_screen();
             cout << constants::SELECTION_NOT_VALID << endl;
             break;
     }
@@ -842,6 +856,7 @@ void Interface::edit_computers(int edit_id)
             exit = true;
             break;
         default:
+            clear_screen();
             cout << constants::SELECTION_NOT_VALID << endl;
             break;
     }
@@ -894,6 +909,7 @@ bool Interface::asc_desc()
             break;
 
             default:
+                clear_screen();
                 cout << constants::SELECTION_NOT_VALID << endl;
                 valid = false;
 
