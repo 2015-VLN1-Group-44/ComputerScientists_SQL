@@ -19,7 +19,7 @@ vector<Computers> Computer_service::search(QString column, QString search_arg)
 void Computer_service::edit_entry (QString column, QString argument, int id)
 {
     QString command = QString(constants::COMPUTERS_EDIT.arg(column).arg(argument).arg(id));
-    computer_repo.open_computer_db(command);
+    computer_repo.edit_remove(command);
 }
 
 Computers Computer_service::from_id(int id)
@@ -31,7 +31,7 @@ Computers Computer_service::from_id(int id)
 void Computer_service::delete_id(int id)
 {
     QString command = QString(constants::DELETE_COMPUTER.arg(id));
-    computer_repo.open_computer_db(command);
+    computer_repo.edit_remove(command);
 }
 
 vector<string> Computer_service::connected_scientists(int id)
