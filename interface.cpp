@@ -160,27 +160,30 @@ bool Interface::list_menu()
             cout << select << " is not a valid menu item." << endl;
             break;
     }
-    print_header();
-    for (unsigned int i = 0; i < data.size(); i++)
+    if (!exit)
     {
-        cout << data[i];
-        vector<string> connected = scientist_service.connected_computers(data[i].get_id());
-        if (!connected.empty())
+        print_header();
+        for (unsigned int i = 0; i < data.size(); i++)
         {
-            cout << "\tDesigned: ";
-        for (int j = 0; j < (int) connected.size(); j++)
-        {
-            cout << connected[j];
-            if (j < ((int) connected.size()) - 2)
+            cout << data[i];
+            vector<string> connected = scientist_service.connected_computers(data[i].get_id());
+            if (!connected.empty())
             {
-                cout << ", ";
+                cout << "\tDesigned: ";
+                for (int j = 0; j < (int) connected.size(); j++)
+                {
+                    cout << connected[j];
+                    if (j < ((int) connected.size()) - 2)
+                    {
+                        cout << ", ";
+                    }
+                    else if (j == ((int) connected.size()) - 2)
+                    {
+                        cout << " & ";
+                    }
+                }
+                cout << endl;
             }
-            else if (j == ((int) connected.size()) - 2)
-            {
-                cout << " & ";
-            }
-        }
-        cout << endl;
         }
     }
     return exit;
