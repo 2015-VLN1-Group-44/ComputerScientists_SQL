@@ -73,9 +73,9 @@ ostream& operator << (ostream& out, Computers comp)
     int comp_name_length = comp.name.size();    //búa til pláss fyrir nafn
 
     out << comp.name;
-    if (comp_name_length < constants::MAX_COMP_NAME_LENGTH )  //Fyllir línuna ef nafnið er undir max_name_length
+    //Fyllir línuna ef nafnið er undir max_name_length
+    if (comp_name_length < constants::MAX_COMP_NAME_LENGTH )
         {
-            //name_length = constants::MAX_NAME_LENGTH - name_length;
             out << string(constants::MAX_COMP_NAME_LENGTH - comp_name_length , ' ');
         }
     if (comp.built)
@@ -86,7 +86,6 @@ ostream& operator << (ostream& out, Computers comp)
     {
         out << "Not built\t";
     }
-    // tékk tékk
     if (comp.comp_t == 1)
     {
         out << "Mechanical";
