@@ -32,6 +32,7 @@ public:
     // spyr notanda í hvaða átt hann vill raða
     bool asc_desc();
     bool edit_remove();
+    bool edit_remove_comp();
 private:
     Scientist_service scientist_service;
     Computer_service computer_service;

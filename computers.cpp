@@ -73,7 +73,7 @@ ostream& operator << (ostream& out, Computers comp)
         }
     if (comp.built)
     {
-        out << comp.year << "\t";
+        out << comp.year << "\t\t";
     }
     else
     {

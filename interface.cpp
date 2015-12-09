@@ -22,7 +22,7 @@ void Interface::start_menu()
 
     do
     {
-
+        cout << endl;
         cout << "\n- Main menu ";
         cout << constants::MENU_DELIMITER << endl;
         cout << "1. Add Scientists to list\t";
@@ -89,6 +89,7 @@ void Interface::start_menu()
 bool Interface::add_menu()
 {
     scientist_service.read_input();
+    clear_screen();
     return true;
 }
 
@@ -204,6 +205,7 @@ void Interface::computer_list_menu()
         cout << "3. Sort list by type\t\t";
         cout << "0. Main menu" << endl;
         cout << "2. Sort list by date built" << endl;
+        cout << "4. Remove/delete entry" << endl;
         cout << endl;
         cout << constants::SELECTION_PROMPT;
         cin >> select;
@@ -238,6 +240,9 @@ void Interface::computer_list_menu()
                 else
                     data = computer_service.sort("type DESC");
                 break;
+            case 4:
+                clear_screen();
+                edit_remove_comp();                                                      //kallað á remove
             case 0:
                 clear_screen();
                 exit = true;
@@ -297,6 +302,7 @@ bool Interface::search_menu()
     switch (select)
     {
         case 1:
+            clear_screen();
             cout << "Enter name: ";
             cin.ignore();
             getline(cin, name);
@@ -312,6 +318,7 @@ bool Interface::search_menu()
             exit = true;
             break;
         case 2:
+            clear_screen();
             cout << "Enter name: ";
             cin.ignore();
             getline(cin, name);
@@ -326,6 +333,7 @@ bool Interface::search_menu()
                 exit = true;
             break;
         case 3:
+            clear_screen();
             cout << "Enter date of birth 'yyyy-mm-dd' (month/day optional): ";
             cin.ignore();
             getline(cin, line);
@@ -342,6 +350,7 @@ bool Interface::search_menu()
             exit = true;
             break;
         case 4:
+            clear_screen();
             cout << "Enter date of death 'yyyy-mm-dd' (month/day optional): ";
             cin.ignore();
             getline(cin, line);
@@ -359,6 +368,7 @@ bool Interface::search_menu()
             exit = true;
             break;
         case 0:
+            clear_screen();
             exit = true;
             found = true;
             return exit;
@@ -495,6 +505,7 @@ void Interface::found_menu(vector<Scientist> found)
         cout << endl;
         }
     }
+    cout << "\n- Edit/remove ";
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Edit entry\t\t\t";
     cout << "2. Remove entry\t\t\t";
@@ -505,11 +516,11 @@ void Interface::found_menu(vector<Scientist> found)
     switch (select)
     {
         case 1:
-            //clear_screen();
             do
             {
-                cout << "Choose entry to edit (0 to cancel): ";
+                cout << "Choice entry to edit (0 to cancel): ";
                 cin >> select;
+                clear_screen();
                 if(select > 0 && select <= (int) found.size())
                 {
                     edit_menu(found[select - 1].get_id());
@@ -527,11 +538,11 @@ void Interface::found_menu(vector<Scientist> found)
             } while (!valid);
             break;
         case 2:
-            //clear_screen();
             do
             {
                 cout << "Choose entry to delete (0 to cancel): ";
                 cin >> select;
+                clear_screen();
                 if (select > 0 && select <= (int) found.size())
                 {
                     valid = true;
@@ -586,10 +597,11 @@ void Interface::found_computers_menu(vector<Computers> found)
         }
         cout << endl;
     }
+    cout << "\n- Edit/remove ";
+    cout << constants::MENU_DELIMITER << endl;
     cout << "1. Edit entry\t\t\t";
     cout << "2. Remove entry\t\t\t";
     cout << "0. Search menu" << endl;
-    cout << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
@@ -637,6 +649,7 @@ void Interface::found_computers_menu(vector<Computers> found)
             } while (!valid);
             break;
         case 0:
+            clear_screen();
             valid = true;
             break;
         default:
@@ -660,7 +673,7 @@ void Interface::edit_menu(int edit_id)
     QDate b, d, current;
     current = QDate::currentDate(); // Sækir daginn í dag úr klukkunni
     bool exit = false;
-
+    cout << "\n- Edit scientist ";
     cout << constants::MENU_DELIMITER << endl;
     cout << scientist_service.find_from_id(edit_id);
     cout << "1. Edit first name" << endl;
@@ -675,18 +688,21 @@ void Interface::edit_menu(int edit_id)
     switch (select)
     {
         case 1:
+            clear_screen();
             cout << "Enter new first name: ";
             cin.ignore();
             getline(cin, n);
             scientist_service.edit_entry("firstname", QString::fromStdString(n), edit_id);
             break;
         case 2:
+            clear_screen();
             cout << "Enter new last name: ";
             cin.ignore();
             getline(cin, n);
             scientist_service.edit_entry("lastname", QString::fromStdString(n), edit_id);
             break;
         case 3:
+            clear_screen();
             cout << "Enter gender: ";
             cin.ignore();
             getline(cin, line);
@@ -702,6 +718,7 @@ void Interface::edit_menu(int edit_id)
                 cout << "Not a valid gender." << endl;
             break;
         case 4:
+            clear_screen();
             cout << "Enter date of birth (dd/mm/yyyy): ";
             cin.ignore();
             getline(cin, line);
@@ -724,6 +741,7 @@ void Interface::edit_menu(int edit_id)
             }
             break;
         case 5:
+            clear_screen();
             cout << "Enter date of death (dd/mm/yyyy): ";
             cin.ignore();
             getline(cin, line);
@@ -747,6 +765,7 @@ void Interface::edit_menu(int edit_id)
             }
             break;
         case 0:
+            clear_screen();
             exit = true;
             break;
         default:
@@ -768,13 +787,13 @@ void Interface::edit_computers(int edit_id)
     QString search_term;
     vector<Scientist> temp;
 
+    cout << "\n- Edit computer ";
     cout << constants::MENU_DELIMITER << endl;
     cout << "1. Edit name" << endl;
     cout << "2. Edit year built" << endl;
     cout << "3. Edit type" << endl;
     cout << "4. Add scientist connection" << endl;
     cout << "0. Search menu" << endl;
-    cout << endl;
     cout << constants::SELECTION_PROMPT;
     cin >> select;
     switch (select)
@@ -815,6 +834,7 @@ void Interface::edit_computers(int edit_id)
             connect_scientist(edit_id);
         break;
         case 0:
+            clear_screen();
             exit = true;
             break;
         default:
@@ -835,7 +855,7 @@ void Interface::print_header()
 
 void Interface::print_header_computers()
 {
-    cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\tType\n";      //-4 vegna "name" í header
+    cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\t\tType\n";      //-4 vegna "name" í header
     cout << constants::MENU_DELIMITER << endl;
 }
 
@@ -845,11 +865,11 @@ bool Interface::asc_desc()
     string command;
     do
     {
+        cout << "\n- Asc-/Descending ";
         cout << constants::MENU_DELIMITER;
         int command = 0;
         cout << "\n1. Ascending\t";
         cout << "2. Descending" << endl;
-        //cout << "Enter selection ";
         cout << constants::SELECTION_PROMPT;
         cin >> command;
         cout << endl;
@@ -857,11 +877,13 @@ bool Interface::asc_desc()
         switch (command)                    //Val fyrir Ascending/Descending
         {
             case 1:
+                clear_screen();
                 asc = true;
                 valid = true;
             break;
 
             case 2:
+                clear_screen();
                 asc = false;
                 valid = true;
             break;
@@ -881,13 +903,20 @@ bool Interface::edit_remove()
     int remove;
     int counter = 1;
     int id_del;
+    cout << "Id  ";
+
+    print_header();
     d = scientist_service.sort("lastname, firstname");
     for(unsigned long i = 0; i < d.size(); i++)
     {
-        cout << counter++ << "  " << d[i];
+        cout << counter++;
+        if (counter < 11)
+            cout << "   ";
+        else (cout << "  ");
+        cout << d[i];
     }
     cout << endl;
-    cout << "Choose the ID of the scientist you wish to remove from the list: ";
+    cout << "Choose the ID of the scientist you wish to remove from the list (0 to cancel): ";
     cin >> remove;
     if(remove <= 0)
     {
@@ -899,6 +928,43 @@ bool Interface::edit_remove()
     {
         id_del = d[remove - 1].get_id();
         scientist_service.delete_id(id_del);
+        cout << "Entry removed." << endl;
+        return true;
+    }
+    return true;
+}
+
+bool Interface::edit_remove_comp()
+{
+    vector <Computers> d;
+    int remove;
+    int counter = 1;
+    int id_del;
+    cout << "Id  ";
+
+    print_header_computers();
+    d = computer_service.sort("name");
+    for(unsigned long i = 0; i < d.size(); i++)
+    {
+        cout << counter++;
+        if (counter < 11)
+            cout << "   ";
+        else (cout << "  ");
+        cout << d[i];
+    }
+    cout << endl;
+    cout << "Choose the ID of the computer you wish to remove from the list (0 to cancel): ";
+    cin >> remove;
+    if(remove <= 0)
+    {
+        cout << endl;
+        cout << "No scientist has the ID-number: " << remove << endl;
+        return false;
+    }
+    else
+    {
+        id_del = d[remove - 1].get_id();
+        computer_service.delete_id(id_del);
         cout << "Entry removed." << endl;
         return true;
     }
