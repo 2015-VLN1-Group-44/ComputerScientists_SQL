@@ -32,8 +32,17 @@ public:
 
     // tengir saman tölvuid og scientist id
     void add_connection(int sci_id, int comp_id);
+
+    // Les innslátt notanda fyrir nýja tölvu
     void read_input();
+
+    /* Skilar scientists tengdum tölvu
+     * breytan id inniheldur einstakt id-númer tölvunnar
+     * sem þeir eru tengdir
+     */
     vector<Scientist> connected_sci(int id);
+
+    // Eyðir tengingu scientists við tölvu
     void remove_connection(int scient_id, int comp_id);
 
 

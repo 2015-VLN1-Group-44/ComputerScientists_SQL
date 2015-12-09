@@ -89,13 +89,6 @@ void Interface::start_menu()
     } while (!quit);
 }
 
-bool Interface::add_menu()
-{
-    scientist_service.read_input();
-    clear_screen();
-    return true;
-}
-
 bool Interface::list_menu()
 {
     bool exit = false;
@@ -684,7 +677,7 @@ void Interface::edit_menu(int edit_id)
     char g;
     QString date, name;
     QDate b, d, current;
-    current = QDate::currentDate(); // Sækir daginn í dag úr klukkunni
+    current = QDate::currentDate();
     bool exit = false;
     cout << "\n- Edit scientist ";
     cout << constants::MENU_DELIMITER << endl;
@@ -918,6 +911,67 @@ bool Interface::asc_desc()
     return asc;
 }
 
+
+void Interface::connect_scientist(int computer_id)
+{
+    string line;
+    QString search_term;
+    int scientist_id;
+    int index;
+    bool valid = true;
+    cout << "Enter last name of the scientist to connect: ";
+    cin >> line;
+    search_term = QString::fromStdString(line);
+    vector<Scientist> temp = scientist_service.search(search_term, "lastname");
+    cout << constants::FOUND;
+    for (unsigned int i = 0; i < (temp.size()); i++)
+    {
+        cout << "Entry " << i + 1 << ": " << temp[0].get_last() << endl;
+    }
+    do
+    {
+        cout << endl << "Choose scientist to connect: ";
+        cin >> index;
+        if(index < 0 || index > (int) temp.size())
+        {
+            cout << constants::SELECTION_NOT_VALID << endl;
+            valid = false;
+        }
+        else
+        {
+            valid = true;
+            scientist_id = temp[index - 1].get_id();
+        }
+    } while (!valid);
+    computer_service.add_connection(scientist_id, computer_id);
+}
+
+void Interface::remove_connection(int comp_id)
+{
+    vector<Scientist> temp;
+    int select, scientist_id;
+    temp = computer_service.connected_sci(comp_id);
+    cout << "Connected scientists: " << endl;
+    for (unsigned int i = 0; i < temp.size(); i++)
+    {
+        cout << i + 1 << ". " << temp[i].get_last() << endl;
+    }
+    cout << "Select connection to remove: ";
+    cin >> select;
+    scientist_id = temp[select - 1].get_id();
+    computer_service.remove_connection(scientist_id, comp_id);
+}
+
+void Interface::clear_screen()
+{
+    #ifdef _WIN32
+        system("CLS");
+    #else
+        system("CLEAR");
+    #endif
+
+}
+
 bool Interface::edit_remove()
 {
     vector <Scientist> d;
@@ -990,64 +1044,4 @@ bool Interface::edit_remove_comp()
         return true;
     }
     return true;
-}
-
-void Interface::connect_scientist(int computer_id)
-{
-    string line;
-    QString search_term;
-    int scientist_id;
-    int index;
-    bool valid = true;
-    cout << "Enter last name of the scientist to connect: ";
-    cin >> line;
-    search_term = QString::fromStdString(line);
-    vector<Scientist> temp = scientist_service.search(search_term, "lastname");
-    cout << constants::FOUND;
-    for (unsigned int i = 0; i < (temp.size()); i++)
-    {
-        cout << "Entry " << i + 1 << ": " << temp[0].get_last() << endl;
-    }
-    do
-    {
-        cout << endl << "Choose scientist to connect: ";
-        cin >> index;
-        if(index < 0 || index > (int) temp.size())
-        {
-            cout << constants::SELECTION_NOT_VALID << endl;
-            valid = false;
-        }
-        else
-        {
-            valid = true;
-            scientist_id = temp[index - 1].get_id();
-        }
-    } while (!valid);
-    computer_service.add_connection(scientist_id, computer_id);
-}
-
-void Interface::remove_connection(int comp_id)
-{
-    vector<Scientist> temp;
-    int select, scientist_id;
-    temp = computer_service.connected_sci(comp_id);
-    cout << "Connected scientists: " << endl;
-    for (unsigned int i = 0; i < temp.size(); i++)
-    {
-        cout << i + 1 << ". " << temp[i].get_last() << endl;
-    }
-    cout << "Select connection to remove: ";
-    cin >> select;
-    scientist_id = temp[select - 1].get_id();
-    computer_service.remove_connection(scientist_id, comp_id);
-}
-
-void Interface::clear_screen()
-{
-    #ifdef _WIN32
-        system("CLS");
-    #else
-        system("CLEAR");
-    #endif
-
 }
