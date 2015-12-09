@@ -623,7 +623,7 @@ void Interface::found_computers_menu(vector<Computers> found)
                 if (select > 0 && select <= (int) found.size())
                 {
                     valid = true;
-                    computer_service.edit_entry("active", "0", found[select - 1].get_id());
+                    computer_service.delete_id(found[select - 1].get_id());
                 }
                 else if (select == 0)
                 {
@@ -773,6 +773,7 @@ void Interface::edit_computers(int edit_id)
     cout << "2. Edit year built" << endl;
     cout << "3. Edit type" << endl;
     cout << "4. Add scientist connection" << endl;
+    cout << "5. Remove scientist connection" << endl;
     cout << "0. Search menu" << endl;
     cout << endl;
     cout << constants::SELECTION_PROMPT;
@@ -813,7 +814,10 @@ void Interface::edit_computers(int edit_id)
             break;
         case 4:
             connect_scientist(edit_id);
-        break;
+            break;
+        case 5:
+            remove_connection(edit_id);
+            break;
         case 0:
             exit = true;
             break;
@@ -835,7 +839,8 @@ void Interface::print_header()
 
 void Interface::print_header_computers()
 {
-    cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\tType\n";      //-4 vegna "name" í header
+    //-4 vegna "name" í header
+    cout << "Name" << string(constants::MAX_COMP_NAME_LENGTH - 4, ' ') << "Year\tType\n";
     cout << constants::MENU_DELIMITER << endl;
 }
 
@@ -937,6 +942,22 @@ void Interface::connect_scientist(int computer_id)
         }
     } while (!valid);
     computer_service.add_connection(scientist_id, computer_id);
+}
+
+void Interface::remove_connection(int comp_id)
+{
+    vector<Scientist> temp;
+    int select, scientist_id;
+    temp = computer_service.connected_sci(comp_id);
+    cout << "Connected scientists: " << endl;
+    for (unsigned int i = 0; i < temp.size(); i++)
+    {
+        cout << i + 1 << ". " << temp[i].get_last() << endl;
+    }
+    cout << "Select connection to remove: ";
+    cin >> select;
+    scientist_id = temp[select - 1].get_id();
+    computer_service.remove_connection(scientist_id, comp_id);
 }
 
 void Interface::clear_screen()

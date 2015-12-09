@@ -121,9 +121,29 @@ vector<string> Repository::connected(QString command, QString column)
     return data;
 }
 
+vector<Scientist> Repository::connected_to_delete(QString command)
+{
+    vector<Scientist> data;
+    QSqlQuery query(db);
+    query.exec(command);
+    Scientist temp;
+    while (query.next())
+    {
+        string name;
+        int id;
+        name = query.value("lastname").toString().toStdString();
+        id = query.value("scientist_id").toInt();
+        temp.set_last(name);
+        temp.set_id(id);
+        data.push_back(temp);
+    }
+    return data;
+}
+
 void Repository::edit_remove(QString command)
 {
     QSqlQuery query(db);
     query.exec(command);
+    qDebug() << query.lastQuery();
 }
 

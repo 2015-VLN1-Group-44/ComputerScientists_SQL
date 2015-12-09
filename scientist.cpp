@@ -66,6 +66,11 @@ void Scientist::set_living(bool a)
     living = a;
 }
 
+void Scientist::set_id(int idn)
+{
+    id = idn;
+}
+
 string Scientist::get_first()
 {
     return first_name;

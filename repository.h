@@ -24,6 +24,8 @@ public:
     void add_computer(Computers c);
     vector<string> connected(QString command, QString column);
     void edit_remove(QString command);
+    vector<Scientist> connected_to_delete(QString command);
+
 
 private:
     QSqlDatabase db;
