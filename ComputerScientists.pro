@@ -24,8 +24,3 @@ HEADERS += \
     scientist_service.h \
     computers.h \
     computer_service.h
-
-DISTFILES += \
-    data.txt
-
-@QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9@
